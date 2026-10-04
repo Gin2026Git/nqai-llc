@@ -1,1 +1,9 @@
-{"cleanUrls":true,"trailingSlash":false}
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms/", "destination": "/terms.html" },
+    { "source": "/privacy/", "destination": "/privacy.html" }
+  ]
+}
