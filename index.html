@@ -1,68 +1,171 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NqAI LLC - Instant SMS Translation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NqAI - Live Interpreter</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-body{font-family:Arial,sans-serif;margin:0;padding:0;line-height:1.6;color:#222}
-.banner{background:#0b57d0;color:#fff;text-align:center;padding:40px 20px}
-.banner h1{margin:0;font-size:32px}
-.banner p{font-size:20px;margin:15px 0}
-.banner .number{font-size:26px;font-weight:bold;background:#fff;color:#0b57d0;padding:10px 20px;border-radius:8px;display:inline-block;margin-top:10px}
-.container{max-width:800px;margin:0 auto;padding:30px 20px}
-.card{border:1px solid #ddd;border-radius:10px;padding:20px;margin:20px 0}
-footer{background:#f5f5f5;padding:25px 20px;text-align:center;font-size:13px;color:#555;border-top:1px solid #ddd}
-footer a{color:#0b57d0;margin:0 8px}
+  :root{--line:#EDEEF0;--card:#F7F7F8;--ink2:#6B6B6E;--ink3:#9A9AA0}
+  *{font-family:'Geist',-apple-system,BlinkMacSystemFont,sans-serif}
+  .serif{font-family:'Instrument Serif',Georgia,serif}
 </style>
 </head>
-<body>
-<div class="banner">
-<h1>NqAI LLC - Instant SMS Translation</h1>
-<p>Text your phrase to</p>
-<div class="number">+1 (615) 235-5215</div>
-<p>for instant translation - Voice to Voice available on $45 plan</p>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+<!-- DOWNLOAD BAR - self contained -->
+<div id="dl-bar" class="sticky top-0 z-50 bg-black text-white border-b border-white/10">
+  <div class="mx-auto max-w-[1200px] px-5 h-[68px] flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="h-8 w-8 rounded-full bg-white text-black grid place-items-center font-bold text-[12px]">Nq</div>
+      <div class="leading-tight">
+        <div class="text-[13px] font-semibold tracking-tight">NqAI Final</div>
+        <div class="text-[11px] text-white/60">Self-download ready • index.html</div>
+      </div>
+    </div>
+    <button onclick="downloadSelf()" class="shrink-0 h-11 px-6 rounded-full bg-white text-black text-[13px] font-semibold hover:bg-zinc-100 flex items-center gap-2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download index.html - Profitable + CONTACT AI 24/7
+    </button>
+  </div>
 </div>
 
-  <div style="text-align:center; background:#fff3cd; padding:18px; margin:0; border:2px solid #ffe69c;">
-<p style="margin:5px; font-weight:bold; font-size:18px; color:#000;">
-Text to +1 (615) 235-5215 for instant translation
-</p>
-<p style="margin:8px; font-size:15px; color:#000;">
-To opt-in, text START, TRANSLATE, or HELLO to +1 (615) 235-5215
-</p>
-<p style="margin:8px; font-size:12px; color:#555;">
-NqAI LLC Brand: NqAI - You will receive 1 SMS reply per request you send. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Terms: https://nqai.llc/terms Privacy: https://nqai.llc/privacy
-</p>
+<div class="mx-auto max-w-[1200px] px-6 md:px-8">
+  <!-- HERO -->
+  <div class="pt-16 md:pt-24 pb-10 text-center max-w-[760px] mx-auto">
+    <div class="inline-flex items-center gap-2 rounded-full bg-zinc-50 border border-zinc-200 px-3.5 py-1.5 text-[11px] tracking-[0.08em] text-zinc-600 font-medium">REMOTE • LIVE TEXT + VOICE • 3-WAY • AI ANSWERS 24/7</div>
+    <h1 class="mt-8 text-[42px] md:text-[72px] leading-[0.9] tracking-[-0.05em] font-semibold">Your Live<br><span class="serif italic font-normal">Interpreter.</span><br>In Your Pocket.</h1>
+    <p class="mt-6 text-[17px] md:text-[19px] leading-[1.5] text-zinc-600">You call NqAI. Press <span class="inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-black text-white text-[12px] font-bold px-1.5">2</span> Enter doctor, HR or school number. All 3 connected with <b class="text-black">LIVE auto-detect</b> — text & voice in Zomi, Spanish, English.</p>
+    <div class="mt-8 flex flex-col md:flex-row justify-center gap-3">
+      <a href="tel:+16152355215" class="h-[52px] px-7 rounded-full bg-black text-white inline-flex items-center justify-center gap-2 text-[15px] font-medium">Call +1 (615) 235-5215</a>
+      <a href="sms:+16152355215?&body=START" class="h-[52px] px-7 rounded-full border border-zinc-200 inline-flex items-center justify-center gap-2 text-[15px] font-medium">Text START</a>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="py-12 md:py-20 border-t border-zinc-100">
+    <div class="text-center max-w-[720px] mx-auto mb-10">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white border border-zinc-200 px-3.5 py-1.5 text-[11px] tracking-[0.08em] font-medium"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>PROFITABLE • NO LOSS AT MAX • 100% APPLE-CLEAN</div>
+      <h2 class="mt-6 text-[36px] md:text-[52px] leading-[0.9] tracking-[-0.05em] font-semibold">Simple, <span class="serif italic font-normal">profitable</span> value.</h2>
+      <p class="mt-4 text-[15px] text-zinc-600">Talk as much as you want. Never cut off. Auto-upgrade saves you money.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 items-stretch">
+      <!-- BASIC -->
+      <div class="rounded-[32px] border border-zinc-200 bg-white p-7 flex flex-col">
+        <div class="flex justify-between items-center"><span class="text-[10px] tracking-[0.08em] bg-zinc-50 border border-zinc-200 px-3 py-1 rounded-full">QUICK VISITS</span><span class="text-[11px] bg-emerald-50 border border-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">36% VALUE</span></div>
+        <div class="mt-6"><div class="text-[12px] tracking-[0.08em] text-zinc-400 font-semibold">BASIC</div><div class="mt-1 flex items-baseline gap-1"><span class="text-[40px] font-semibold tracking-[-0.04em] leading-none">$11.99</span><span class="text-zinc-500">/mo</span></div></div>
+        <div class="mt-5 rounded-[18px] bg-zinc-50 border border-zinc-100 p-4">
+          <div class="text-[11px] tracking-[0.08em] text-zinc-400">INCLUDED • 1.5 HOURS</div>
+          <div class="mt-2 text-[20px] font-semibold tracking-tight">150 texts + 90 mins</div>
+          <div class="text-[12px] text-zinc-500 mt-1">Perfect for one appointment</div>
+        </div>
+        <div class="mt-5 space-y-2.5 text-[13px] text-zinc-600">
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-zinc-100 border grid place-items-center shrink-0">✓</span> Auto-detect Zomi, Spanish +130</div>
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-zinc-100 border grid place-items-center shrink-0">✓</span> Live 3-Way • Press 2</div>
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-black text-white grid place-items-center shrink-0">✓</span> After: $0.15/min + $0.05/text</div>
+        </div>
+        <div class="mt-6 pt-5 border-t border-dashed border-zinc-200 text-[11px] text-zinc-500">Fair use: After included, Voice $0.15/min, Text $0.05. Never cut off. Auto-upgrade.</div>
+      </div>
+
+      <!-- LOVERS POPULAR BLACK -->
+      <div class="rounded-[32px] bg-black text-white p-7 flex flex-col relative -mt-2 md:-mt-4 md:mb-4 shadow-[0_24px_80px_rgba(0,0,0,0.25)]">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-black text-[10px] tracking-[0.08em] font-bold px-4 py-1.5 rounded-full">MOST POPULAR • LOVERS</div>
+        <div class="flex justify-between items-center pt-2"><span class="text-[10px] tracking-[0.08em] bg-white/10 border border-white/10 px-3 py-1 rounded-full text-white/70">FOR RELATIONSHIPS</span><span class="h-7 w-7 rounded-full bg-white text-black grid place-items-center">♥</span></div>
+        <div class="mt-6"><div class="text-[12px] tracking-[0.08em] text-white/40 font-semibold">LOVERS</div><div class="mt-1 flex items-baseline gap-1"><span class="text-[40px] font-semibold tracking-[-0.04em] leading-none">$49.99</span><span class="text-white/50">/mo</span></div><div class="mt-2 text-[13px] text-white/60">For couples & families. Zomi + Hispanic love needs time.</div></div>
+        <div class="mt-5 rounded-[18px] bg-white/[0.07] border border-white/10 p-4">
+          <div class="text-[11px] tracking-[0.08em] text-white/40">INCLUDED • 6.5 HOURS</div>
+          <div class="mt-2 text-[20px] font-semibold">500 texts + 400 mins</div>
+          <div class="text-[12px] text-white/60 mt-1">6.5 hours — daily check-ins, no cutoff</div>
+        </div>
+        <div class="mt-5 space-y-2.5 text-[13px] text-white/70">
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-white/10 border border-white/10 grid place-items-center shrink-0">✓</span> All dialects • Zomi, Hakha, Español</div>
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-white/10 border border-white/10 grid place-items-center shrink-0">✓</span> Text + Voice together</div>
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-white text-black grid place-items-center shrink-0">✓</span> After: $0.15/min • Keep talking</div>
+        </div>
+        <div class="mt-auto pt-6"><a href="sms:+16152355215?&body=START%20LOVERS" class="h-12 w-full rounded-full bg-white text-black inline-flex items-center justify-center text-[14px] font-semibold">Choose Lovers • Popular</a><div class="mt-3 text-center text-[11px] text-white/50">Press 2 for live 3-way • Auto-detect ON</div></div>
+      </div>
+
+      <!-- UNLIMITED -->
+      <div class="rounded-[32px] border border-zinc-200 bg-white p-7 flex flex-col">
+        <div class="flex justify-between items-center"><span class="text-[10px] tracking-[0.08em] bg-black text-white px-3 py-1 rounded-full">HEAVY • 16.5 HOURS</span><span class="text-[11px] bg-black text-white px-2 py-1 rounded-full font-medium">25% VALUE</span></div>
+        <div class="mt-6"><div class="text-[12px] tracking-[0.08em] text-zinc-400 font-semibold">UNLIMITED</div><div class="mt-1 flex items-baseline gap-1"><span class="text-[40px] font-semibold tracking-[-0.04em] leading-none">$99.99</span><span class="text-zinc-500">/mo</span></div><div class="mt-2 text-[13px] text-zinc-600">For heavy talkers, shops & big families.</div></div>
+        <div class="mt-5 rounded-[18px] bg-black text-white p-4">
+          <div class="text-[11px] tracking-[0.08em] text-white/50">INCLUDED • 16.5 HOURS</div>
+          <div class="mt-2 text-[20px] font-semibold">1000 texts + 1000 mins</div>
+          <div class="text-[12px] text-white/60 mt-1">Truly unlimited feel</div>
+        </div>
+        <div class="mt-5 space-y-2.5 text-[13px] text-zinc-600">
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-black text-white grid place-items-center shrink-0">✓</span> Talk as much as you want — no cutoff</div>
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-zinc-100 border grid place-items-center shrink-0">✓</span> Priority Zomi + Spanish + Hakha</div>
+          <div class="flex gap-2"><span class="h-5 w-5 rounded-full bg-zinc-100 border grid place-items-center shrink-0">✓</span> After: $0.15/min • Auto-upgrade</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 rounded-[20px] bg-zinc-50 border border-zinc-200 p-5 flex flex-wrap gap-2 text-[11px]">
+      <span class="bg-black text-white px-3 py-1 rounded-full font-medium">FAIR USE • TALK AS MUCH AS YOU WANT</span>
+      <span class="bg-white border border-zinc-200 px-3 py-1 rounded-full">After included: Voice $0.15/min • Text $0.05</span>
+      <span class="bg-white border border-dashed border-zinc-200 px-3 py-1 rounded-full">Never cutoff • Auto-upgrade saves money</span>
+      <span class="bg-white border border-zinc-200 px-3 py-1 rounded-full">Basic 150+90 • Lovers 500+400 • Unlimited 1000+1000</span>
+    </div>
+  </div>
+
+  <!-- CONTACT AI 24/7 -->
+  <div class="pb-20">
+    <div class="rounded-[32px] md:rounded-[48px] border border-zinc-200 overflow-hidden">
+      <div class="p-7 md:p-12">
+        <div class="flex flex-col lg:flex-row justify-between gap-8">
+          <div class="max-w-[520px]">
+            <div class="inline-flex items-center gap-2 rounded-full bg-black text-white px-3.5 py-1.5 text-[11px] tracking-[0.08em] font-medium"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>CONTACT — AI ANSWERS 24/7</div>
+            <h2 class="mt-5 text-[32px] md:text-[52px] leading-[0.9] tracking-[-0.05em] font-semibold">No voicemail.<br><span class="serif italic font-normal">No waiting.</span><br>Live AI in your language.</h2>
+            <p class="mt-4 text-[14px] leading-[1.6] text-zinc-600">Real AI picks up instantly — not a machine menu. Zomi, Español, English auto-detected. Smyrna, TN built. Press 2 for live 3-way translation.</p>
+            <div class="mt-6 flex gap-2">
+              <a href="tel:+16152355215" class="h-10 px-4 rounded-full bg-black text-white text-[13px] font-medium inline-flex items-center gap-2">Call +1 (615) 235-5215</a>
+              <span class="h-10 px-4 rounded-full bg-zinc-50 border border-zinc-200 text-[11px] inline-flex items-center">Reply STOP to opt-out</span>
+            </div>
+          </div>
+          <div class="w-full lg:w-[380px] shrink-0">
+            <div class="rounded-[24px] bg-black text-white p-2">
+              <div class="rounded-[20px] bg-white/10 border border-white/10 p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3"><div class="h-11 w-11 rounded-full bg-white text-black grid place-items-center">☎</div><div><div class="text-[11px] text-white/50 tracking-[0.08em]">LIVE AI NOW</div><div class="text-[18px] font-semibold">+1 (615) 235-5215</div></div></div>
+                <a href="tel:+16152355215" class="h-10 px-5 rounded-full bg-white text-black text-[13px] font-medium inline-flex items-center">Call</a>
+              </div>
+              <div class="px-4 py-3 text-center text-[11px] text-white/60 flex items-center justify-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>AI answers in &lt;1s • Zomi • Español • English</div>
+            </div>
+            <div class="mt-4 grid grid-cols-3 gap-3 text-[11px]">
+              <div class="rounded-[16px] bg-zinc-50 border border-zinc-200 p-3 text-center"><div class="font-semibold">Call</div><div class="text-zinc-500 mt-1">&lt;1s pick-up</div></div>
+              <div class="rounded-[16px] bg-black text-white p-3 text-center"><div class="font-semibold">Press 2</div><div class="text-white/60 mt-1">3-Way Live</div></div>
+              <div class="rounded-[16px] bg-zinc-50 border border-zinc-200 p-3 text-center"><div class="font-semibold">Text</div><div class="text-zinc-500 mt-1">START</div></div>
+            </div>
+            <div class="mt-4 rounded-[14px] bg-zinc-900 text-white p-3 text-[12px] leading-snug">Call +1 (615) 235-5215 → AI says Hello in your language → Press <span class="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white text-black text-[11px] font-bold px-1">2</span> for live translation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-zinc-100 py-10 text-[11px] text-zinc-500 leading-relaxed">
+    <div class="flex flex-col md:flex-row justify-between gap-6">
+      <div>© NqAI LLC Smyrna TN • Live Text + Voice 3-Way • Fair use: After included $0.15/min voice $0.05/text • Never cut off • Auto-upgrade</div>
+      <div class="flex gap-4"><a href="https://nqai.llc/terms.html" target="_blank" class="underline">Terms</a><a href="https://nqai.llc/privacy.html" target="_blank" class="underline">Privacy</a></div>
+    </div>
+  </footer>
 </div>
 
-<div class="container">
-<div class="card">
-<h2>How it works</h2>
-<p><strong>1.</strong> Text any phrase to <strong>+1 (615) 235-5215</strong><br>
-<strong>2.</strong> NqAI LLC (Brand: NqAI) replies instantly with translation<br>
-<strong>3.</strong> Conversational - one reply per inbound message</p>
-<p>Example:<br>
-You: Translate hello to Spanish<br>
-NqAI LLC: Hola - Reply STOP to opt-out, HELP for help</p>
-</div>
-
-<div class="card">
-<h2>$45 Plan - Includes Voice to Voice</h2>
-<p>SMS translation + <strong>Voice to Voice translation</strong> - Call the same number +1 (615) 235-5215 and speak for live translation.</p>
-</div>
-</div>
-
-<footer>
-<p>By texting +1 (615) 235-5215 you agree to receive SMS translation replies from NqAI LLC (Registered Brand name: NqAI). Message frequency varies based on usage. Reply STOP to opt-out, HELP for help. Message and data rates may apply. Consent is not shared with third parties.</p>
-<p>We do not sell or share your SMS opt-in data or personal information with third parties for marketing purposes.</p>
-<p>
-<a href="/privacy">Privacy Policy</a> |
-<a href="/terms">Terms & Conditions</a> |
-<a href="https://nqai.llc">https://nqai.llc</a>
-</p>
-<p>© NqAI LLC - Smyrna, TN - Support: +1 (615) 235-5215</p>
-</footer>
+<script>
+function downloadSelf(){
+  var html = document.documentElement.outerHTML;
+  var blob = new Blob([html], {type:'text/html'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'index.html';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 500);
+}
+</script>
 </body>
 </html>
