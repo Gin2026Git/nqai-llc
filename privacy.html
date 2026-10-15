@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy Policy - NqAI LLC</title>
-<style>body{font-family:system-ui,sans-serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.6;color:#111}h1{font-size:28px}h2{font-size:18px;margin-top:28px}</style></head>
-<body>
-<h1>Privacy Policy — NqAI LLC</h1>
-<p><strong>nqai.llc — Last updated Oct 2026</strong></p>
-<p>We provide live phone interpreter service.</p>
-<h2>What we collect</h2>
-<p>Phone number, call audio for translation, texts you send.</p>
-<h2>How we use</h2>
-<p>To connect you with doctor/HR/school via 3-way call and to provide live interpretation in Spanish and English, expanding to other languages and dialects on demand.</p>
-<h2>Required SMS Disclosure (Required for Twilio A2P)</h2>
-<p>By texting START to +1 (615) 235-5215 you agree to receive conversational interpreter messages from NqAI LLC. Message frequency varies based on your usage. Reply STOP to opt-out at any time. Reply HELP for help. Message and data rates may apply. We do not share your phone number with third parties for marketing.</p>
-<p>Contact: hello@nqai.llc — Smyrna, TN 37167<br>
-Program: NqAI Interpreter<br>Keywords: START, STOP, HELP</p>
-<h2>Your choices</h2>
-<p>You can opt-out of SMS at any time by replying STOP. You may request deletion of your data by emailing hello@nqai.llc. Call audio is used solely for live interpretation and is not retained for marketing.</p>
-<h2>Data security</h2>
-<p>We take reasonable measures to protect your information. No method of transmission is 100% secure, but we restrict access to authorized personnel only.</p>
-<p><a href="/">← Back to Home</a></p>
-</body></html>
+// app/privacy/page.tsx
+export default function Privacy() {
+  return (
+    <div className="max-w-4xl mx-auto p-8 prose">
+      <h1>Privacy Policy - NqAI LLC</h1>
+      <p><strong>Effective:</strong> May 13, 2026 | <strong>Phone:</strong> +1 (615) 235-5215 | <strong>Site:</strong> https://nqai.llc</p>
+      <h2>1. Auto-Detect Live Text=Voice</h2>
+      <p>We provide AI Interpreter with auto language detection using Meta NLLB-200 + MMS (1,107 languages). Voice auto-detected via MMS ASR, text via FastText LID. No manual selection.</p>
+      <h2>2. Data Collected</h2>
+      <ul><li>Phone, SMS content, voice transcriptions for translation</li><li>Payment via Stripe for $11.99/mo</li><li>Usage data to improve auto-detect</li></ul>
+      <h2>3. Meta Infrastructure</h2>
+      <p>Models: facebook/nllb-200-distilled-1.3B + mms. Hosted on HuggingFace Inference API, served via Vercel. Your data not sent to Meta for training. Processing for translation only.</p>
+      <h2>4. SMS: +1 (615) 235-5215, STOP to cancel, HELP for help, msg rates may apply</h2>
+      <h2>5. Contact: support@nqai.llc, Smyrna, TN</h2>
+    </div>
+  );
+}
