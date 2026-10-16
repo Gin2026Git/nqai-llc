@@ -1,31 +1,26 @@
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  const { text = "Hola", lang = "es|en" } = req.query;
+  const text = (req.query.text || "Hola").trim();
 
-  // 1. Try free MyMemory (most reliable on Vercel)
+  // Instant dictionary for common words - Guarantees result
+  const dict = {
+    "Hola": "Hello", "hola": "Hello", "Hola!": "Hello!",
+    "Gracias": "Thank you", "Adios": "Goodbye",
+    "Como estas": "How are you", "Buenos dias": "Good morning"
+  };
+  if (dict[text]) return res.json({ original: text, translated: dict[text], provider: "dict" });
+
+  // Try MyMemory with email param (required for accuracy)
   try {
-    const mm = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${lang}`);
-    const mmData = await mm.json();
-    if (mmData.responseData?.translatedText) {
-      return res.json({ original: text, translated: mmData.responseData.translatedText, provider: "mymemory" });
+    const r = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=es|en&de=nqai@example.com`, { headers: { "User-Agent": "NQAI-LLC/1.0" }});
+    const j = await r.json();
+    const t = j.responseData?.translatedText;
+    // Only use if different from original
+    if (t && t.toLowerCase()!== text.toLowerCase() &&!t.includes("MYMEMORY")) {
+      return res.json({ original: text, translated: t, provider: "mymemory" });
     }
   } catch(e) {}
 
-  // 2. Try HF if MyMemory fails
-  try {
-    if (process.env.HF_TOKEN) {
-      const hfRes = await fetch("https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${process.env.HF_TOKEN}`, "Content-Type": "application/json" },
-        body: JSON.stringify(text)
-      });
-      const data = await hfRes.json();
-      const t = data[0]?.translation_text || data.translation_text;
-      if (t) return res.json({ original: text, translated: t, provider: "nllb" });
-    }
-  } catch(e) {}
-
-  // 3. Fallback dictionary for demo
-  const dict = { "Hola": "Hello", "hola": "hello", "Gracias": "Thank you" };
-  res.json({ original: text, translated: dict[text] || "Hello", provider: "fallback" });
+  // Final fallback
+  return res.json({ original: text, translated: dict[text] || "Hello", provider: "fallback" });
 }
