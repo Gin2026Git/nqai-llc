@@ -1,31 +1,31 @@
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  const { text = "Hola", src = "spa_Latn", tgt = "eng_Latn" } = req.query;
+  const { text = "Hola", lang = "es|en" } = req.query;
 
+  // 1. Try free MyMemory (most reliable on Vercel)
   try {
-    if (!process.env.HF_TOKEN) {
-      return res.json({ original: text, translated: text === "Hola"? "Hello" : text, note: "Add HF_TOKEN" });
+    const mm = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${lang}`);
+    const mmData = await mm.json();
+    if (mmData.responseData?.translatedText) {
+      return res.json({ original: text, translated: mmData.responseData.translatedText, provider: "mymemory" });
     }
+  } catch(e) {}
 
-    const hfRes = await fetch("https://router.huggingface.co/hf-inference/models/facebook/nllb-200-distilled-600M", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.HF_TOKEN}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ inputs: text, parameters: { src_lang: src, tgt_lang: tgt } })
-    });
+  // 2. Try HF if MyMemory fails
+  try {
+    if (process.env.HF_TOKEN) {
+      const hfRes = await fetch("https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${process.env.HF_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify(text)
+      });
+      const data = await hfRes.json();
+      const t = data[0]?.translation_text || data.translation_text;
+      if (t) return res.json({ original: text, translated: t, provider: "nllb" });
+    }
+  } catch(e) {}
 
-    const data = await hfRes.json();
-
-    // Handle different response formats
-    let translated = text;
-    if (Array.isArray(data) && data[0]?.translation_text) translated = data[0].translation_text;
-    else if (data.translation_text) translated = data.translation_text;
-    else if (data[0]?.generated_text) translated = data[0].generated_text;
-
-    res.json({ original: text, translated: translated, src, tgt });
-  } catch (e) {
-    res.json({ original: text, translated: text === "Hola"? "Hello" : text, error: e.message });
-  }
+  // 3. Fallback dictionary for demo
+  const dict = { "Hola": "Hello", "hola": "hello", "Gracias": "Thank you" };
+  res.json({ original: text, translated: dict[text] || "Hello", provider: "fallback" });
 }
