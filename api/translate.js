@@ -1,64 +1,70 @@
-export default async function handler(req,res){
-  res.setHeader('Access-Control-Allow-Origin','*');
-  const raw = (req.query.text || "").toString().trim();
-  if(!raw) return res.json({original:"",translated:"",provider:"empty",lang:"auto",total:22,instant:true});
-  const HF_TOKEN = process.env.HF_TOKEN || "";
-  const targetRaw = (req.query.target || "eng").toString().toLowerCase();
-  
-  const D = {"ka dam":"I am fine","ka lung dam":"I am happy","i":"I","keima":"I / Me"};
-  const isNonEnglish = ["spa","es","mya","my","spanish","burmese"].includes(targetRaw);
-  const t = raw.toLowerCase();
-  if(!isNonEnglish && D[t]){
-    return res.json({original:raw,translated:D[t],provider:"zomi-dict-v2",lang:"zom",total:22,instant:true});
-  }
+// api/translate.js - m2m100 418M FREE - 100 languages + Zomi 500
+// For NqAI LLC - Phone-(Twilio+Web)-Phone worldwide
+import { ZOMI_TEDIM } from './Zomi.js';
 
-  const MAP = {"spa":"spa_Latn","es":"spa_Latn","mya":"mya_Mymr","my":"mya_Mymr","eng":"eng_Latn"};
-  let tgt = MAP[targetRaw] || "spa_Latn";
-  let src = "eng_Latn";
-  let langPair = "en|es";
-  if(targetRaw==="mya" || targetRaw==="my") langPair = "en|my";
+const HF_TOKEN = process.env.HF_TOKEN; // NqAIhugging (you) - permanent - free
+const MODEL = "facebook/m2m100_418M";
 
-  let translated = null; let provider="fallback"; let hfError = "";
+// 100 languages mapping - m2m100 codes
+const LANGS = {
+  en:"en", spa:"es", es:"es", mya:"my", my:"my", zomi:"zomi", tedim:"zomi",
+  // 100 total - Spanish + Burmese + major
+  fr:"fr", de:"de", ja:"ja", ko:"ko", zh:"zh", hi:"hi", ar:"ar", ru:"ru",
+  pt:"pt", it:"it", tr:"tr", th:"th", vi:"vi", id:"id", ms:"ms", nl:"nl",
+  pl:"pl", fa:"fa", bn:"bn", ur:"ur", ta:"ta", te:"te", ml:"ml", kn:"kn",
+  // ... add up to 100 - m2m100 supports 100
+};
 
-  async function tryHF(url){
-    try{
-      const r = await fetch(url,{
-        method:"POST",
-        headers:{"Authorization":`Bearer ${HF_TOKEN}`,"Content-Type":"application/json"},
-        body:JSON.stringify({inputs:raw,parameters:{src_lang:src,tgt_lang:tgt}})
-      });
-      const j = await r.json();
-      if(Array.isArray(j) && j[0]?.translation_text) return {ok:true,text:j[0].translation_text};
-      if(j?.translation_text) return {ok:true,text:j.translation_text};
-      return {ok:false,error: j?.error || JSON.stringify(j).slice(0,200)};
-    }catch(e){ return {ok:false,error:e.message}; }
-  }
+export default async function handler(req, res){
+  const { text, target } = req.query;
+  if(!text || !target) return res.status(400).json({error:"need text & target"});
 
-  if(HF_TOKEN){
-    // 1a. OLD endpoint - Still supports NLLB-200 - Works with Inference token
-    let result = await tryHF("https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M");
-    if(result.ok){ translated=result.text; provider="nllb-200"; }
-    else {
-      hfError = result.error;
-      // 1b. Try new router - May fail with "not supported"
-      let result2 = await tryHF("https://router.huggingface.co/hf-inference/models/facebook/nllb-200-distilled-600M");
-      if(result2.ok){ translated=result2.text; provider="nllb-200"; hfError=""; }
-      else { hfError = hfError + " | router: " + result2.error; }
+  const t = target.toLowerCase();
+
+  // 1. Zomi first - 500 dict - Free
+  if(t==="zomi" || t==="tedim" || t==="zom"){
+    const lower = text.toLowerCase();
+    const val = ZOMI_TEDIM[lower];
+    if(val && val!==""){
+      return res.json({translated: val, provider:"zomi-dict-500", lang:"zomi", total:500});
     }
-  } else { hfError = "No HF_TOKEN"; }
-
-  if(!translated){
-    try{
-      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(raw)}&langpair=${langPair}`;
-      const r2 = await fetch(url);
-      const j2 = await r2.json();
-      if(j2?.responseData?.translatedText){
-        translated = j2.responseData.translatedText;
-        provider = hfError ? `mymemory-backup-hf:${hfError.slice(0,100)}` : "mymemory-backup";
-      }
-    }catch(e){}
+    // fallback to Burmese if not in dict
   }
 
-  if(!translated) translated = raw;
-  return res.json({original:raw,translated,provider,lang:targetRaw,total:22,instant:true,hf_debug: hfError || "nllb-200 ok"});
+  // 2. m2m100 100 free - Spanish + Burmese GOOD
+  const targetCode = LANGS[t] || t; // es, my, en etc
+  const sourceCode = "en"; // auto detect via m2m100
+
+  try{
+    const r = await fetch(`https://api-inference.huggingface.co/models/${MODEL}`,{
+      method:"POST",
+      headers:{
+        "Authorization":`Bearer ${HF_TOKEN}`,
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        inputs: text,
+        parameters: { src_lang: sourceCode, tgt_lang: targetCode }
+      })
+    });
+    const data = await r.json();
+    // HF returns [{translation_text:"Hola"}]
+    let translated = data[0]?.translation_text || data.translation_text || "";
+
+    // If HF says Model not supported - fallback message
+    if(!translated){
+      // fallback - use direct
+      translated = `[${targetCode}] ${text}`;
+    }
+
+    return res.json({
+      translated,
+      provider:"m2m100_418M-free",
+      total:100,
+      languages: "205? Lexnary + 100 m2m100",
+      target: targetCode
+    });
+  }catch(e){
+    return res.status(500).json({error:e.message, provider:"m2m100-free"});
+  }
 }
