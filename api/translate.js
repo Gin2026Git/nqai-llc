@@ -18,9 +18,9 @@ export default async function handler(req,res){
   let langPair = "en|es";
   if(targetRaw==="mya" || targetRaw==="my") langPair = "en|my";
 
-  let translated = null; let provider="fallback";
+  let translated = null; let provider="fallback"; let hfError = "";
 
-  // 1. Try NLLB-200 with new router
+  // 1. Try NLLB-200 with new router - Permanent Inference token - NqAIhugging
   if(HF_TOKEN){
     try{
       const r = await fetch("https://router.huggingface.co/hf-inference/models/facebook/nllb-200-distilled-600M",{
@@ -29,10 +29,13 @@ export default async function handler(req,res){
         body:JSON.stringify({inputs:raw,parameters:{src_lang:src,tgt_lang:tgt}})
       });
       const j = await r.json();
+      console.log("HF status", r.status, "response", JSON.stringify(j).slice(0,800));
       if(Array.isArray(j) && j[0]?.translation_text){ translated=j[0].translation_text; provider="nllb-200"; }
       else if(j?.translation_text){ translated=j.translation_text; provider="nllb-200"; }
-    }catch(e){}
-  }
+      else if(j?.error){ hfError = j.error; }
+      else { hfError = JSON.stringify(j).slice(0,200); }
+    }catch(e){ hfError = e.message; console.log("HF fetch error", e.message); }
+  } else { hfError = "No HF_TOKEN env - Check Vercel Env Variables"; }
 
   // 2. Backup - MyMemory free - Guarantees Hola even if HF fails
   if(!translated){
@@ -42,12 +45,12 @@ export default async function handler(req,res){
       const j2 = await r2.json();
       if(j2?.responseData?.translatedText){
         translated = j2.responseData.translatedText;
-        provider = "mymemory-backup";
+        provider = hfError ? `mymemory-backup-hf_error:${hfError.slice(0,120)}` : "mymemory-backup";
       }
     }catch(e){}
   }
 
   if(!translated) translated = raw;
 
-  return res.json({original:raw,translated,provider,lang:targetRaw,total:22,instant:true});
+  return res.json({original:raw,translated,provider,lang:targetRaw,total:22,instant:true,hf_debug: hfError ? hfError.slice(0,300) : "HF ok or not needed - nllb-200"});
 }
