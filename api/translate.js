@@ -20,24 +20,33 @@ export default async function handler(req,res){
 
   let translated = null; let provider="fallback"; let hfError = "";
 
-  // 1. Try NLLB-200 with new router - Permanent Inference token - NqAIhugging
-  if(HF_TOKEN){
+  async function tryHF(url){
     try{
-      const r = await fetch("https://router.huggingface.co/hf-inference/models/facebook/nllb-200-distilled-600M",{
+      const r = await fetch(url,{
         method:"POST",
         headers:{"Authorization":`Bearer ${HF_TOKEN}`,"Content-Type":"application/json"},
         body:JSON.stringify({inputs:raw,parameters:{src_lang:src,tgt_lang:tgt}})
       });
       const j = await r.json();
-      console.log("HF status", r.status, "response", JSON.stringify(j).slice(0,800));
-      if(Array.isArray(j) && j[0]?.translation_text){ translated=j[0].translation_text; provider="nllb-200"; }
-      else if(j?.translation_text){ translated=j.translation_text; provider="nllb-200"; }
-      else if(j?.error){ hfError = j.error; }
-      else { hfError = JSON.stringify(j).slice(0,200); }
-    }catch(e){ hfError = e.message; console.log("HF fetch error", e.message); }
-  } else { hfError = "No HF_TOKEN env - Check Vercel Env Variables"; }
+      if(Array.isArray(j) && j[0]?.translation_text) return {ok:true,text:j[0].translation_text};
+      if(j?.translation_text) return {ok:true,text:j.translation_text};
+      return {ok:false,error: j?.error || JSON.stringify(j).slice(0,200)};
+    }catch(e){ return {ok:false,error:e.message}; }
+  }
 
-  // 2. Backup - MyMemory free - Guarantees Hola even if HF fails
+  if(HF_TOKEN){
+    // 1a. OLD endpoint - Still supports NLLB-200 - Works with Inference token
+    let result = await tryHF("https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M");
+    if(result.ok){ translated=result.text; provider="nllb-200"; }
+    else {
+      hfError = result.error;
+      // 1b. Try new router - May fail with "not supported"
+      let result2 = await tryHF("https://router.huggingface.co/hf-inference/models/facebook/nllb-200-distilled-600M");
+      if(result2.ok){ translated=result2.text; provider="nllb-200"; hfError=""; }
+      else { hfError = hfError + " | router: " + result2.error; }
+    }
+  } else { hfError = "No HF_TOKEN"; }
+
   if(!translated){
     try{
       const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(raw)}&langpair=${langPair}`;
@@ -45,12 +54,11 @@ export default async function handler(req,res){
       const j2 = await r2.json();
       if(j2?.responseData?.translatedText){
         translated = j2.responseData.translatedText;
-        provider = hfError ? `mymemory-backup-hf_error:${hfError.slice(0,120)}` : "mymemory-backup";
+        provider = hfError ? `mymemory-backup-hf:${hfError.slice(0,100)}` : "mymemory-backup";
       }
     }catch(e){}
   }
 
   if(!translated) translated = raw;
-
-  return res.json({original:raw,translated,provider,lang:targetRaw,total:22,instant:true,hf_debug: hfError ? hfError.slice(0,300) : "HF ok or not needed - nllb-200"});
+  return res.json({original:raw,translated,provider,lang:targetRaw,total:22,instant:true,hf_debug: hfError || "nllb-200 ok"});
 }
