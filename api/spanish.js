@@ -1,6 +1,20 @@
-export default function handler(req,res){
+export default async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
-  const q=(req.query.text||'').toLowerCase().trim();
-  const D={"hola":"Hello","gracias":"Thank you","adios":"Goodbye","si":"Yes","no":"No","por favor":"Please","buenos dias":"Good morning","buenas noches":"Good night","como estas":"How are you","te amo":"I love you","casa":"House","agua":"Water","comida":"Food","dinero":"Money","trabajo":"Work","ayuda":"Help","donde":"Where","amigo":"Friend","familia":"Family","dios":"God","dios te bendiga":"God bless you","smyrna":"Smyrna","usa":"USA"};
-  return res.json({original:req.query.text||'',translated:D[q]||q,provider:'spanish-v5',total:30});
+  res.setHeader('Cache-Control','s-maxage=86400');
+  const raw = (req.query.text || req.body?.text || "Hola").toString().trim();
+  const SPANISH_DICT = {
+    "hola":"Hello","gracias":"Thank you","adios":"Goodbye","si":"Yes","no":"No",
+    "por favor":"Please","buenos dias":"Good morning","buenas noches":"Good night",
+    "como estas":"How are you","estoy bien":"I am fine","te amo":"I love you","donde":"Where"
+  };
+  const t = raw.toLowerCase().trim();
+  let v = SPANISH_DICT[t] || null;
+  if(!v){
+    try{
+      const r = await fetch(`https://nqai.llc/api/translate?text=${encodeURIComponent(raw)}`);
+      const j = await r.json();
+      v = j.translated || raw;
+    }catch(e){ v = raw; }
+  }
+  return res.json({original:raw, translated:v, provider: SPANISH_DICT[t] ? 'spanish-dict' : 'nllb-200', lang:'spa', instant:true});
 }
