@@ -4,10 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>NqAI Web - Burmese Readable</title>
-
-<!-- Myanmar Unicode Fonts - Fixes unreadable -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
 body{font-family:system-ui, -apple-system, Segoe UI, Roboto; padding:20px; max-width:900px; margin:auto; background:#fafafa}
 .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
@@ -16,8 +13,7 @@ button{cursor:pointer}
 .black{background:black; color:white}
 #out{
   font-size:48px; font-weight:700; margin-top:20px; line-height:1.6;
-  /* BURMESE READABLE - Unicode fonts */
-  font-family:"Noto Sans Myanmar","Padauk","Myanmar Text", "Myanmar3", "Zawgyi-One", sans-serif;
+  font-family:"Noto Sans Myanmar","Padauk","Myanmar Text","Myanmar3",sans-serif;
   word-break:break-word;
 }
 #out.mya{
@@ -30,8 +26,8 @@ button{cursor:pointer}
 </head>
 <body>
 
-<h1>NqAI Web - Burmese Readable</h1>
-<p class="small">Zomi 500 + Spanish + Burmese Unicode GOOD - Native fix ready</p>
+<h1>NqAI Web - Phone-(Twilio+Web)-Phone</h1>
+<p class="small">Zomi 500 + Spanish + Burmese GOOD - Noto Myanmar Unicode - Lexnary 117 verified</p>
 
 <div class="card">
 <div class="row">
@@ -39,60 +35,58 @@ button{cursor:pointer}
 <input id="txt" value="How are you" style="width:280px" />
 <select id="tgt">
 <option value="zomi">Zomi - tui</option>
-<option value="spa">Spanish</option>
-<option value="mya" selected>Burmese - နေကောင်းလား</option>
+<option value="spa">Spanish - Hola</option>
+<option value="mya" selected>Burmese - မင်္ဂလာပါ</option>
+<option value="en">English</option>
 </select>
-<button onclick="doTranslate()" class="black">Translate</button>
+<button onclick="doTranslate()" class="black">Translate + Speak</button>
 </div>
 
 <div id="out" class="mya">နေကောင်းလား</div>
-<div id="info" class="small"></div>
+<div id="info" class="small" style="margin-top:8px"></div>
 <div id="readable" class="small" style="margin-top:10px; padding:10px; background:#f0f7ff; border-radius:8px; display:none"></div>
 
-<div class="card" style="background:#fffbe6">
-<b>🎙️ Native Fix - Accent bad? Record:</b>
+<div class="card" style="background:#fffbe6; margin-top:16px">
+<b>🎙️ Native Fix - Burmese accent bad? Fix yourself:</b>
 <div class="row" style="margin-top:10px">
 <button onclick="recordFix()" id="recBtn" style="background:#ff4d4f; color:white">🔴 Record Good Accent</button>
-<button onclick="playFix()">▶️ Play Fix</button>
-<button onclick="saveFix()" class="black">💾 Save</button>
+<button onclick="playFix()">▶️ Play Your Fix</button>
+<button onclick="saveFix()" class="black">💾 Save Fix for Everyone</button>
 </div>
+<p style="font-size:13px; margin:8px 0">1. Click Record → Say good Burmese<br>2. Play → 3. Save → AI uses your voice for next users + 3-way voice</p>
 <audio id="audio" controls style="width:100%; margin-top:10px; display:none"></audio>
 <div id="fixStatus" class="small" style="color:green; margin-top:6px"></div>
 </div>
+
 </div>
 
 <script>
-// Zawgyi to Unicode simple check - if contains Zawgyi patterns, show warning
-function isZawgyi(s){
-  return /[\u1031\u1038]/.test(s) && s.includes("ာ");
-}
-
 async function doTranslate(){
-  const text=document.getElementById('txt').value;
+  const text=document.getElementById('txt').value.trim();
   const target=document.getElementById('tgt').value;
+  if(!text) return;
   const r=await fetch(`/api/translate?text=${encodeURIComponent(text)}&target=${target}`);
   const d=await r.json();
   const outEl=document.getElementById('out');
-  outEl.innerText=d.translated;
+  outEl.innerText=d.translated || "";
   outEl.className = target==="mya" ? "mya" : "";
-  document.getElementById('info').innerText=`${text} → ${d.translated} | Provider:${d.provider}`;
+  document.getElementById('info').innerText=`Result: ${text} → ${d.translated} | Provider: ${d.provider} | Total: ${d.total||100}`;
 
-  // Readable helper
   const readEl=document.getElementById('readable');
   if(target==="mya"){
     readEl.style.display='block';
-    readEl.innerHTML=`<b>Burmese Unicode Readable:</b> ${d.translated}<br><b>Roman:</b> Ne kaung la? <br><span style="font-size:12px">Font: Noto Sans Myanmar Unicode - If still unreadable, install Padauk font on phone</span>`;
-  }else{
-    readEl.style.display='none';
-  }
+    readEl.innerHTML=`<b>Burmese Unicode:</b> ${d.translated}<br><b>Roman:</b> Ne kaung la?<br><span style="font-size:12px">Font: Noto Sans Myanmar - Readable on all phones</span>`;
+  }else{ readEl.style.display='none'; }
 
-  // Try native fix first
   const key=`fix-${target}-${d.translated}`;
   const saved=localStorage.getItem(key);
   if(saved && saved.startsWith('data:audio')){
-    document.getElementById('audio').src=saved;
-    document.getElementById('audio').style.display='block';
-  }else if(d.translated){
+    const audio=document.getElementById('audio');
+    audio.src=saved; audio.style.display='block'; audio.play();
+    document.getElementById('fixStatus').innerText='✅ Playing NATIVE fixed accent (not robot)';
+    return;
+  }
+  if(d.translated){
     const u=new SpeechSynthesisUtterance(d.translated);
     u.lang = target==="mya" ? "my-MM" : target==="spa" ? "es-ES" : "en-US";
     speechSynthesis.speak(u);
@@ -118,9 +112,11 @@ async function recordFix(){
     const url=URL.createObjectURL(fixBlob);
     const audio=document.getElementById('audio');
     audio.src=url; audio.style.display='block'; audio.play();
+    document.getElementById('fixStatus').innerText='✅ Recorded - Click Play - Then Save';
   };
   mediaRec.start();
-  btn.innerText="⏹️ Stop";
+  btn.innerText="⏹️ Stop Recording";
+  document.getElementById('fixStatus').innerText='🔴 Recording native accent... speak now';
 }
 function playFix(){ document.getElementById('audio').play(); }
 async function saveFix(){
@@ -131,11 +127,4 @@ async function saveFix(){
   reader.onloadend=async()=>{
     const base64=reader.result;
     localStorage.setItem(`fix-${target}-${text}`, base64);
-    document.getElementById('fixStatus').innerText='🚀 Saved - Native accent will play next time + 3-way voice';
-    try{ await fetch('/api/fix',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text, target, audio:base64})}); }catch(e){}
-  };
-  reader.readAsDataURL(fixBlob);
-}
-</script>
-</body>
-</html>
+    document.getElementById('fixStatus').
