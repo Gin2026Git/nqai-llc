@@ -1,88 +1,99 @@
 import { kv } from '@vercel/kv';
 
-export default async function handler(req, res) {
-  const p = { ...req.query, ...req.body };
-  const from = p.From || '';
-  const to = p.To || '';
-  const callSid = p.CallSid || '';
-  const recUrl = p.RecordingUrl || '';
-  const recSid = p.RecordingSid || '';
-  const transcription = p.TranscriptionText || '';
-  const digits = p.Digits || '';
-  const callStatus = p.CallStatus || '';
-
-  // Step 2: User pressed key after hearing teaching
-  if (digits) {
-    if (digits === '1') {
-      // Save confirmed teaching - find last record from this number and mark confirmed
-      try {
-        const data = await kv.hgetall('fixes');
-        const fromRecords = Object.values(data || {}).filter(r => r.from_number === from).sort((a,b)=>b.timestamp-a.timestamp);
-        if (fromRecords[0]) {
-          fromRecords[0].confirmed = true;
-          fromRecords[0].confirmed_at = Date.now();
-          await kv.hset('fixes', { [fromRecords[0].id]: fromRecords[0] });
-        }
-      } catch(e){}
-      const twiml2 = `<?xml version="1.0" encoding="UTF-8"?><Response><Say>Confirmed! Your teaching saved to Family Vault. Lungdam! You can hang up or press 2 to teach more.</Say><Gather numDigits="1" action="/api/voice" timeout="10"><Say>Press 2 to teach another word, or hang up.</Say></Gather></Response>`;
-      res.setHeader('Content-Type','text/xml'); return res.status(200).send(twiml2);
+async function freeTranslate(text,from,to){
+  try{
+    if(process.env.GROQ_API_KEY){
+      const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+        method:'POST',
+        headers:{'Authorization':`Bearer ${process.env.GROQ_API_KEY}`,'Content-Type':'application/json'},
+        body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:`Translate ${from} to ${to}. Only translation.`},{role:'user',content:text}],temperature:0.1})
+      });
+      const j=await r.json();
+      if(j.choices?.[0]?.message?.content) return j.choices[0].message.content.trim();
     }
-    if (digits === '2') {
-      const twimlReset = `<?xml version="1.0" encoding="UTF-8"?><Response><Say>Ok teach me. Say the Zomi word, then say means, then English. Example: Damdam maw means How are you in Zomi. After beep.</Say><Record maxLength="30" action="/api/voice" transcribe="true" transcribeCallback="/api/voice" /><Gather numDigits="1" action="/api/voice" timeout="5"><Say>Press 1 to save, 2 to teach again.</Say></Gather></Response>`;
-      res.setHeader('Content-Type','text/xml'); return res.status(200).send(twimlReset);
+  }catch(e){}
+  try{
+    const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
+    const j=await r.json(); return j.responseData?.translatedText||text;
+  }catch{ return text; }
+}
+
+async function findMeaning(term){
+  try{
+    const d=await kv.hgetall('fixes');
+    const all=Object.values(d||{});
+    const l=term.toLowerCase().trim();
+    const m=all.find(x=>x.text_original?.toLowerCase()===l);
+    return m?.meaning||null;
+  }catch{ return null; }
+}
+
+export default async function handler(req,res){
+  const p={...req.query,...req.body};
+  const from=p.From||''; const digits=p.Digits||''; const speech=p.SpeechResult||''; const trans=p.TranscriptionText||''; const input=(speech||trans||'').trim(); const mode=p.mode||'';
+  
+  if(digits==='1'){
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Burma dialects interpreting. Say Zomi or Burmese word.</Say><Gather input="speech" action="/api/voice?mode=burma_interpret" timeout="10"><Say>Say word.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(digits==='2'){
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Burma teaching. Say word means English. Example Lungdam means Thank you in Zomi.</Say><Record maxLength="30" action="/api/voice?mode=burma_teach" transcribe="true" transcribeCallback="/api/voice?mode=burma_teach" /><Gather numDigits="1" action="/api/voice?mode=burma_teach" timeout="10"><Say>Press 9 to save.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(digits==='3'){
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Spanish English instant. Press 1 English to Spanish, 2 Spanish to English, 3 for 3-way conference.</Say><Gather numDigits="1" action="/api/voice?mode=spanish_menu" timeout="10"><Say>Press 1,2,3.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(digits==='9'){
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Saved! Total grows. Press 1 Burma, 2 teaching, 3 Spanish.</Say><Gather numDigits="1" action="/api/voice" timeout="10"><Say>Press 1,2,3.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(mode==='spanish_menu'){
+    if(digits==='1'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>English to Spanish. Say English.</Say><Gather input="speech" action="/api/voice?mode=es_en" timeout="10"><Say>Say English.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+    }
+    if(digits==='2'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Spanish to English. Di en espanol.</Say><Gather input="speech" action="/api/voice?mode=es_es" timeout="10"><Say>Di en espanol.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+    }
+    if(digits==='3'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>3-way conference. Enter second number then hash.</Say><Gather input="dtmf" finishOnKey="#" action="/api/voice?mode=spanish_conf" timeout="20"><Say>Enter number hash.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
     }
   }
-
-  // Step 1: Recording completed with transcription
-  if (transcription || recUrl || recSid || callStatus === 'completed') {
-    const id = Date.now() + '-' + Math.random().toString(36).slice(2, 6);
-    let term = transcription || '(recording) Kei ham / Kei pau / Damdam maw?';
-    let meaning = transcription || 'Voice teaching';
-    let dialect = 'thado-kuki + zomi-tedim';
-    let type = 'voice_call';
-
-    // Parse teaching from transcription: "Damdam maw means How are you"
-    const tLower = (transcription || '').toLowerCase();
-    if (tLower.includes(' means ') || tLower.includes(' is ') || tLower.includes('=')) {
-      type = 'teach_record';
-      if (tLower.includes(' means ')) {
-        const idx = tLower.indexOf(' means ');
-        term = transcription.substring(0, idx).trim();
-        meaning = transcription.substring(idx + 7).trim();
-      } else if (tLower.includes(' is ')) {
-        const idx = tLower.indexOf(' is ');
-        term = transcription.substring(0, idx).trim();
-        meaning = transcription.substring(idx + 4).trim();
-      }
-      if (term.toLowerCase().includes('kei ham')) dialect = 'thado-kuki';
-      else dialect = 'zomi-tedim';
-    }
-
-    const rec = {
-      type: type,
-      text_original: term,
-      full_input: transcription || term,
-      dialect_detected: dialect,
-      meaning: meaning,
-      from_number: from,
-      to_number: to || '+16152355215',
-      call_sid: callSid,
-      recording_url: recUrl || (recSid ? `https://api.twilio.com/2010-04-01/Accounts/${process.env.TWILIO_ACCOUNT_SID}/Recordings/${recSid}` : ''),
-      transcription: transcription,
-      timestamp: Date.now(),
-      id: id,
-      source: type === 'teach_record' ? 'teach-voice' : 'voice.js-final-dictionary',
-      lang: 'tcd',
-      teach: type === 'teach_record'
-    };
-    try { await kv.hset('fixes', { [id]: rec }); } catch(e){}
-
-    // Ask to press 1 to confirm save
-    const twiml = `<?xml version="1.0" encoding="UTF-8"?><Response><Say>You said: ${term}. Means: ${meaning}. Saved to Family Vault.</Say><Gather numDigits="1" action="/api/voice" timeout="10"><Say>Press 1 to confirm and save, Press 2 to teach another word, or hang up if correct.</Say></Gather></Response>`;
-    res.setHeader('Content-Type','text/xml'); return res.status(200).send(twiml);
+  if(mode==='es_en'&&input){
+    const t=await freeTranslate(input,'en','es');
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${t}</Say><Gather input="speech" action="/api/voice?mode=es_en" timeout="10"><Say>Next.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
   }
-
-  // Initial call
-  const twimlInit = `<?xml version="1.0" encoding="UTF-8"?><Response><Say voice="Polly.Joanna">Welcome to NqAI Family Vault teaching mode.</Say><Say>Teach me Zomi or Thado Kuki. Say the word, then means, then English. Example: Damdam maw means How are you in Zomi. After beep, speak, then press 1 to save.</Say><Record maxLength="30" action="/api/voice" transcribe="true" transcribeCallback="/api/voice" /><Gather numDigits="1" action="/api/voice" timeout="10"><Say>Press 1 to confirm save, 2 to teach again.</Say></Gather></Response>`;
-  res.setHeader('Content-Type','text/xml'); return res.status(200).send(twimlInit);
+  if(mode==='es_es'&&input){
+    const t=await freeTranslate(input,'es','en');
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${t}</Say><Gather input="speech" action="/api/voice?mode=es_es" timeout="10"><Say>Next.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(mode==='spanish_conf'){
+    const second=(p.Digits||'').replace('#',''); const clean=second.startsWith('+')?second:`+${second}`; const conf=`nqai-spanish-${Date.now()}`;
+    try{
+      const client=(await import('twilio'))(process.env.TWILIO_ACCOUNT_SID,process.env.TWILIO_AUTH_TOKEN);
+      await client.calls.create({to:clean,from:'+16152355215',twiml:`<Response><Say>Joining Spanish English 3-way.</Say><Dial><Conference>${conf}</Conference></Dial></Response>`});
+    }catch(e){}
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Calling ${clean}. Conference ${conf}.</Say><Dial><Conference record="record-from-start">${conf}</Conference></Dial></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(mode==='burma_interpret'&&input){
+    const m=await findMeaning(input);
+    const ans=m?`${input} means ${m}`:`Teach me ${input} press 2`;
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${ans}</Say><Gather input="speech" action="/api/voice?mode=burma_interpret" timeout="10"><Say>Next.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  if(mode==='burma_teach'&&(trans||input)){
+    const full=trans||input; let term=full; let meaning=full;
+    if(full.toLowerCase().includes(' means ')){ const idx=full.toLowerCase().indexOf(' means '); term=full.substring(0,idx).trim(); meaning=full.substring(idx+7).trim(); }
+    try{ await kv.hset('fixes',{[Date.now()]:{type:'teach_record',text_original:term,meaning,timestamp:Date.now(),id:Date.now(),from_number:from}}); }catch{}
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Taught ${term} means ${meaning}. Press 9.</Say><Gather numDigits="1" action="/api/voice?mode=burma_teach" timeout="10"><Say>Press 9.</Say></Gather></Response>`;
+    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  const init=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Welcome to NqAI. Burma rare and Spanish instant.</Say><Gather numDigits="1" action="/api/voice" timeout="12"><Say>Press 1 Burma interpreting, 2 teaching, 3 Spanish instant.</Say></Gather></Response>`;
+  res.setHeader('Content-Type','text/xml'); return res.status(200).send(init);
 }
