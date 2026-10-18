@@ -17,7 +17,6 @@ async function freeTranslate(text,from,to){
     const j=await r.json(); return j.responseData?.translatedText||text;
   }catch{ return text; }
 }
-
 async function findMeaning(term){
   try{
     const d=await kv.hgetall('fixes');
@@ -27,58 +26,42 @@ async function findMeaning(term){
     return m?.meaning||null;
   }catch{ return null; }
 }
-
 export default async function handler(req,res){
   const p={...req.query,...req.body};
   const from=p.From||''; const digits=p.Digits||''; const speech=p.SpeechResult||''; const trans=p.TranscriptionText||''; const input=(speech||trans||'').trim(); const mode=p.mode||'';
   
-  if(digits==='1'){
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Burma dialects interpreting. Say Zomi or Burmese word.</Say><Gather input="speech" action="/api/voice?mode=burma_interpret" timeout="10"><Say>Say word.</Say></Gather></Response>`;
-    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
-  }
-  if(digits==='2'){
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Burma teaching. Say word means English. Example Lungdam means Thank you in Zomi.</Say><Record maxLength="30" action="/api/voice?mode=burma_teach" transcribe="true" transcribeCallback="/api/voice?mode=burma_teach" /><Gather numDigits="1" action="/api/voice?mode=burma_teach" timeout="10"><Say>Press 9 to save.</Say></Gather></Response>`;
-    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
-  }
-  if(digits==='3'){
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Spanish English instant. Press 1 English to Spanish, 2 Spanish to English, 3 for 3-way conference.</Say><Gather numDigits="1" action="/api/voice?mode=spanish_menu" timeout="10"><Say>Press 1,2,3.</Say></Gather></Response>`;
-    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
-  }
-  if(digits==='9'){
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Saved! Total grows. Press 1 Burma, 2 teaching, 3 Spanish.</Say><Gather numDigits="1" action="/api/voice" timeout="10"><Say>Press 1,2,3.</Say></Gather></Response>`;
-    res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
-  }
+  // *** FIX: Check Spanish submenu FIRST before main menu ***
   if(mode==='spanish_menu'){
     if(digits==='1'){
-      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>English to Spanish. Say English.</Say><Gather input="speech" action="/api/voice?mode=es_en" timeout="10"><Say>Say English.</Say></Gather></Response>`;
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>English to Spanish. Say English now after beep.</Say><Gather input="speech" language="en-US" action="/api/voice?mode=es_en" timeout="10" speechTimeout="auto"><Say>Say English sentence.</Say></Gather></Response>`;
       res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
     }
     if(digits==='2'){
-      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Spanish to English. Di en espanol.</Say><Gather input="speech" action="/api/voice?mode=es_es" timeout="10"><Say>Di en espanol.</Say></Gather></Response>`;
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Spanish to English. Di en espanol ahora.</Say><Gather input="speech" language="es-ES" action="/api/voice?mode=es_es" timeout="10" speechTimeout="auto"><Say>Di en espanol.</Say></Gather></Response>`;
       res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
     }
     if(digits==='3'){
-      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>3-way conference. Enter second number then hash.</Say><Gather input="dtmf" finishOnKey="#" action="/api/voice?mode=spanish_conf" timeout="20"><Say>Enter number hash.</Say></Gather></Response>`;
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>3-way conference. Enter second number starting with 1 then hash. Example 1 6 1 5 6 1 8 8 1 8 1 hash.</Say><Gather input="dtmf" finishOnKey="#" action="/api/voice?mode=spanish_conf" timeout="25"><Say>Enter number then hash.</Say></Gather></Response>`;
       res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
     }
   }
   if(mode==='es_en'&&input){
     const t=await freeTranslate(input,'en','es');
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${t}</Say><Gather input="speech" action="/api/voice?mode=es_en" timeout="10"><Say>Next.</Say></Gather></Response>`;
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${t}</Say><Gather input="speech" language="en-US" action="/api/voice?mode=es_en" timeout="10" speechTimeout="auto"><Say>Next English.</Say></Gather></Response>`;
     res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
   }
   if(mode==='es_es'&&input){
     const t=await freeTranslate(input,'es','en');
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${t}</Say><Gather input="speech" action="/api/voice?mode=es_es" timeout="10"><Say>Next.</Say></Gather></Response>`;
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>${t}</Say><Gather input="speech" language="es-ES" action="/api/voice?mode=es_es" timeout="10" speechTimeout="auto"><Say>Siguiente.</Say></Gather></Response>`;
     res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
   }
   if(mode==='spanish_conf'){
     const second=(p.Digits||'').replace('#',''); const clean=second.startsWith('+')?second:`+${second}`; const conf=`nqai-spanish-${Date.now()}`;
     try{
       const client=(await import('twilio'))(process.env.TWILIO_ACCOUNT_SID,process.env.TWILIO_AUTH_TOKEN);
-      await client.calls.create({to:clean,from:'+16152355215',twiml:`<Response><Say>Joining Spanish English 3-way.</Say><Dial><Conference>${conf}</Conference></Dial></Response>`});
-    }catch(e){}
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Calling ${clean}. Conference ${conf}.</Say><Dial><Conference record="record-from-start">${conf}</Conference></Dial></Response>`;
+      await client.calls.create({to:clean,from:'+16152355215',twiml:`<Response><Say>Joining Spanish English 3-way conference.</Say><Dial><Conference>${conf}</Conference></Dial></Response>`});
+    }catch(e){ console.log('conf call error',e); }
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Calling ${clean}. Joining conference.</Say><Dial><Conference record="record-from-start">${conf}</Conference></Dial></Response>`;
     res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
   }
   if(mode==='burma_interpret'&&input){
@@ -91,8 +74,27 @@ export default async function handler(req,res){
     const full=trans||input; let term=full; let meaning=full;
     if(full.toLowerCase().includes(' means ')){ const idx=full.toLowerCase().indexOf(' means '); term=full.substring(0,idx).trim(); meaning=full.substring(idx+7).trim(); }
     try{ await kv.hset('fixes',{[Date.now()]:{type:'teach_record',text_original:term,meaning,timestamp:Date.now(),id:Date.now(),from_number:from}}); }catch{}
-    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Taught ${term} means ${meaning}. Press 9.</Say><Gather numDigits="1" action="/api/voice?mode=burma_teach" timeout="10"><Say>Press 9.</Say></Gather></Response>`;
+    const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Taught ${term} means ${meaning}. Press 9 to save.</Say><Gather numDigits="1" action="/api/voice?mode=burma_teach" timeout="10"><Say>Press 9.</Say></Gather></Response>`;
     res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+  }
+  // Main menu only when no mode
+  if(!mode){
+    if(digits==='1'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Burma dialects interpreting. Say Zomi or Burmese word.</Say><Gather input="speech" action="/api/voice?mode=burma_interpret" timeout="10"><Say>Say word.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+    }
+    if(digits==='2'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Burma teaching. Say word means English. Example Lungdam means Thank you in Zomi.</Say><Record maxLength="30" action="/api/voice?mode=burma_teach" transcribe="true" transcribeCallback="/api/voice?mode=burma_teach" /><Gather numDigits="1" action="/api/voice?mode=burma_teach" timeout="10"><Say>Press 9 to save.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+    }
+    if(digits==='3'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Spanish English instant. Press 1 English to Spanish, 2 Spanish to English, 3 for 3-way conference.</Say><Gather numDigits="1" action="/api/voice?mode=spanish_menu" timeout="10"><Say>Press 1,2,3.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+    }
+    if(digits==='9'){
+      const tw=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Saved! Total grows. Press 1 Burma, 2 teaching, 3 Spanish.</Say><Gather numDigits="1" action="/api/voice" timeout="10"><Say>Press 1,2,3.</Say></Gather></Response>`;
+      res.setHeader('Content-Type','text/xml'); return res.status(200).send(tw);
+    }
   }
   const init=`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Welcome to NqAI. Burma rare and Spanish instant.</Say><Gather numDigits="1" action="/api/voice" timeout="12"><Say>Press 1 Burma interpreting, 2 teaching, 3 Spanish instant.</Say></Gather></Response>`;
   res.setHeader('Content-Type','text/xml'); return res.status(200).send(init);
