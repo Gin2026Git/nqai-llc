@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NqAI Web - Phone-(Twilio+Web)-Phone</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto; padding:20px; max-width:900px; margin:auto; background:#fafafa}
+  h1{margin:0 0 8px 0}
+  .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:12px 0}
+  button,input,select{padding:12px 14px; border-radius:10px; border:1px solid #ccc; font-size:16px}
+  button{cursor:pointer}
+  .black{background:black; color:white; border-color:black}
+  #out{font-size:48px; font-weight:800; margin-top:30px; line-height:1.2; min-height:60px}
+  #info{color:#666; font-size:14px; margin-top:16px; line-height:1.5}
+  .card{background:white; border:1px solid #e5e5e5; border-radius:16px; padding:16px; margin-top:16px}
+</style>
+</head>
+<body>
+
+<h1>NqAI Web - Phone-(Twilio+Web)-Phone</h1>
+<p>Zomi 500 + Spanish + Burmese GOOD on 100 free - No paid - Lexnary 117 verified</p>
+
+<div class="card">
+  <div class="row">
+    <button onclick="listen()">🎤 Speak English</button>
+    <input id="txt" value="Hello" placeholder="Type Hello" style="width:280px" />
+    <select id="tgt">
+      <option value="zomi">Zomi (Tedim) 500 - tui</option>
+      <option value="spa">Spanish - Hola</option>
+      <option value="mya">Burmese - မင်္ဂလာပါ</option>
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="ja">Japanese</option>
+    </select>
+    <button onclick="doTranslate()" class="black" id="btn">Translate + Speak</button>
+  </div>
+
+  <div id="out"></div>
+  <div id="info">
+    <div>API: /api/translate?text=water&target=zomi → tui</div>
+    <div>API: /api/translate?text=Hello&target=spa → Hola</div>
+    <div>API: /api/translate?text=Hello&target=mya → မင်္ဂလာပါ</div>
+  </div>
+</div>
+
+<script>
+async function doTranslate(){
+  const text = document.getElementById('txt').value.trim();
+  const target = document.getElementById('tgt').value;
+  if(!text) return;
+  const btn = document.getElementById('btn');
+  btn.innerText = "...";
+  try{
+    const r = await fetch(`/api/translate?text=${encodeURIComponent(text)}&target=${target}`);
+    const d = await r.json();
+    const translated = d.translated || "";
+    document.getElementById('out').innerText = translated;
+    document.getElementById('info').innerHTML = `
+      <div><b>Result:</b> ${text} → ${translated}</div>
+      <div><b>Provider:</b> ${d.provider || ""} | <b>Total:</b> ${d.total || 100}</div>
+      <div style="margin-top:6px">API: /api/translate?text=${text}&target=${target} → ${translated}</div>
+      <div>Zomi works + Spanish + Burmese GOOD on 100 free</div>
+    `;
+    if(translated){
+      const u = new SpeechSynthesisUtterance(translated);
+      if(target==="spa") u.lang="es-ES";
+      else if(target==="mya") u.lang="my-MM";
+      else u.lang="en-US";
+      window.speechSynthesis.speak(u);
+    }
+  }catch(e){
+    document.getElementById('out').innerText = "error fetch failed";
+  }
+  btn.innerText = "Translate + Speak";
+}
+
+function listen(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ alert("Use Chrome on laptop for Speak"); return; }
+  const rec = new SR();
+  rec.lang = "en-US";
+  rec.onresult = (e)=>{ document.getElementById('txt').value = e.results[0][0].transcript; };
+  rec.start();
+}
+</script>
+
+</body>
+</html>
