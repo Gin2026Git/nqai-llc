@@ -1,1 +1,0 @@
-# nqai-llc
