@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NqAI Web — Burmese • Zomi • Spanish</title>
+<style>body{margin:0;background:#0f0f0f;color:#fff;font-family:system-ui;padding:12px}
+input,select,button{padding:12px;border-radius:8px;border:1px solid #333;background:#1a1a1a;color:#fff;margin:4px}
+#out{white-space:pre-wrap;background:#151515;padding:16px;border-radius:10px;min-height:100px;margin-top:12px;font-size:20px;line-height:1.6}
+</style></head><body>
+<h2>NqAI Web — Burmese Unicode • Zomi 500 • Spanish</h2>
+<select id="target"><option value="mya">Burmese mya</option><option value="tcd">Zomi (Tedim)</option><option value="spa">Spanish</option><option value="eng">English</option></select>
+<input id="text" style="width:60%" placeholder="Type နေကောင်းလား or Hola or tui" value="နေကောင်းလား">
+<button onclick="translate()">Translate</button>
+<button id="rec" onclick="toggleRec()" style="background:#dc2626">🔴 Record Native Fix</button>
+<button onclick="saveFix()" style="background:#16a34a">💾 Save Fix</button>
+<div id="out">Type and translate... Native Fix will show here.</div>
+<script>
+let mediaRecorder,chunks=[],audioBlob=null;
+async function translate(){
+  const text=document.getElementById('text').value;
+  const target=document.getElementById('target').value;
+  document.getElementById('out').textContent='Translating...';
+  // check fix first
+  let fixRes=await fetch(`/api/fix?text=${encodeURIComponent(text)}&target=${target}`).then(r=>r.json()).catch(()=>({}));
+  if(fixRes.found && fixRes.audio){ document.getElementById('out').innerHTML=`✅ Native Fix Found: ${fixRes.text} <br><audio controls src="${fixRes.audio}"></audio>`; return; }
+  let r=await fetch('/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,target})}).then(r=>r.json()).catch(()=>({text:'(api/translate not ready) '+text}));
+  document.getElementById('out').textContent=r.text||r.translation||JSON.stringify(r);
+}
+async function toggleRec(){
+  if(mediaRecorder && mediaRecorder.state==='recording'){ mediaRecorder.stop(); document.getElementById('rec').textContent='🔴 Record Native Fix'; return; }
+  let stream=await navigator.mediaDevices.getUserMedia({audio:true}); chunks=[];
+  mediaRecorder=new MediaRecorder(stream); mediaRecorder.ondataavailable=e=>chunks.push(e.data);
+  mediaRecorder.onstop=()=>{ audioBlob=new Blob(chunks,{type:'audio/webm'}); document.getElementById('out').innerHTML+=`<br><br>🎙️ Recorded — Click 💾 Save Fix<br><audio controls src="${URL.createObjectURL(audioBlob)}"></audio>`; };
+  mediaRecorder.start(); document.getElementById('rec').textContent='⏹️ Stop';
+}
+async function saveFix(){
+  if(!audioBlob) return alert('Record first!');
+  const text=document.getElementById('text').value; const target=document.getElementById('target').value;
+  let reader=new FileReader(); reader.onloadend=async()=>{
+    let base64=reader.result;
+    let res=await fetch('/api/fix',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,target,audio:base64})}).then(r=>r.json());
+    alert('Saved! '+res.key+' Total:'+res.total);
+  }; reader.readAsDataURL(audioBlob);
+}
+</script></body></html>
