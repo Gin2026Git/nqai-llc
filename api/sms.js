@@ -1,22 +1,13 @@
-export default async function handler(req, res){
-  res.setHeader('Content-Type', 'text/xml');
-  res.setHeader('Access-Control-Allow-Origin','*');
-  const body = (req.body?.Body || req.query?.Body || req.query?.text || "Hello").toString().trim();
-  
-  // Call core translate logic - Reuse translate.js dict + NLLB
-  const D = {"hola":"Hello","mingalaba":"Hello","ka dam":"I am fine"};
-  const translated = D[body.toLowerCase()] || body;
-  
-  // For full NLLB - fetch your own API
-  let finalText = translated;
-  try {
-    const r = await fetch(`https://nqai.llc/api/translate?text=${encodeURIComponent(body)}`);
-    const j = await r.json();
-    finalText = j.translated || translated;
-  } catch(e){}
-
-  return res.status(200).send(`<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-<Message>NqAI LLC 615-235-5215: ${body} => ${finalText} [Powered by 【entity-Meta¦canonical_name=Meta】 NLLB-200]</Message>
-</Response>`);
+// api/sms.js - SMS -> nqai-fixes persistent
+import { kv } from '@vercel/kv';
+export default async function handler(req,res){
+  const p={...req.query,...req.body};
+  const from=p.From||'unknown'; const body=p.Body||''; const sid=p.MessageSid||Date.now().toString();
+  if(body){
+    const id=Date.now()+'-'+Math.random().toString(36).slice(2,6);
+    const rec={type:'sms_record',text_original:body,text_lang:'auto',translated:'',to_lang:'tcd',from_number:from,to_number:'+16152355215',message_sid:sid,voice_soul:'sms-6152355215',timestamp:Date.now(),id,source:'sms.js-one-brain',dialect:'tcd'};
+    try{await kv.hset('fixes',{ [id]: rec });}catch(e){console.error(e);}
+  }
+  const twiml=`<?xml version="1.0"?><Response><Message>Ngai Family Vault ah na thu hong ki save ta. Nqai.llc ah en in. Thank you!</Message></Response>`;
+  res.setHeader('Content-Type','text/xml'); return res.status(200).send(twiml);
 }
