@@ -1,136 +1,57 @@
-// api/translate.js - NqAI One Brain - spa, eng, mya, tcd + ML self-recording
-
-let cacheFixes = null;
-let cacheTime = 0;
-
-async function loadFixes(host){
-  if(cacheFixes && Date.now()-cacheTime < 5*60*1000) return cacheFixes;
-  try{
-    const r = await fetch(`https://${host}/api/fix`);
-    const j = await r.json();
-    cacheFixes = j.records || [];
-    cacheTime = Date.now();
-    return cacheFixes;
-  }catch{ return []; }
-}
-
-const DICT = {
-  tcd: {
-    "how are you?": "Kei ham? Na dam hiam?",
-    "how are you": "Kei ham?",
-    "i love you": "Kei it Ing",
-    "thank you": "Lungdam",
-    "where are you?": "Kolah om na hiam?",
-    "good morning": "Zingsang hoih",
-    "good night": "Zan hoih",
-    "are you safe?": "Na bit hiam?",
-    "research": "Kan simna",
-    "bro, how's research?": "Una, na kan simna bang hi hiam?"
-  },
-  mya: {
-    "how are you?": "နေကောင်းလား",
-    "are you safe?": "ဘေးကင်းလား",
-    "thank you": "ကျေးဇူးတင်ပါတယ်",
-    "i love you": "ချစ်တယ်"
-  },
-  spa: {
-    "how are you?": "¿Cómo estás?",
-    "i love you": "Te amo",
-    "thank you": "Gracias"
-  }
+// NqAI - All Major Languages Translator
+const MAJOR_LANGS = {
+  'en':'English','es':'Spanish','zh':'Chinese','hi':'Hindi','ar':'Arabic',
+  'fr':'French','de':'German','ru':'Russian','pt':'Portuguese','ja':'Japanese',
+  'ko':'Korean','it':'Italian','tr':'Turkish','nl':'Dutch','pl':'Polish',
+  'vi':'Vietnamese','th':'Thai','id':'Indonesian','ms':'Malay','bn':'Bengali',
+  'ur':'Urdu','ta':'Tamil','te':'Telugu','mr':'Marathi','gu':'Gujarati',
+  'kn':'Kannada','ml':'Malayalam','pa':'Punjabi','fa':'Persian','sw':'Swahili',
+  'my':'Burmese','tcd':'Tiddim Chin','zai':'Zomi'
 };
 
-const LANG_MAP = {
-  eng: "English", en: "English",
-  spa: "Spanish", es: "Spanish",
-  mya: "Burmese (Myanmar)",
-  tcd: "Tedim Zomi dialect",
-  auto: "auto-detected language"
+const VOICE_MAP = {
+  'en':'Polly.Joanna','es':'Polly.Mia','zh':'Polly.Zhiyu','hi':'Polly.Aditi',
+  'ar':'Polly.Zeina','fr':'Polly.Celine','de':'Polly.Marlene','ja':'Polly.Mizuki',
+  'ko':'Polly.Seoyeon','it':'Polly.Bianca','pt':'Polly.Camila','ru':'Polly.Tatyana',
+  'hi':'Polly.Aditi','default':'Polly.Joanna'
 };
 
-function dictTranslate(text, to){
-  if(!DICT[to]) return null;
-  const key = text.toLowerCase().trim();
-  return DICT[to][key] || null;
-}
-
-export default async function handler(req,res){
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');
-  if(req.method==='OPTIONS') return res.status(200).end();
-
-  const body = req.method==='POST' ? (typeof req.body==='string' ? JSON.parse(req.body) : req.body) : {};
-  const text = body.text || req.query.text || '';
-  const from = body.from || req.query.from || 'auto';
-  const to = body.to || req.query.to || 'eng';
-  const caller = body.caller || req.query.caller || 'unknown';
-
-  if(!text) return res.status(400).json({error:'text required'});
-
-  const host = req.headers.host;
-  const fixes = await loadFixes(host);
-  const loved = fixes.filter(f=>f.ml_text && f.ml_loved && f.text_lang?.includes(to)).reverse();
-  for(const f of loved){
-    if(f.ml_text.toLowerCase()===text.toLowerCase()){
-      return res.json({
-        translated: f.ml_correction || f.text_original,
-        source: 'ml-self-recorded-loved',
-        dialect: to,
-        voice_soul: f.ml_voice_soul || caller
-      });
-    }
-  }
-
-  const dictHit = dictTranslate(text, to);
-  if(dictHit){
-    return res.json({ translated: dictHit, source: 'dict-rare', dialect: to });
-  }
-
-  let translated = text;
+export default async function handler(req, res) {
+  const text = req.query.text || req.body?.text || "";
+  let from = (req.query.from || 'auto').toLowerCase();
+  let to = (req.query.to || 'auto').toLowerCase();
   
-  try{
-    if(process.env.GROQ_API_KEY){
-      const fromName = LANG_MAP[from] || from;
-      const toName = LANG_MAP[to] || to;
-      
-      const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions',{
-        method:'POST',
-        headers:{'Authorization':`Bearer ${process.env.GROQ_API_KEY}`,'Content-Type':'application/json'},
-        body:JSON.stringify({
-          model:'openai/gpt-oss-20b',
-          messages:[
-            {role:'system',content:`You are NqAI professional translator. Translate from ${fromName} to ${toName}. Only output the translation, no explanation.`},
-            {role:'user',content:text}
-          ],
-          temperature:0.1
-        })
-      });
-      
-      const groqJ = await groqRes.json();
-      if(groqJ.choices?.[0]?.message?.content){
-        translated = groqJ.choices[0].message.content.trim();
-      }
-    }
-  }catch(e){
-    console.log('translate error',e.message);
+  if(!text) return res.json({error:"no text"});
+
+  // Auto-detect with Groq
+  const prompt = `Detect language of: "${text}" and translate. 
+  From: ${from} (auto=detect), To: ${to} (if auto, translate to English if source not English, else to Spanish).
+  Supported: ${Object.keys(MAJOR_LANGS).join(',')}.
+  Return ONLY JSON: {"from":"code","to":"code","translated":"translation"}`;
+
+  const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "openai/gpt-oss-20b",
+      messages: [{role:"user", content: prompt}],
+      temperature: 0.2
+    })
+  });
+  
+  const data = await groqRes.json();
+  let result = {translated: text, from, to, source: "groq+dict+ml"};
+  try {
+    const content = data.choices[0].message.content;
+    result = {...result, ...JSON.parse(content.match(/\{.*\}/s)[0])};
+  } catch(e) {
+    result.translated = text; // fallback
   }
-
-  try{
-    await fetch(`https://${host}/api/fix`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        type:'translate_record',
-        text_original: text,
-        text_lang: from,
-        translated,
-        to_lang: to,
-        caller,
-        timestamp: new Date().toISOString(),
-        source: 'translate.js-one-brain'
-      })
-    });
-  }catch{}
-
-  res.json({ translated, from, to, source:'groq+dict+ml', dialect: to });
+  
+  result.dialect = result.to;
+  result.voice = VOICE_MAP[result.to] || VOICE_MAP.default;
+  return res.json(result);
 }
