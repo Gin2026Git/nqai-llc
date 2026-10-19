@@ -1,5 +1,4 @@
 // api/translate.js - NqAI One Brain - spa, eng, mya, tcd + ML self-recording
-// Real Phone No.(Twilio+AI+Web+ML Recording)-Real Phone No - Handles:to=spa, eng, mya, tcd (Tedim rare) - Auto learns from /api/fix
 
 let cacheFixes = null;
 let cacheTime = 0;
@@ -87,7 +86,6 @@ export default async function handler(req,res){
     return res.json({ translated: dictHit, source: 'dict-rare', dialect: to });
   }
 
-  // Real Groq translation - Fixed with language names
   let translated = text;
   let debug = { hasGroqKey: !!process.env.GROQ_API_KEY, from, to };
   
@@ -100,7 +98,7 @@ export default async function handler(req,res){
         method:'POST',
         headers:{'Authorization':`Bearer ${process.env.GROQ_API_KEY}`,'Content-Type':'application/json'},
         body:JSON.stringify({
-          model:'llama-3.3-70b-versatile',
+          model:'llama-3.1-8b-instant',
           messages:[
             {role:'system',content:`You are NqAI professional translator. Translate from ${fromName} to ${toName}. Only output the translation, no explanation, no quotes.`},
             {role:'user',content:text}
@@ -111,24 +109,16 @@ export default async function handler(req,res){
       
       const groqJ = await groqRes.json();
       debug.groqStatus = groqRes.status;
-      debug.groqResponse = groqJ;
       
       if(groqJ.choices?.[0]?.message?.content){
         translated = groqJ.choices[0].message.content.trim();
       } else {
-        debug.error = 'No choices in response';
+        debug.groqResponse = groqJ;
+        debug.error = 'No choices';
       }
-    } else {
-      debug.error = 'No GROQ_API_KEY';
-      const mmFrom = from==='eng'?'en':from==='spa'?'es':from;
-      const mmTo = to==='eng'?'en':to==='spa'?'es':to;
-      const mm = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${mmFrom}|${mmTo}`);
-      const mmJ = await mm.json();
-      if(mmJ.responseData?.translatedText) translated = mmJ.responseData.translatedText;
     }
   }catch(e){
     debug.catchError = e.message;
-    console.log('translate error',e);
   }
 
   try{
@@ -142,7 +132,6 @@ export default async function handler(req,res){
         translated,
         to_lang: to,
         caller,
-        voice_soul: caller,
         timestamp: new Date().toISOString(),
         source: 'translate.js-one-brain'
       })
