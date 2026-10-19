@@ -5,7 +5,6 @@ let cacheFixes = null;
 let cacheTime = 0;
 
 async function loadFixes(host){
-  // Cache 5 min
   if(cacheFixes && Date.now()-cacheTime < 5*60*1000) return cacheFixes;
   try{
     const r = await fetch(`https://${host}/api/fix`);
@@ -16,7 +15,6 @@ async function loadFixes(host){
   }catch{ return []; }
 }
 
-// Rare dictionaries - merged from zomi.js + burmese.js + spanish.js
 const DICT = {
   tcd: {
     "how are you?": "Kei ham? Na dam hiam?",
@@ -43,6 +41,14 @@ const DICT = {
   }
 };
 
+const LANG_MAP = {
+  eng: "English", en: "English",
+  spa: "Spanish", es: "Spanish",
+  mya: "Burmese (Myanmar)",
+  tcd: "Tedim Zomi dialect",
+  auto: "auto-detected language"
+};
+
 function dictTranslate(text, to){
   if(!DICT[to]) return null;
   const key = text.toLowerCase().trim();
@@ -62,7 +68,6 @@ export default async function handler(req,res){
 
   if(!text) return res.status(400).json({error:'text required'});
 
-  // 1. Check ML self-recorded fixes first - Rare dialects by self
   const host = req.headers.host;
   const fixes = await loadFixes(host);
   const loved = fixes.filter(f=>f.ml_text && f.ml_loved && f.text_lang?.includes(to)).reverse();
@@ -77,44 +82,55 @@ export default async function handler(req,res){
     }
   }
 
-  // 2. Check dictionary - Rare Tedim 500 by self
   const dictHit = dictTranslate(text, to);
   if(dictHit){
     return res.json({ translated: dictHit, source: 'dict-rare', dialect: to });
   }
 
-  // 3. Real Groq translation - Production (Fixed)
+  // Real Groq translation - Fixed with language names
   let translated = text;
+  let debug = { hasGroqKey: !!process.env.GROQ_API_KEY, from, to };
+  
   try{
     if(process.env.GROQ_API_KEY){
+      const fromName = LANG_MAP[from] || from;
+      const toName = LANG_MAP[to] || to;
+      
       const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions',{
         method:'POST',
         headers:{'Authorization':`Bearer ${process.env.GROQ_API_KEY}`,'Content-Type':'application/json'},
         body:JSON.stringify({
           model:'llama-3.3-70b-versatile',
           messages:[
-            {role:'system',content:`You are NqAI translator. Translate ${from} to ${to}. Only output translation, no explanation. Keep rare dialects meaning.`},
+            {role:'system',content:`You are NqAI professional translator. Translate from ${fromName} to ${toName}. Only output the translation, no explanation, no quotes.`},
             {role:'user',content:text}
           ],
           temperature:0.1
         })
       });
+      
       const groqJ = await groqRes.json();
+      debug.groqStatus = groqRes.status;
+      debug.groqResponse = groqJ;
+      
       if(groqJ.choices?.[0]?.message?.content){
         translated = groqJ.choices[0].message.content.trim();
+      } else {
+        debug.error = 'No choices in response';
       }
     } else {
-      // Fallback MyMemory
-      const mm = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
+      debug.error = 'No GROQ_API_KEY';
+      const mmFrom = from==='eng'?'en':from==='spa'?'es':from;
+      const mmTo = to==='eng'?'en':to==='spa'?'es':to;
+      const mm = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${mmFrom}|${mmTo}`);
       const mmJ = await mm.json();
       if(mmJ.responseData?.translatedText) translated = mmJ.responseData.translatedText;
     }
   }catch(e){
+    debug.catchError = e.message;
     console.log('translate error',e);
-    translated = dictHit || text;
   }
 
-  // 4. Save this translation pair for future self-learning
   try{
     await fetch(`https://${host}/api/fix`,{
       method:'POST',
@@ -133,5 +149,5 @@ export default async function handler(req,res){
     });
   }catch{}
 
-  res.json({ translated, from, to, source:'nllb+dict+ml', dialect: to });
+  res.json({ translated, from, to, source:'groq+dict+ml', dialect: to, _debug: debug });
 }
