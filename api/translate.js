@@ -87,7 +87,6 @@ export default async function handler(req,res){
   }
 
   let translated = text;
-  let debug = { hasGroqKey: !!process.env.GROQ_API_KEY, from, to };
   
   try{
     if(process.env.GROQ_API_KEY){
@@ -98,9 +97,9 @@ export default async function handler(req,res){
         method:'POST',
         headers:{'Authorization':`Bearer ${process.env.GROQ_API_KEY}`,'Content-Type':'application/json'},
         body:JSON.stringify({
-          model:'llama-3.1-8b-instant',
+          model:'openai/gpt-oss-20b',
           messages:[
-            {role:'system',content:`You are NqAI professional translator. Translate from ${fromName} to ${toName}. Only output the translation, no explanation, no quotes.`},
+            {role:'system',content:`You are NqAI professional translator. Translate from ${fromName} to ${toName}. Only output the translation, no explanation.`},
             {role:'user',content:text}
           ],
           temperature:0.1
@@ -108,17 +107,12 @@ export default async function handler(req,res){
       });
       
       const groqJ = await groqRes.json();
-      debug.groqStatus = groqRes.status;
-      
       if(groqJ.choices?.[0]?.message?.content){
         translated = groqJ.choices[0].message.content.trim();
-      } else {
-        debug.groqResponse = groqJ;
-        debug.error = 'No choices';
       }
     }
   }catch(e){
-    debug.catchError = e.message;
+    console.log('translate error',e.message);
   }
 
   try{
@@ -138,5 +132,5 @@ export default async function handler(req,res){
     });
   }catch{}
 
-  res.json({ translated, from, to, source:'groq+dict+ml', dialect: to, _debug: debug });
+  res.json({ translated, from, to, source:'groq+dict+ml', dialect: to });
 }
