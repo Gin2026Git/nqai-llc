@@ -83,7 +83,7 @@ export default async function handler(req,res){
     return res.json({ translated: dictHit, source: 'dict-rare', dialect: to });
   }
 
-  // 3. Real Groq translation - Production
+  // 3. Real Groq translation - Production (Fixed)
   let translated = text;
   try{
     if(process.env.GROQ_API_KEY){
