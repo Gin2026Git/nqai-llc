@@ -1,67 +1,28 @@
-// api/translator-bot.js - NqAI Real-time Translator Voice Bot
-// Listens, translates via translate.js (groq+dict+ml), speaks into conference
+export default async function handler(req, res) {
+  const conf = req.query.conf || 'nqai-room';
+  const speech = req.body.SpeechResult || "";
 
-export default async function handler(req,res){
-  const host = req.headers.host || 'nqai.llc';
-  const confName = req.query.conf || req.body?.conf || 'nqai-room';
-  const from = req.query.from || 'eng';
-  const to = req.query.to || 'spa';
-  const translatedText = req.query.translated || req.body?.translated || '';
-  const callerInput = req.query.SpeechResult || req.body?.SpeechResult || '';
-
-  res.setHeader('Content-Type','text/xml');
-
-  // Step 2: If we have speech from human, translate it
-  if(callerInput){
-    try{
-      const r = await fetch(`https://${host}/api/translate`,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ text: callerInput, from, to, caller: 'translator-bot' })
-      });
-      const j = await r.json();
-      const translated = j.translated || callerInput;
-
-      // Speak translation into conference
-      const twiml = `
-        <Response>
-          <Say voice="Polly.Mia" language="es-MX">${translated.replace(/[<>&]/g,' ')}</Say>
-          <Redirect method="POST">https://${host}/api/translator-bot?conf=${encodeURIComponent(confName)}&amp;from=${from}&amp;to=${to}</Redirect>
-        </Response>`;
-      return res.status(200).send(twiml);
-    }catch(e){
-      console.log('translator error', e.message);
-    }
-  }
-
-  // Step 1: If we have pre-translated text (from other flow), just say it
-  if(translatedText){
+  if(!speech) {
+    // Listening loop - any language
     const twiml = `
       <Response>
-        <Say voice="Polly.Mia" language="es-MX">${translatedText.replace(/[<>&]/g,' ')}</Say>
-        <Redirect method="POST">https://${host}/api/translator-bot?conf=${encodeURIComponent(confName)}&amp;from=${from}&amp;to=${to}</Redirect>
+        <Gather input="speech" action="/api/translator-bot?conf=${conf}" method="POST" language="auto" speechTimeout="auto" speechModel="phone_call">
+          <Say voice="Polly.Joanna">NqAI listening, any language...</Say>
+        </Gather>
+        <Redirect>/api/translator-bot?conf=${conf}</Redirect>
       </Response>`;
-    return res.status(200).send(twiml);
+    res.setHeader('Content-Type','text/xml');
+    return res.send(twiml);
   }
 
-  // Step 0: Join conference and listen loop
+  // Detect + Translate to other side
+  const tr = await fetch(`https://nqai.llc/api/translate?text=${encodeURIComponent(speech)}&from=auto&to=auto`).then(r=>r.json());
+  
   const twiml = `
     <Response>
-      <Say voice="Polly.Mia" language="es-MX">Traductor conectado. Listo para traducir.</Say>
-      <Dial>
-        <Conference 
-          beep="false" 
-          startConferenceOnEnter="true" 
-          endConferenceOnExit="false"
-          statusCallback="https://${host}/api/conf-status"
-          statusCallbackEvent="join leave"
-        >${confName}</Conference>
-      </Dial>
-      <Gather input="speech" language="en-US" speechTimeout="auto" timeout="3" action="https://${host}/api/translator-bot?conf=${encodeURIComponent(confName)}&amp;from=${from}&amp;to=${to}" method="POST">
-        <Say>Listening</Say>
-      </Gather>
-      <Redirect method="POST">https://${host}/api/translator-bot?conf=${encodeURIComponent(confName)}&amp;from=${from}&amp;to=${to}</Redirect>
+      <Say voice="${tr.voice || 'Polly.Joanna'}" language="${tr.to}">${tr.translated.replace(/&/g,'&amp;')}</Say>
+      <Redirect>/api/translator-bot?conf=${conf}</Redirect>
     </Response>`;
-  
-  res.status(200).send(twiml);
+  res.setHeader('Content-Type','text/xml');
+  res.send(twiml);
 }
