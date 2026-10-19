@@ -1,6 +1,5 @@
 // api/translate.js - NqAI One Brain - spa, eng, mya, tcd + ML self-recording
-// Real Phone No-(Twilio+AI+Web+ML Recording)-Real Phone No
-// Handles: ?to=spa, eng, mya, tcd (Tedim rare) - Auto learns from /api/fix
+// Real Phone No.(Twilio+AI+Web+ML Recording)-Real Phone No - Handles:to=spa, eng, mya, tcd (Tedim rare) - Auto learns from /api/fix
 
 let cacheFixes = null;
 let cacheTime = 0;
@@ -22,25 +21,25 @@ const DICT = {
   tcd: {
     "how are you?": "Kei ham? Na dam hiam?",
     "how are you": "Kei ham?",
-    "i love you": "Kei it ing",
+    "i love you": "Kei it Ing",
     "thank you": "Lungdam",
-    "where are you?": "Koiah om na hiam?",
+    "where are you?": "Kolah om na hiam?",
     "good morning": "Zingsang hoih",
     "good night": "Zan hoih",
     "are you safe?": "Na bit hiam?",
     "research": "Kan simna",
-    "bro, how's research?": "Una, na kan simna bang hi hiam?",
+    "bro, how's research?": "Una, na kan simna bang hi hiam?"
   },
   mya: {
     "how are you?": "နေကောင်းလား",
-    "are you safe?": "အေးဆေးပဲမလား",
+    "are you safe?": "ဘေးကင်းလား",
     "thank you": "ကျေးဇူးတင်ပါတယ်",
-    "i love you": "ချစ်တယ်",
+    "i love you": "ချစ်တယ်"
   },
   spa: {
     "how are you?": "¿Cómo estás?",
     "i love you": "Te amo",
-    "thank you": "Gracias",
+    "thank you": "Gracias"
   }
 };
 
@@ -55,10 +54,10 @@ export default async function handler(req,res){
   res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTIONS');
   if(req.method==='OPTIONS') return res.status(200).end();
 
-  const body = req.method==='POST' ? (typeof req.body==='string'? JSON.parse(req.body) : req.body) : {};
+  const body = req.method==='POST' ? (typeof req.body==='string' ? JSON.parse(req.body) : req.body) : {};
   const text = body.text || req.query.text || '';
   const from = body.from || req.query.from || 'auto';
-  const to = body.to || req.query.to || 'eng'; // spa, eng, mya, tcd
+  const to = body.to || req.query.to || 'eng';
   const caller = body.caller || req.query.caller || 'unknown';
 
   if(!text) return res.status(400).json({error:'text required'});
@@ -66,7 +65,6 @@ export default async function handler(req,res){
   // 1. Check ML self-recorded fixes first - Rare dialects by self
   const host = req.headers.host;
   const fixes = await loadFixes(host);
-  // Find exact loved correction
   const loved = fixes.filter(f=>f.ml_text && f.ml_loved && f.text_lang?.includes(to)).reverse();
   for(const f of loved){
     if(f.ml_text.toLowerCase()===text.toLowerCase()){
@@ -85,36 +83,49 @@ export default async function handler(req,res){
     return res.json({ translated: dictHit, source: 'dict-rare', dialect: to });
   }
 
-  // 3. NLLB-200 translation - Production use HuggingFace API
-  // For now, placeholder - Replace with real NLLB call when you have HF token
-  let translated = text; // Fallback
+  // 3. Real Groq translation - Production
+  let translated = text;
   try{
-    // Example real call:
-    // const hfRes = await fetch('https://api-inference.huggingface.co/models/facebook/nllb-200-distilled-600M', {...})
-    // translated = await hfRes...
-    
-    // Simple mock for Spanish/English until HF connected
-    if(to==='spa' && from==='eng'){
-      translated = `[ES] ${text}`;
-    } else if(to==='eng' && from==='spa'){
-      translated = `[EN] ${text}`;
+    if(process.env.GROQ_API_KEY){
+      const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions',{
+        method:'POST',
+        headers:{'Authorization':`Bearer ${process.env.GROQ_API_KEY}`,'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'llama-3.3-70b-versatile',
+          messages:[
+            {role:'system',content:`You are NqAI translator. Translate ${from} to ${to}. Only output translation, no explanation. Keep rare dialects meaning.`},
+            {role:'user',content:text}
+          ],
+          temperature:0.1
+        })
+      });
+      const groqJ = await groqRes.json();
+      if(groqJ.choices?.[0]?.message?.content){
+        translated = groqJ.choices[0].message.content.trim();
+      }
     } else {
-      translated = `[${to}] ${text}`; // Will be replaced by NLLB
+      // Fallback MyMemory
+      const mm = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);
+      const mmJ = await mm.json();
+      if(mmJ.responseData?.translatedText) translated = mmJ.responseData.translatedText;
     }
   }catch(e){
+    console.log('translate error',e);
     translated = dictHit || text;
   }
 
   // 4. Save this translation pair for future self-learning
   try{
     await fetch(`https://${host}/api/fix`,{
-      method:'POST', headers:{'Content-Type':'application/json'},
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
         type:'translate_record',
         text_original: text,
         text_lang: from,
         translated,
         to_lang: to,
+        caller,
         voice_soul: caller,
         timestamp: new Date().toISOString(),
         source: 'translate.js-one-brain'
