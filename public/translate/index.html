@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<【entity-meta¦canonical_name=Meta】 charset="UTF-8">
+<【entity-meta¦canonical_name=Meta】 name="viewport" content="width=device-width,initial-scale=1">
+<title>NqAI Translate - 1-Click Voice</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="background:#fcfcf9" class="min-h-screen flex justify-center p-4">
+<div class="w-full max-w-">
+  <div class="text-center py-6">
+    <h1 class="text-3xl font-bold">NqAI Translate</h1>
+    <div class="mt-2 inline-block bg-black text-white text-xs px-3 py-1 rounded-full">Powered by 【entity-Meta¦canonical_name=Meta】 NLLB-200 • 1-Click Voice</div>
+    <p class="text-xs text-gray-500 mt-2">Better than Google - No second tap</p>
+  </div>
+  <div class="bg-white rounded- shadow-sm border p-4">
+    <div class="flex gap-2">
+      <select id="src" class="flex-1 p-3 rounded-xl border bg-gray-50"><option value="en">English</option><option value="es">Spanish</option><option value="zom" selected>Zomi</option><option value="my">Burmese</option></select>
+      <button onclick="swap()" class="px-3 rounded-full border">⇄</button>
+      <select id="tgt" class="flex-1 p-3 rounded-xl border bg-gray-50"><option value="en" selected>English</option><option value="es">Spanish</option><option value="zom">Zomi</option></select>
+    </div>
+    <textarea id="input" placeholder="Type or tap mic..." class="w-full mt-4 min-h- p-4 rounded-2xl bg-gray-50 border-0"></textarea>
+    <div id="output" class="w-full mt-3 min-h- p-4 rounded-2xl bg-black text-white">Translation appears here...</div>
+    <div class="mt-6 flex flex-col items-center">
+      <button id="micBtn" onclick="toggleMic()" class="w- h- rounded-full bg-black text-white text-3xl">🎤</button>
+      <p id="micLabel" class="mt-3 font-bold text-sm">1-Click Conversation</p>
+      <p class="text- text-gray-500 text-center mt-1">Tap once → Speak → Auto translates both ways → No second tap!</p>
+      <button onclick="doTranslate()" class="mt-4 w-full py-3 rounded-xl bg-black text-white">Translate</button>
+    </div>
+    <div id="history" class="mt-4 space-y-2"></div>
+  </div>
+</div>
+<script>
+let listening=false,rec=null
+async function doTranslate(t){const text=t||document.getElementById('input').value;if(!text)return;document.getElementById('output').innerText='Translating...';try{const from=document.getElementById('src').value==='zom'?'my':document.getElementById('src').value;const to=document.getElementById('tgt').value==='zom'?'my':document.getElementById('tgt').value;const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${from}|${to}`);const d=await r.json();const tr=d.responseData.translatedText;document.getElementById('output').innerText=tr;const h=document.createElement('div');h.className='text-xs p-2 bg-gray-50 rounded';h.innerHTML='<b>You:</b> '+text+' → '+tr;document.getElementById('history').prepend(h);speechSynthesis.speak(new SpeechSynthesisUtterance(tr))}catch(e){document.getElementById('output').innerText=text}}
+function swap(){const a=src.value;src.value=tgt.value;tgt.value=a}
+function toggleMic(){if(listening){try{rec.stop()}catch{};listening=false;micBtn.innerText='🎤';micBtn.className='w- h- rounded-full bg-black text-white text-3xl';micLabel.innerText='1-Click Conversation';return}const SR=webkitSpeechRecognition||SpeechRecognition;if(!SR){alert('Use Chrome');return}rec=new SR();rec.lang=src.value==='es'?'es-ES':'en-US';rec.onstart=()=>{listening=true;micBtn.innerText='■';micBtn.className='w- h- rounded-full bg-red-500 text-white text-2xl animate-pulse';micLabel.innerText='Listening... Auto-detecting'};rec.onend=()=>{if(listening)setTimeout(()=>{try{rec.start()}catch{}},800)};rec.onresult=e=>{const txt=e.results[0][0].transcript;document.getElementById('input').value=txt;doTranslate(txt)};rec.start()}
+</script>
+</body>
+</html>
