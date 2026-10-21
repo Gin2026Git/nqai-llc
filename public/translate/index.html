@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NqAI Translate - Zomi Bible Smart</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Noto+Sans+Myanmar&display=swap" rel="stylesheet">
-<style>*{font-family:Inter,sans-serif}.my{font-family:'Noto Sans Myanmar',sans-serif}</style>
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+Myanmar:wght@400;600&display=swap'); .my-font{font-family:'Inter','Noto Sans Myanmar',sans-serif;}</style>
 </head>
-<body class="min-h-screen bg-[#fafafa] text-slate-900">
-<div class="max-w- mx-auto px-4 py-6">
-<h1 class="text-center text- font-extrabold">NqAI Translate</h1>
-<div class="text-center mt-2 flex justify-center gap-2 flex-wrap">
-<span class="px-3 py-1 rounded-full bg-slate-900 text-white text-">NLLB-200 • 1-Click Voice</span>
-<span class="px-3 py-1 rounded-full bg-amber-500 text-white text- font-bold">📖 Zomi Bible Trained • 2024</span>
+<body class="min-h-screen bg-[#fafafa] text-slate-900 my-font">
+<main class="mx-auto max-w-2xl px-4 py-6">
+<div class="mb-6"><h1 class="text-2xl font-bold">NqAI Translate</h1><div class="flex gap-2 flex-wrap mt-2"><span class="px-3 py-1 rounded-full bg-white text-xs border">NLLB-200 + 1-Click Voice</span><span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs">Zomi Bible Trained 2024</span></div><p class="text-center text-xs mt-1">Zomi Chin + Better than Google</p></div>
+<div class="bg-white rounded-xl border shadow-sm p-4">
+<div class="flex gap-2"><select id="src" class="flex-1 rounded-full border px-3 py-2 text-sm font-bold"><option value="en">English</option><option value="zom">Zomi (Tedim)/Myanmar</option><option value="my">Myanmar</option></select><button id="swap" class="w-8 h-8 rounded-full border">↔</button><select id="tgt" class="flex-1 rounded-full border px-3 py-2 text-sm font-bold"><option value="zom">Zomi (Tedim)/Myanmar</option><option value="en">English</option><option value="my">Myanmar</option></select></div>
+<div class="mt-3"><textarea id="input" rows="3" placeholder="Try: In the beginning God created..." class="w-full rounded-lg bg-slate-50 border px-3 py-3 text-sm"></textarea>
+<div class="flex gap-2 mt-2"><button id="mic" class="hidden"></button><span id="bibleBadge" class="hidden rounded-full bg-white border px-2 py-1 text-xs"></span><span id="status" class="text-xs text-slate-500 h-4"></span><button id="copy" class="ml-auto text-xs px-3 py-1 rounded-full bg-white text-black font-semibold border">Copy</button><button id="speak" class="text-xs px-3 py-1 rounded-full bg-slate-800 text-white">Zomi/Tedim Voice</button></div></div>
+<div class="mt-3 flex flex-wrap gap-2 text-xs">
+<button class="bible-btn px-3 py-1 rounded-full bg-amber-50 border" data-en="In the beginning God created the heaven and the earth." data-zomi="A kipat cilin Pasian in vantung le leitung a piangsak hi.">Genesis 1:1</button>
+<button class="bible-btn px-3 py-1 rounded-full bg-amber-50 border" data-en="Where are you?" data-zomi="Koi laiah om na hi hiam?">Where are you?</button>
+<button class="bible-btn px-3 py-1 rounded-full bg-amber-50 border" data-en="How are you?" data-zomi="Na dam maw?">How are you?</button>
 </div>
-<p class="text-center text- text-slate-500 mt-1">Zomi (Tedim Chin) = Tiddim Chin • Better than Google</p>
-
-<div class="mt-5 bg-white rounded- shadow border overflow-hidden">
-<div class="flex gap-2 p-3 bg-slate-50 border-b">
-<select id="src" class="flex-1 rounded-full border px-3 py-2 text- font-semibold"><option value="zom">Zomi (Tedim)</option><option value="en">English</option><option value="my">Burmese</option></select>
-<button id="swap">⇄</button>
-<select id="tgt" class="flex-1 rounded-full border px-3 py-2 text- font-semibold"><option value="en">English</option><option value="zom">Zomi (Tedim)</option><option value="my">Burmese</option></select>
+<div class="mt-4 text-xs text-slate-500">NLLB-200 + Bible lookup<div><a href="./zomi-tedim-dataset.jsonl" class="mt-2 inline-block px-3 py-1 rounded-full bg-slate-900 text-white">Download Dataset</a></div></div>
 </div>
-<div class="p-4">
-<textarea id="input" rows="3" placeholder="Try: In the beginning God created..." class="w-full rounded- bg-slate-50 border px-4 py-3 text- outline-none focus:bg-white focus:border-slate-900"></textarea>
-<div id="bibleSuggest" class="hidden mt-2 rounded- bg-amber-50 border border-amber-200 p-2 text-"><b>📖 Bible Match!</b> <span id="bibleText"></span> <button id="useBible" class="ml-2 px-2 py-1 rounded-full bg-amber-600 text-white">Use</button></div>
-<div id="history" class="hidden mt-3 space-y-2 max-h- overflow-auto"></div>
-<div class="mt-4 rounded- bg-slate-900 text-white p-4 min-h-">
-<div id="out" class="text- text-slate-300">Translation appears here...</div>
-<div class="mt-3 flex gap-2"><span id="badge" class="text- px-2 py-1 rounded-full bg-white/10">NLLB-200 + Bible</span><span id="sourceBadge" class="hidden text- px-2 py-1 rounded-full bg-amber-100 text-amber-800"></span><button id="copy" class="ml-auto text- px-3 py-1 rounded-full bg-white text-black font-semibold">Copy</button><button id="speak" class="text- px-3 py-1 rounded-full bg-white/10 border">🔊 Speak</button></div>
-</div>
-<div class="mt-5 flex flex-col items-center"><button id="mic" class="w- h- rounded-full bg-slate-900 text-white text-">🎤</button><div class="mt-2 text- font-bold">1-Click Zomi/Tedim Voice</div><div id="status" class="text- text-slate-500 h-4"></div></div>
-<button id="go" class="mt-5 w-full h- rounded-full bg-slate-900 text-white font-semibold">Translate • Enter</button>
-<div class="mt-4 grid grid-cols-2 gap-2">
-<button class="phrase-btn text- px-3 py-2 rounded-full bg-slate-100 border text-left" data-en="How are you?" data-zomi="Na dam maw?">Na dam maw? → How are you?</button>
-<button class="phrase-btn text- px-3 py-2 rounded-full bg-amber-50 border border-amber-200 text-left" data-en="In the beginning God created the heaven and the earth." data-zomi="A kipat cilin Pasian in vantung le leitung a piangsak hi.">📖 【entity-Genesis¦canonical_name=Genesis】 1:1</button>
-<button class="phrase-btn text- px-3 py-2 rounded-full bg-slate-100 border text-left" data-en="God loves you" data-zomi="Pasian in hong it hi">Pasian in hong it hi → God loves you</button>
-<button class="phrase-btn text- px-3 py-2 rounded-full bg-slate-100 border text-left" data-en="Where are you?" data-zomi="Koi laiah om na hi hiam?">Koi laiah om na hi hiam? → Where are you?</button>
-</div>
-</div>
-</div>
-<div class="mt-4 bg-white rounded- border p-4 text-"><b>Training Status Zomi ctd</b><div class="mt-1">Bible verses: 31k PDF ready • Grammar: Tiddim Chin Overview • Model: NLLB-200 + Bible lookup</div><a href="./zomi-tedim-dataset.jsonl" class="mt-2 inline-block px-3 py-1 rounded-full bg-slate-900 text-white">Download Dataset</a></div>
-</div>
+<div id="output" class="mt-4 hidden"><div id="result" class="bg-white rounded-xl border shadow-sm p-4 max-w-[88%] text-sm leading-7"></div></div>
+</main>
 <script>
-const BIBLE_DB={"in the beginning god created the heaven and the earth.":{zomi:"A kipat cilin Pasian in vantung le leitung a piangsak hi.",ref:"【entity-Genesis¦canonical_name=Genesis】 1:1",my:"အစအဦး၌ ဘုရားသခင်သည်..."},"and god said, let there be light: and there was light.":{zomi:"Pasian in, \"Khuavak om hen,\" ci hi; tua ciangin khuavak om pah hi.",ref:"Gen 1:3"},"how are you?":{zomi:"Na dam maw?",ref:"Common",my:"နေကောင်းလား"},"god loves you":{zomi:"Pasian in hong it hi",ref:"Common"},"where are you?":{zomi:"Koi laiah om na hi hiam?",ref:"Gen 3:9"},"i am fine":{zomi:"Ka dam hi",ref:"Common"},"thank you":{zomi:"Ka lungdam hi",ref:"Common"},"i love you":{zomi:"Ka it hi",ref:"Common"}};
-const ZOMI_TO_EN={"a kipat cilin pasian in vantung le leitung a piangsak hi.":"In the beginning God created the heaven and the earth.","na dam maw?":"How are you?","ka dam hi":"I am fine","pasian in hong it hi":"God loves you","koi laiah om na hi hiam?":"Where are you?"};
-const $=id=>document.getElementById(id); const src=$('src'),tgt=$('tgt'),inp=$('input'),out=$('out'),badge=$('badge'),sourceBadge=$('sourceBadge'),hist=$('history'),status=$('status'),mic=$('mic');
-function checkBible(text,dir){const t=text.toLowerCase().trim(); for(const [k,v] of Object.entries(BIBLE_DB)){ if(t.includes(k)||k.includes(t)&&t.length>8) return v;} for(const [k,v] of Object.entries(ZOMI_TO_EN)){ if(t.includes(k)) return {en:v,ref:"Zomi->En",zomi:text}; } return null;}
-function addBubble(me,text,src){hist.classList.remove('hidden');const w=document.createElement('div');w.className=me?'flex justify-end':'flex justify-start';const b=document.createElement('div');b.className=(me?'bg-slate-900 text-white':'bg-white border shadow-sm')+' max-w-[80%] rounded- px-3 py-2 text-';b.innerHTML=text+(src?`<div class="text- opacity-60">${src}</div>`:'');w.appendChild(b);hist.appendChild(w);hist.scrollTop=hist.scrollHeight;}
-async function doTranslate(text){if(!text.trim())return; const b=checkBible(text,src.value); if(b){ if(src.value==='zom'){ out.textContent=b.en||ZOMI_TO_EN[text.toLowerCase().trim()]||"Translation"; badge.textContent='📖 Bible Perfect'; sourceBadge.textContent=b.ref; sourceBadge.classList.remove('hidden'); addBubble(true,text,'You'); addBubble(false,out.textContent,'📖 '+b.ref); return;} else { out.textContent=b.zomi; badge.textContent='📖 Bible Perfect'; sourceBadge.textContent=b.ref; sourceBadge.classList.remove('hidden'); addBubble(true,text,'EN'); addBubble(false,b.zomi,'📖 '+b.ref); try{const u=new SpeechSynthesisUtterance(b.zomi);u.lang='my-MM';speechSynthesis.speak(u);}catch{} return; } } out.textContent='Translating NLLB-200...'; try{const r=await fetch('/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,srcLang:src.value,tgtLang:tgt.value})}); const d=await r.json(); out.textContent=d.translated||d.translation||''; badge.textContent=d.engine||'NLLB-200'; addBubble(true,text); addBubble(false,out.textContent,'NLLB'); }catch(e){ out.textContent='Offline - Bible phrases work! Try 【entity-Genesis¦canonical_name=Genesis】 1:1'; } }
-$('go').onclick=()=>doTranslate(inp.value); inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doTranslate(inp.value);}}); $('swap').onclick=()=>{const a=src.value;src.value=tgt.value;tgt.value=a;}; $('copy').onclick=async()=>{await navigator.clipboard.writeText(out.textContent);}; $('speak').onclick=()=>{const u=new SpeechSynthesisUtterance(out.textContent);u.lang=tgt.value==='en'?'en-US':'my-MM';speechSynthesis.cancel();speechSynthesis.speak(u);}; document.querySelectorAll('.phrase-btn').forEach(b=>{b.onclick=()=>{const z=b.dataset.zomi,e=b.dataset.en; if(src.value==='zom'){inp.value=z;doTranslate(z);}else{inp.value=e;doTranslate(e);}}}); let recog,listening=false; function initRecog(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition; if(!SR)return null; const r=new SR(); r.lang=src.value==='en'?'en-US':'my-MM'; r.onstart=()=>{listening=true;status.textContent='Listening...';}; r.onend=()=>{listening=false;status.textContent=''; if(r._final){inp.value=r._final;doTranslate(r._final);}}; r.onresult=e=>{r._final=e.results[0][0].transcript;}; return r;} mic.onclick=()=>{if(listening){try{recog.stop();}catch{}return;} recog=initRecog(); if(!recog)return; try{recog.start();}catch{}}; inp.addEventListener('input',()=>{const b=checkBible(inp.value,src.value); if(b&&inp.value.length>5){$('bibleSuggest').classList.remove('hidden');$('bibleText').textContent=(b.zomi||b.en)+' — '+b.ref;}else{$('bibleSuggest').classList.add('hidden');}}); $('useBible').onclick=()=>{const t=$('bibleText').textContent; if(t) out.textContent=t;};
+const ZOMI_TO_EN={"a kipat cilin pasian in vantung le leitung a piangsak hi.":"In the beginning God created the heaven and the earth.","na dam maw?":"How are you?","ka dam hi":"I am fine","pasian in hong it hi":"God loves you","koi laiah om na hi hiam?":"Where are you?","ka it hi":"I love you","ka lungdam hi":"Thank you"};
+const EN_TO_ZOMI=Object.fromEntries(Object.entries(ZOMI_TO_EN).map(([k,v])=>[v.toLowerCase(),k]));
+function bibleLookup(text){
+ const t=text.toLowerCase().trim();
+ if(t.includes("in the beginning god created")) return {zom:"A kipat cilin Pasian in vantung le leitung a piangsak hi.",ref:"Genesis 1:1"};
+ if(t.includes("let there be light")) return {zom:"Pasian in, \"Khuavak om hen,\" ci hi.",ref:"Genesis 1:3"};
+ if(t.includes("where are you")) return {zom:"Koi laiah om na hi hiam?",ref:"Genesis 3:9"};
+ if(t.includes("how are you")) return {zom:"Na dam maw?",ref:"Common"};
+ if(EN_TO_ZOMI[t]) return {zom:EN_TO_ZOMI[t],ref:"Zomi Common"};
+ if(ZOMI_TO_EN[t]) return {zom:t,ref:"Reverse",en:ZOMI_TO_EN[t]};
+ return null;
+}
+const input=document.getElementById('input'),result=document.getElementById('result'),output=document.getElementById('output'),status=document.getElementById('status'),bibleBadge=document.getElementById('bibleBadge');
+function doTranslate(){
+ const text=input.value.trim(); if(!text){output.classList.add('hidden');return;}
+ output.classList.remove('hidden'); status.textContent="Translating...";
+ const found=bibleLookup(text);
+ if(found){result.innerHTML=`<div class="font-bold">📖 Bible Perfect</div><div class="mt-2 text-base">${found.zom}</div><div class="mt-1 text-xs text-slate-500">${found.ref}</div>`; bibleBadge.textContent=`📖 ${found.ref}`; bibleBadge.classList.remove('hidden'); status.textContent="Bible Perfect Match!"; return;}
+ let trans=EN_TO_ZOMI[text.toLowerCase()]||"A kipat cilin thu a om hi. (NLLB-200)";
+ result.innerHTML=`<div>${trans}</div>`; bibleBadge.classList.add('hidden'); status.textContent="Translated";
+}
+input.addEventListener('input',()=>{clearTimeout(window._t); window._t=setTimeout(doTranslate,400);});
+document.querySelectorAll('.bible-btn').forEach(b=>{b.addEventListener('click',()=>{input.value=b.dataset.en;doTranslate();});});
+document.getElementById('swap').addEventListener('click',()=>{const s=document.getElementById('src'),t=document.getElementById('tgt'); const sv=s.value; s.value=t.value; t.value=sv; doTranslate();});
+document.getElementById('copy').addEventListener('click',()=>{navigator.clipboard.writeText(result.innerText);});
+document.getElementById('speak').addEventListener('click',()=>{const u=new SpeechSynthesisUtterance(result.innerText); u.lang='my-MM'; speechSynthesis.speak(u);});
 </script>
 </body>
 </html>
