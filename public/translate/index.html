@@ -2,78 +2,50 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NqAI Translate - 1-Click Voice</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-body{font-family:Inter,sans-serif;background:#fcfcf9}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>*{font-family:Inter,sans-serif}@keyframes wave{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1.4)}}@keyframes pulseRing{0%{transform:scale(.8);opacity:.7}100%{transform:scale(2.2);opacity:0}}.wave-bar{animation:wave .7s ease-in-out infinite}</style>
 </head>
-<body class="min-h-screen flex justify-center p-4">
-<div class="w-full max-w-[640px]">
-<div class="text-center py-6">
-<h1 class="text-3xl font-bold">NqAI Translate</h1>
-<div class="mt-2 inline-block bg-black text-white text-xs px-3 py-1 rounded-full">Powered by NLLB-200 • 1-Click Voice</div>
-<p class="text-xs text-gray-500 mt-2">Better than Google - No second tap</p>
+<body class="min-h-screen bg-[#fafafa] text-slate-900">
+<div class="max-w- mx-auto px-4 py-8">
+<div class="text-center mb-7">
+<h1 class="text- font-extrabold">NqAI Translate</h1>
+<div class="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 text-white text- font-semibold"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Powered by NLLB-200 • 1-Click Voice</div>
+<p class="mt-2 text- text-slate-500">Better than Google — No second tap!</p>
 </div>
-<div class="bg-white rounded-3xl shadow-sm border p-4">
-<div class="flex gap-2">
-<select id="src" class="flex-1 p-3 rounded-xl border bg-gray-50 text-sm"><option value="en">English</option><option value="es">Spanish</option><option value="my">Burmese</option><option value="zom" selected>Zomi</option></select>
-<button onclick="swapLang()" class="px-3 rounded-full border">⇄</button>
-<select id="tgt" class="flex-1 p-3 rounded-xl border bg-gray-50 text-sm"><option value="en" selected>English</option><option value="es">Spanish</option><option value="zom">Zomi</option></select>
+<div class="bg-white rounded- shadow border overflow-hidden">
+<div class="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b">
+<select id="src" class="flex-1 bg-white border rounded-full px-3.5 py-2 text- font-semibold"><option value="zom">Zomi</option><option value="ted">Tedim</option><option value="hac">Hakha</option><option value="tcz">Falam</option><option value="my">Burmese</option><option value="en">English</option></select>
+<button id="swap" class="w-9 h-9 rounded-full bg-white border">⇄</button>
+<select id="tgt" class="flex-1 bg-white border rounded-full px-3.5 py-2 text- font-semibold"><option value="en">English</option><option value="zom">Zomi</option><option value="ted">Tedim</option><option value="hac">Hakha</option><option value="my">Burmese</option></select>
 </div>
-<textarea id="input" placeholder="Type or tap mic..." class="w-full mt-4 min-h-[110px] p-4 rounded-2xl bg-gray-50 border-0 focus:ring-2 focus:ring-black outline-none"></textarea>
-<div id="output" class="w-full mt-3 min-h-[110px] p-4 rounded-2xl bg-black text-white">Translation appears here...</div>
+<div class="p-4">
+<textarea id="input" rows="3" placeholder="Type or tap mic..." class="w-full resize-none rounded- bg-slate-50 border px-4 py-3.5 text- outline-none focus:bg-white"></textarea>
+<div id="history" class="mt-4 space-y-2 max-h- overflow-auto hidden"></div>
+<div class="mt-4 rounded- bg-slate-900 text-white p-4">
+<div id="out" class="text- text-slate-300">Translation appears here...</div>
+<div class="mt-3 flex gap-2"><span id="badge" class="text- px-2 py-0.5 rounded-full bg-white/10 border">NLLB-200 ready</span><button id="copy" class="ml-auto text- px-2.5 py-1 rounded-full bg-white text-slate-900 font-semibold">Copy</button><button id="speak" class="text- px-2.5 py-1 rounded-full bg-white/10 border">🔊 Speak</button></div>
+</div>
 <div class="mt-6 flex flex-col items-center">
-<button id="micBtn" onclick="toggleMic()" class="w-20 h-20 rounded-full bg-black text-white text-3xl flex items-center justify-center">🎤</button>
-<p id="micLabel" class="mt-3 font-bold text-sm">1-Click Conversation</p>
-<p class="text-xs text-gray-500 text-center mt-1">Tap once → Auto translates both ways → No second tap!</p>
-<button onclick="doTranslate()" class="mt-4 w-full py-3.5 rounded-xl bg-black text-white font-semibold">Translate</button>
+<div class="relative"><div id="pulse" class="absolute inset-0 rounded-full border border-red-400 hidden" style="animation:pulseRing 1.6s infinite"></div><button id="mic" class="relative w- h- rounded-full bg-slate-900 text-white grid place-items-center">🎤</button></div>
+<div id="micLabel" class="mt-3 text-center"><div class="text- font-bold">1-Click Conversation</div><div class="text- text-slate-500">Tap once • Auto both ways • No second tap!</div></div>
+<div id="status" class="mt-2 text- h-4"></div>
 </div>
-<div id="history" class="mt-4 space-y-2"></div>
+<button id="go" class="mt-6 w-full h- rounded-full bg-slate-900 text-white font-semibold">Translate • Enter</button>
 </div>
-<p class="text-center text-xs text-gray-400 mt-4">nqai.llc/translate • No Language Left Behind</p>
 </div>
+<div class="text-center mt-5 text- text-slate-400">NqAI Burmese AI • No Language Left Behind</div>
 </div>
 <script>
-let listening=false,rec=null
-function swapLang(){let a=src.value;src.value=tgt.value;tgt.value=a}
-async function doTranslate(t){
-  const text=t||input.value
-  if(!text)return
-  output.innerText='Translating with NLLB-200...'
-  try{
-    const r=await fetch('/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,srcLang:src.value,tgtLang:tgt.value})})
-    const d=await r.json()
-    output.innerText=d.translated||text
-    const h=document.createElement('div')
-    h.className='text-xs p-2 bg-gray-50 rounded'
-    h.innerHTML='<b>You:</b> '+text+' → <span class=text-blue-600>'+d.translated+'</span> <span class=text-xs>('+d.engine+')</span>'
-    history.prepend(h)
-    speechSynthesis.speak(new SpeechSynthesisUtterance(d.translated))
-  }catch(e){
-    // fallback
-    try{
-      const from=src.value==='zom'?'my':src.value
-      const to=tgt.value==='zom'?'my':tgt.value
-      const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+from+'|'+to)
-      const d=await r.json()
-      output.innerText=d.responseData.translatedText
-    }catch{output.innerText=text}
-  }
-}
-function toggleMic(){
-  if(listening){try{rec.stop()}catch{};listening=false;micBtn.innerText='🎤';micBtn.className='w-20 h-20 rounded-full bg-black text-white text-3xl flex items-center justify-center';micLabel.innerText='1-Click Conversation';return}
-  const SR=webkitSpeechRecognition||SpeechRecognition
-  if(!SR){alert('Use Chrome');return}
-  rec=new SR()
-  rec.lang=src.value==='es'?'es-ES':'en-US'
-  rec.onstart=()=>{listening=true;micBtn.innerText='■';micBtn.className='w-20 h-20 rounded-full bg-red-500 text-white text-2xl flex items-center justify-center animate-pulse';micLabel.innerText='Listening...'}
-  rec.onend=()=>{if(listening)setTimeout(()=>{try{rec.start()}catch{}},800)}
-  rec.onresult=e=>{const txt=e.results[0][0].transcript;input.value=txt;doTranslate(txt)}
-  rec.start()
-}
+const $=id=>document.getElementById(id);const src=$('src'),tgt=$('tgt'),inp=$('input'),out=$('out'),badge=$('badge'),hist=$('history'),status=$('status'),mic=$('mic'),pulse=$('pulse'),micLabel=$('micLabel');let listening=false,recog=null;
+function addBubble(me,t){hist.classList.remove('hidden');const w=document.createElement('div');w.className=me?'flex justify-end':'flex justify-start';const b=document.createElement('div');b.className=(me?'bg-slate-900 text-white':'bg-slate-100')+' max-w-[80%] rounded- px-3.5 py-2 text-';b.textContent=t;w.appendChild(b);hist.appendChild(w);}
+function setListening(on){listening=on;if(on){mic.classList.add('bg-red-600');pulse.classList.remove('hidden');status.textContent='Listening...';}else{mic.classList.remove('bg-red-600');pulse.classList.add('hidden');status.textContent='';}}
+async function doTranslate(t){if(!t.trim())return;out.textContent='Translating with NLLB-200...';badge.textContent='NLLB-200...';try{const r=await fetch('/api/translate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,srcLang:src.value,tgtLang:tgt.value})});const d=await r.json();out.textContent=d.translated||'';badge.textContent=d.engine||'NLLB-200';addBubble(true,t);addBubble(false,d.translated||'');try{const u=new SpeechSynthesisUtterance(d.translated||'');speechSynthesis.speak(u);}catch{}}catch{out.textContent='Error';}}
+$('go').onclick=()=>doTranslate(inp.value);inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doTranslate(inp.value);}});$('swap').onclick=()=>{const a=src.value;src.value=tgt.value;tgt.value=a;};$('copy').onclick=async()=>{await navigator.clipboard.writeText(out.textContent);};$('speak').onclick=()=>{speechSynthesis.speak(new SpeechSynthesisUtterance(out.textContent));};
+function initRecog(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;const r=new SR();r.lang=src.value==='en'?'en-US':'my-MM';r.onstart=()=>setListening(true);r.onend=()=>{setListening(false);if(r._final)doTranslate(r._final);};r.onresult=e=>{r._final=e.results[0][0].transcript;};return r;}
+mic.onclick=()=>{if(listening){try{recog.stop();}catch{}return;}recog=initRecog();if(!recog)return;recog._final='';try{recog.start();}catch{}};
 </script>
 </body>
 </html>
