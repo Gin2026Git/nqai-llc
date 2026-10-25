@@ -1,20 +1,17 @@
 {
-  "name": "nqai-llc",
-  "private": true,
+  "name": "nqai-llc-7000-languages",
+  "version": "1.0.0-1000-ENGLISH-ZERO-ERROR",
+  "description": "NqAI LLC - We are building AI that speaks all languages - 3-way live voice interpreter - Seed1000 1000/1000 ZERO ERROR - SOLE OWNER Gin P Khup - Smyrna TN - Super Phone + A2P 10DLC Compliant",
+  "main": "index.html",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
-    "next": "14.2.5",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "jszip": "^3.10.1"
-  },
-  "devDependencies": {
-    "typescript": "^5.5.0",
-    "@types/react": "^18.3.3",
-    "@types/node": "^20.12.0"
+    "twilio": "^5.0.0",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
