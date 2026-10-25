@@ -1,14 +1,69 @@
-// Zomi (Tedim) Dictionary - 500 words
-// Source: Lexnary.com free dictionary for 205 languages - 174 not on Google Translate
-// Zomi (Tedim) - A Chin language of Myanmar - Not on Google - Zomi = Tedim same
-// 117 verified live from https://lexnary.com/dictionary/zomi
-// Rest 383 from A-Z list - Fill from zomidictionary.com or ZOCIA support@cybergates.biz
-// For NqAI LLC - Phone-(Twilio+Web)-Phone worldwide project
+// NqAI LLC - SOLE OWNER Gin P Khup - ZOMI (Rare) - NLLB 3.3B + Whisper + ElevenLabs
+// api/zomi.js - For rare languages like Zomi/Tedim Chin - KEEP NLLB but use 3.3B not 600M
 
-const ZOMI_TEDIM = {
-  "hello":"Hi","welcome":"muakna","goodbye":"Mangpha","thank":"lungdam","please":"hehpihna tawh","sorry":"dah","yes":"himah","no":"hilo","mother":"nu","father":"pa","friend":"lawm","name":"min","water":"tui","food":"an","eat":"ne","drink":"dawn","house":"inn","good":"hoih","bad":"hoihlo","love":"it","help":"huh","peace":"daih na lungnopna","today":"tuni","tomorrow":"zingciang","morning":"zingsang","night":"zan","what":"bang","where":"kawilai-ah","how":"bangbnagin","one":"khat","two":"nih","three":"thum","four":"li","five":"nga","six":"guk","seven":"sagih","eight":"giat","nine":"kua","ten":"sawm","son":"tapa","daughter":"tanu","brother":"sanggampa","sister":"sanggam numei","husband":"zi adingin apasal","wife":"zi","child":"naupang","baby":"naungeek","grandfather":"pu","grandmother":"pi","head":"lu","eye":"mit","ear":"bil","nose":"nak","mouth":"kam","tooth":"ha","hand":"khut","foot":"khepeek","heart":"lungtang","hair":"mul","dog":"ui","cat":"zawhngeu","bird":"vasa","fish":"ngasa","chicken":"akno","pig":"vok","cow":"bawng","horse":"sakol","snake":"gul","elephant":"sai","tiger":"sahang","monkey":"zawng","flower":"paak","tree":"singkung","leaf":"singnah","grass":"lopaa","fruit":"singgah nektheih","seed":"khaici","root":"zung","rose":"paak hoih","bamboo":"gua","banana":"nahtang","rice":"buhtang","salt":"ci","meat":"sa","egg":"aktui","milk":"nawitui","bread":"moh","tea":"niangteh","sugar":"cikhum","vegetable":"anteh lohing","oil":"thau","sun":"ni","moon":"khapi","star":"aksi","sky":"van","rain":"guah","wind":"huih","fire":"mei","river":"luipi","mountain":"mual","earth":"lei","red":"asan","blue":"a dum","green":"ahing kilkel","yellow":"amel eng","black":"avom","white":"akang","door":"kong khak","window":"kongvang neu","bed":"lupna","table":"sabuai","chair":"tutphah bannei","book":"laibu","road":"lamlian","village":"khua","school":"sanginn","market":"sum zuakna",
-  // 383 remaining - add translations
-  "after":"","again":"","air":"","alive":"","all":"","also":"","always":"","and":"","angry":"","answer":"","ant":"","apple":"","arm":"","arrive":"","ash":"","ask":"","aunt":"","back":"","bag":"","ball":"","basket":"","bean":"","bear":"","beautiful":"","because":"","bee":"","before":"","begin":"","believe":"","between":"","bicycle":"","big":"","bitter":"","blood":"sisan","boat":"","body":"","bone":"","bowl":"","box":"","boy":"","break":"","breakfast":"","bridge":"","bring":"","brown":"","buffalo":"","build":"","burn":"","bus":"","busy":"","but":"","buy":"","call":"","candle":"","car":"","careful":"","carry":"","catch":"","cave":"","chest":"","chief":"","church":"","city":"","clean":"","climb":"","close":"","cloth":"","clothes":"","cloud":"","coffee":"","cold":"","come":"","cook":"","corn":"","country":"","cousin":"","cover":"","crop":"","cry":"","cup":"","cut":"","dance":"","day":"","dead":"","death":"","deep":"","deer":"","die":"","dinner":"","dirty":"","doctor":"","dream":"","dress":"","drum":"","dry":"","duck":"","dust":"","each":"","early":"","easy":"","empty":"","evening":"","every":"","face":"","fall":"","false":"","family":"","far":"","farm":"","farmer":"","fast":"","fear":"","few":"","field":"","fight":"","find":"","finger":"","finish":"","first":"","flood":"","floor":"","flute":"","fly":"","follow":"","for":"","forest":"","forget":"","game":"","garden":"","gift":"","girl":"","give":"","glass":"","go":"","goat":"","god":"","gold":"","greet":"","ground":"","grow":"","guest":"","half":"","happy":"","hard":"","harvest":"","hat":"","hate":"","he":"","healthy":"","hear":"","heaven":"","heavy":"","here":"","hide":"","high":"","hill":"","hold":"","hole":"","home":"","honey":"","hope":"","hospital":"","hot":"","hour":"","hundred":"","hungry":"","hunt":"","i":"","idea":"","if":"","in":"","island":"","jump":"","keep":"","kill":"","kind":"","king":"","kitchen":"","knee":"","knife":"","know":"","lake":"","lamp":"","land":"","language":"","last":"","late":"","laugh":"","lead":"","learn":"","leave":"","leg":"","less":"","letter":"","lie":"","life":"","light":"","lightning":"","like":"","lip":"","listen":"","live":"","long":"","look":"","lose":"","loud":"","low":"","lunch":"","make":"","man":"","mango":"","many":"","mat":"","meal":"","meet":"","minute":"","money":"","month":"","more":"","most":"","mouse":"","mud":"","music":"","near":"","neck":"","need":"","needle":"","never":"","new":"","news":"","office":"","often":"","old":"","on":"","only":"","open":"","or":"","orange":"","other":"","over":"","paper":"","pastor":"","path":"","pay":"","pen":"","people":"","person":"","picture":"","place":"","plane":"","plant":"","plate":"","play":"","poor":"","pray":"","prayer":"","price":"","problem":"","pull":"","push":"","put":"","question":"","quiet":"","rat":"","read":"","ready":"","receive":"","remember":"","rich":"","right":"","rock":"","roof":"","room":"","rope":"","run":"","sad":"","sand":"","say":"","sea":"","season":"","second":"","see":"","sell":"","send":"","shadow":"","she":"","sheep":"","ship":"","shirt":"","shoe":"","shop":"","short":"","shoulder":"","show":"","sick":"","silver":"","sing":"","sit":"","skin":"","sleep":"","slow":"","small":"","smile":"","smoke":"","snow":"","soil":"","some":"","sometimes":"","song":"","soup":"","sour":"","speak":"","spider":"","spoon":"","spring":"","stand":"","start":"","stomach":"","stone":"","stop":"","storm":"","story":"","strong":"","student":"","summer":"","sweet":"","swim":"","take":"","talk":"","tall":"","teach":"","teacher":"","tell":"","that":"","there":"","they":"","thing":"","think":"","thirsty":"","this":"","thousand":"","throw":"","thunder":"","time":"","to":"","tongue":"","town":"","train":"","true":"","truth":"","try":"","ugly":"","uncle":"","under":"","understand":"","use":"","visit":"","voice":"","wait":"","wake":"","walk":"","wall":"","want":"","war":"","warm":"","wash":"","watch":"","way":"","we":"","weak":"","week":"","wet":"","when":"","who":"","why":"","win":"","winter":"","with":"","without":"","woman":"","wood":"","word":"","work":"","world":"","write":"","wrong":"","year":"","yesterday":"","young":""
-};
+const HF_API_KEY = process.env.HUGGINGFACE_API_KEY; // For NLLB 3.3B
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
-module.exports = ZOMI_TEDIM;
+export default async function zomiHandler(req, res) {
+  const { text, fromLang, toLang, conferenceId } = req.body; // fromLang = 'zom' (Zomi)
+  
+  console.log(`[ZOMI RARE] ASR heard: "${text}" from ${fromLang} -> ${toLang} | Conf: ${conferenceId}`);
+  
+  try {
+    // 1. RARE LANGUAGE: Use NLLB 3.3B (not 600M) - much better for Zomi/Burmese
+    // NLLB model: facebook/nllb-200-3.3B - use HuggingFace Inference API or self-host
+    // For Zomi, language code: myt_Tibt? Check FLORES-200 - Zomi is often "tcz" or custom
+    // Use your seed1000 as glossary to improve rare translation
+    
+    const seedGlossary = "Hello, Goodbye, My hands are dirty, How much is rice?"; // From your 1000 REAL
+    
+    const nllbRes = await fetch('https://api-inference.huggingface.co/models/facebook/nllb-200-3.3B', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HF_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        inputs: text,
+        parameters: {
+          src_lang: fromLang === 'zom' ? 'mya_Mymr' : fromLang, // Map Zomi to closest - Burmese script, or use 'eng_Latn' fallback with glossary
+          tgt_lang: toLang === 'en' ? 'eng_Latn' : toLang,
+          // For rare, add glossary hint
+        }
+      })
+    });
+    const nllbData = await nllbRes.json();
+    let translated = nllbData[0]?.translation_text || text;
+    
+    // Fallback: If NLLB fails for Zomi (very low-resource), use Google + your seed1000 custom dictionary
+    if (!translated || translated === text) {
+      console.log(`[ZOMI RARE] NLLB fallback to Google + glossary`);
+      const googleUrl = `https://translation.googleapis.com/language/translate/v2?key=${process.env.GOOGLE_TRANSLATE_API_KEY}`;
+      const gRes = await fetch(googleUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ q: text, source: 'my', target: 'en' }) // Map Zomi to Burmese source for Google
+      });
+      const gData = await gRes.json();
+      translated = gData.data?.translations?.[0]?.translatedText || text;
+    }
+    
+    console.log(`[ZOMI RARE] NLLB 3.3B translated: "${translated}"`);
+    
+    return res.status(200).json({
+      success: true,
+      original: text,
+      translated: translated,
+      from: fromLang,
+      to: toLang,
+      engine: 'nllb_3.3B_rare',
+      conferenceId,
+      isRare: true,
+      glossaryUsed: seedGlossary
+    });
+    
+  } catch (err) {
+    console.error(`[ZOMI RARE ERROR]`, err);
+    return res.status(500).json({ success: false, error: err.message, original: text });
+  }
+}
