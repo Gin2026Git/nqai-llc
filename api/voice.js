@@ -1,81 +1,65 @@
-// api/voice.js - FIXED FOR TWILIO - Returns TwiML, not JSON - NqAI 3-WAY
-// SOLE OWNER: Gin P Khup - Smyrna, TN - Fixes "Application Error"
-// MUST return valid XML for Twilio, never JSON on voice webhook
+// api/voice.js - NqAI LLC - SOLE OWNER Gin P Khup - Smyrna TN - 79 lines equivalent
+// Greeting: Hi, this is NqAI Super Intelligence Phone System. Please dial the destination number.
 
-import twilio from 'twilio';
-
-export const config = { api: { bodyParser: false } };
-
-export default async function handler(req, res) {
-  console.log('[VOICE] Twilio webhook hit - returning TwiML');
-
+export default function handler(req, res) {
   try {
-    const VoiceResponse = twilio.twiml.VoiceResponse;
-    const response = new VoiceResponse();
+    // HIPAA & Security Headers - Always TwiML
+    res.setHeader('Content-Type', 'text/xml; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
 
-    // Get params safely - Twilio sends form-encoded
-    let body = '';
-    if (req.method === 'POST') {
-      const chunks = [];
-      for await (const chunk of req) chunks.push(chunk);
-      body = Buffer.concat(chunks).toString();
-      console.log('[VOICE] Body:', body.substring(0,200));
+    // Parse Digits
+    const bodyDigits = req.body && req.body.Digits ? String(req.body.Digits) : '';
+    const queryDigits = req.query && req.query.Digits ? String(req.query.Digits) : '';
+    const digitsRaw = bodyDigits || queryDigits || '';
+    const digits = digitsRaw.replace(/\D/g, '');
+
+    const caller = (req.body && req.body.Caller) || (req.query && req.query.Caller) || '+16150000000';
+    const callerSafe = String(caller).replace(/[^+0-9]/g, '');
+
+    // If destination 10+ digits, dial
+    if (digits && digits.length >= 10) {
+      const spokenDigits = digits.split('').join(' ');
+      const xmlDial = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="Polly.Matthew" language="en-US">Thank you. You dialed ${spokenDigits}.</Say>
+  <Say voice="Polly.Matthew" language="en-US">Connecting to destination with NqAI Super Intelligence live voice interpreter. One moment please.</Say>
+  <Pause length="1"/>
+  <Say voice="Polly.Matthew" language="en-US">Hi, this is NqAI Super Intelligence Phone System. Building AI that speaks all languages. Connecting now.</Say>
+  <Dial callerId="${callerSafe}" answerOnBridge="true" timeout="30" record="do-not-record">
+    <Number statusCallbackEvent="initiated ringing answered completed" statusCallback="/api/voice-status" statusCallbackMethod="POST">${digits}</Number>
+  </Dial>
+  <Say voice="Polly.Matthew" language="en-US">The call could not be connected. Goodbye. Thank you for using NqAI LLC in Smyrna, Tennessee.</Say>
+  <Hangup/>
+</Response>`;
+      res.status(200).send(xmlDial);
+      return;
     }
 
-    const CallSid = req.body?.CallSid || 'unknown';
-    const ConferenceSid = req.body?.ConferenceSid || CallSid;
-
-    // Fix VERCEL_URL - may be undefined, use host header
-    const host = req.headers.host || process.env.VERCEL_URL || 'nqai-llc.vercel.app';
-    const protocol = host.includes('localhost') ? 'http' : 'https';
-    const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `${protocol}://${host}`;
-    
-    console.log(`[VOICE 3-WAY] Call: ${CallSid} Host: ${host} BaseUrl: ${baseUrl}`);
-
-    // 1. Welcome message - ensures TwiML always valid
-    response.say({ voice: 'Polly.Miguel', language: 'es-ES' }, 'Bienvenido a NqAI, conectando interprete. Welcome to NqAI, connecting interpreter.');
-
-    // 2. Join conference - main 3-way
-    const dial = response.dial();
-    dial.conference({
-      statusCallback: `${baseUrl}/api/conf-status`,
-      statusCallbackEvent: 'start end join leave',
-      startConferenceOnEnter: true,
-      endConferenceOnExit: false,
-    }, `NqAI-${ConferenceSid || CallSid}`);
-
-    // 3. Start Media Stream for real-time translation - use wss
-    // Comment out if translator-bot not deployed yet - this can cause app error if wss endpoint missing
-    try {
-      const streamUrl = baseUrl.replace('https://', 'wss://').replace('http://', 'ws://') + '/api/translator-bot';
-      console.log(`[VOICE] Stream URL: ${streamUrl}`);
-      
-      // Only add stream if translator-bot exists - for now comment to fix app error
-      // response.connect().stream({
-      //   url: streamUrl,
-      //   track: 'inbound_track',
-      // });
-      
-      // For debugging - just conference for now - no stream
-      console.log('[VOICE] Skipping media stream for now - conference only - fixes app error');
-    } catch (e) {
-      console.log('[VOICE] Stream setup error, continuing with conference only:', e.message);
-    }
-
-    res.setHeader('Content-Type', 'text/xml');
-    const twiml = response.toString();
-    console.log('[VOICE] TwiML:', twiml);
-    return res.status(200).send(twiml);
+    // Initial greeting
+    const xmlGreeting = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="Polly.Matthew" language="en-US">Hi, this is NqAI Super Intelligence Phone System.</Say>
+  <Pause length="0.6"/>
+  <Say voice="Polly.Matthew" language="en-US">Please dial the destination number, followed by pound.</Say>
+  <Gather numDigits="12" finishOnKey="#" action="/api/voice" method="POST" timeout="12" input="dtmf" language="en-US">
+    <Say voice="Polly.Matthew" language="en-US">Enter the ten digit destination number, then press pound. For example, 615 555 0123, then pound.</Say>
+  </Gather>
+  <Say voice="Polly.Matthew" language="en-US">We did not receive a destination number. Goodbye. Thank you for calling NqAI LLC.</Say>
+  <Hangup/>
+</Response>`;
+    res.status(200).send(xmlGreeting);
+    return;
 
   } catch (err) {
-    console.error('[VOICE ERROR - Application Error cause]', err);
-    // Fallback TwiML - ALWAYS return valid XML even on error - fixes Twilio Application Error
-    const fallback = `<?xml version="1.0" encoding="UTF-8"?>
+    const xmlError = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="Polly.Miguel" language="es-ES">Error en NqAI, pero conectado. Error in NqAI, but connected.</Say>
-  <Dial><Conference>NqAI-fallback</Conference></Dial>
+  <Say voice="Polly.Matthew" language="en-US">Hi, this is NqAI Super Intelligence Phone System.</Say>
+  <Say voice="Polly.Matthew" language="en-US">We are experiencing a brief issue. Please try again. Thank you for calling NqAI LLC.</Say>
+  <Hangup/>
 </Response>`;
     res.setHeader('Content-Type', 'text/xml');
-    return res.status(200).send(fallback);
+    res.status(200).send(xmlError);
   }
 }
