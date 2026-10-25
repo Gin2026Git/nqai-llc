@@ -1,70 +1,62 @@
+// NqAI LLC - SOLE OWNER Gin P Khup - voice.js - 3-way AI Live Voice Interpreter - FIXED
+// api/voice.js - Twilio Media Streams + Deepgram ASR + Google/NLLB + ElevenLabs TTS + Conference
 
-// api/voice.js - FIXED - hello@nqai.llc - No more Application Error!
-export default async function handler(req, res) {
-  try {
-    const step = req.query.step;
-    console.log("STEP:", step, "BODY:", req.body);
+import { twiml } from 'twilio';
 
-    // STEP 1: FIRST CALL - Ask for number - THIS WAS MISSING!
-    if (step !== 'got_number') {
-      const twiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say voice="alice">Welcome to NqAI. Please say or enter the phone number you want to call.</Say>
-  <Gather input="speech dtmf" timeout="10" numDigits="12" speechTimeout="auto" action="/api/voice?step=got_number" method="POST">
-    <Say>Enter number now.</Say>
-  </Gather>
-  <Say>We didn't hear number. Try again.</Say>
-  <Redirect>/api/voice</Redirect>
-</Response>`;
-      res.setHeader('Content-Type', 'text/xml');
-      return res.status(200).send(twiml);
-    }
+const DEEPGRAM_API_KEY = process.env.DEEPGRAM_API_KEY;
+const GOOGLE_TRANSLATE_API_KEY = process.env.GOOGLE_TRANSLATE_API_KEY;
+const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
-    // STEP 2: Got number - Send SMS + Connect
-    let num = (req.body.Digits || req.body.SpeechResult || "").replace(/\D/g, "");
-    const callerId = req.body.From || "";
-    console.log("CALLER:", callerId, "TO:", num);
+export default async function voiceHandler(req, res) {
+  // Twilio webhook when caller dials NqAI number
+  const { CallSid, From, To, ConferenceSid } = req.body;
+  
+  console.log(`[VOICE 3-WAY] New call: ${CallSid} From: ${From} To: ${To} Conf: ${ConferenceSid}`);
+  
+  // TwiML: Join conference + start Media Stream for real-time ASR
+  const response = new twiml.VoiceResponse();
+  
+  // 1. Join 3-way conference (caller + interpreter + third party via join-conference.js)
+  const dial = response.dial();
+  dial.conference({
+    statusCallback: '/api/conf-status',
+    statusCallbackEvent: 'start end join leave',
+    startConferenceOnEnter: true,
+    endConferenceOnExit: false,
+  }, `NqAI-${ConferenceSid || CallSid}`);
+  
+  // 2. Start Media Stream for real-time voice translation (8kHz phone -> 16kHz for ASR)
+  // This streams to your /api/translator-bot.js which does ASR -> Translate -> TTS
+  response.connect().stream({
+    url: `wss://${process.env.VERCEL_URL}/api/translator-bot`,
+    track: 'inbound_track',
+    parameter: [
+      { name: 'CallSid', value: CallSid },
+      { name: 'ConferenceSid', value: ConferenceSid || `NqAI-${CallSid}` }
+    ]
+  });
+  
+  // For initial testing: Say welcome in English + Spanish
+  // response.say({ voice: 'Polly.Miguel', language: 'es-ES' }, 'Bienvenido a NqAI, el teléfono que habla todos los idiomas. Conectando intérprete...');
+  
+  res.set('Content-Type', 'text/xml');
+  return res.status(200).send(response.toString());
+}
 
-    if (num.length < 10) {
-      const twiml = `<?xml version="1.0" encoding="UTF-8"?><Response><Say>Number too short. Try again.</Say><Redirect>/api/voice</Redirect></Response>`;
-      res.setHeader('Content-Type', 'text/xml');
-      return res.status(200).send(twiml);
-    }
-    if (num.length === 10) num = "1" + num;
-    const toNum = "+" + num;
-    const sid = process.env.TWILIO_ACCOUNT_SID;
-    const tok = process.env.TWILIO_AUTH_TOKEN;
-    const twilioNum = process.env.TWILIO_PHONE_NUMBER || "+16152355215";
-    const auth = "Basic " + Buffer.from(sid + ":" + tok).toString('base64');
-
-    // 1. SEND SMS FIRST - 2 sec prior - Killer feature!
-    try {
-      const smsBody = `NqAI Call: You have an incoming translated call from ${callerId}. Please answer this call from ${twilioNum}. Your conversation will be translated in real-time by AI! - nqai.llc Reply STOP to opt-out`;
-      await fetch(`https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`, {
-        method: 'POST',
-        headers: { 'Authorization': auth, 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ To: toNum, From: twilioNum, Body: smsBody })
-      });
-      console.log("SMS SENT to", toNum);
-    } catch (e) {
-      console.error("SMS FAILED:", e);
-    }
-
-    // 2. CONNECT CALL
-    const conf = `nqai-${Date.now()}`;
-    const twiml2 = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say>SMS sent. Connecting you now to ${toNum}. Your call will be translated.</Say>
-  <Dial>
-    <Number>${toNum}</Number>
-  </Dial>
-</Response>`;
-    res.setHeader('Content-Type', 'text/xml');
-    return res.status(200).send(twiml2);
-
-  } catch (err) {
-    console.error("VOICE CRASH:", err);
-    res.setHeader('Content-Type', 'text/xml');
-    return res.status(200).send(`<?xml version="1.0" encoding="UTF-8"?><Response><Say>Sorry, NqAI error. Please call again. Contact hello at nqai dot llc</Say><Hangup/></Response>`);
-  }
+// For major languages: Use Deepgram Nova-2 for 8kHz phone Spanish (better than Whisper for phone)
+// For rare: Whisper large-v3
+export async function transcribeWithDeepgram(audioBase64, language = 'es') {
+  // Deepgram handles 8kHz phone audio natively - better than Whisper for Spanish phone calls
+  const dgRes = await fetch('https://api.deepgram.com/v1/listen?language=' + language + '&model=nova-2-phonecall&encoding=mulaw&sample_rate=8000', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Token ${DEEPGRAM_API_KEY}`,
+      'Content-Type': 'audio/mulaw'
+    },
+    body: Buffer.from(audioBase64, 'base64')
+  });
+  const dgData = await dgRes.json();
+  const transcript = dgData.results?.channels?.[0]?.alternatives?.[0]?.transcript || '';
+  console.log(`[VOICE ASR Deepgram ${language}]: "${transcript}"`);
+  return transcript;
 }
