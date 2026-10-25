@@ -1,87 +1,81 @@
-// api/voice.js - FIXED FOR ALL LANGUAGES - NqAI 3-WAY AI LIVE VOICE INTERPRETER
-// SOLE OWNER: Gin P Khup - Smyrna, TN - 7000 Languages Mission
-// Supports ALL languages: Deepgram Nova-3 multilingual + Nova-2 phonecall fallback
-// Twilio 8kHz mulaw -> Deepgram (40% more accurate than Whisper for phone) -> Google NMT
+// api/voice.js - FIXED FOR TWILIO - Returns TwiML, not JSON - NqAI 3-WAY
+// SOLE OWNER: Gin P Khup - Smyrna, TN - Fixes "Application Error"
+// MUST return valid XML for Twilio, never JSON on voice webhook
 
 import twilio from 'twilio';
 
 export const config = { api: { bodyParser: false } };
 
-// ALL Deepgram supported languages for NqAI 7000 mission (Nova-3 supports 30+)
-const DEEPGRAM_LANG_MAP = {
-  'es': 'es', 'en': 'en', 'my': 'my', 'zom': 'my', // Zomi uses Burmese base + NLLB
-  'fr': 'fr', 'de': 'de', 'pt': 'pt', 'it': 'it', 'nl': 'nl',
-  'ja': 'ja', 'ko': 'ko', 'zh': 'zh', 'ar': 'ar', 'hi': 'hi',
-  'ru': 'ru', 'tr': 'tr', 'pl': 'pl', 'uk': 'uk', 'id': 'id',
-  'ms': 'ms', 'th': 'th', 'vi': 'vi', 'ta': 'ta', 'te': 'te',
-  'auto': null // auto-detect for future 7000
-};
-
 export default async function handler(req, res) {
-  const { lang = 'auto', callSid } = req.query;
-  const targetLang = (lang || 'auto').toLowerCase();
-  
-  // Get raw mulaw audio from Twilio
-  const chunks = [];
-  for await (const chunk of req) chunks.push(chunk);
-  const audioBuffer = Buffer.concat(chunks);
-  
-  if (!audioBuffer.length) {
-    return res.status(400).json({ error: 'No audio' });
-  }
+  console.log('[VOICE] Twilio webhook hit - returning TwiML');
 
   try {
-    let transcript = '';
-    let detectedLang = targetLang;
-    
-    // PRIORITY 1: Deepgram Nova-2 Phonecall for phone (8kHz) - BEST for Spanish/English phone
-    // PRIORITY 2: Deepgram Nova-3 multilingual for ALL languages future
-    if (process.env.DEEPGRAM_API_KEY) {
-      const deepgramLang = DEEPGRAM_LANG_MAP[targetLang] || undefined;
-      const usePhonecall = ['es','en'].includes(targetLang) || targetLang === 'auto';
-      const model = usePhonecall ? 'nova-2-phonecall' : 'nova-3';
-      
-      const url = new URL('https://api.deepgram.com/v1/listen');
-      url.searchParams.set('model', model);
-      url.searchParams.set('encoding', 'mulaw');
-      url.searchParams.set('sample_rate', '8000');
-      url.searchParams.set('smart_format', 'true');
-      if (deepgramLang) url.searchParams.set('language', deepgramLang);
-      else url.searchParams.set('detect_language', 'true'); // ALL languages auto-detect for future
-      if (model === 'nova-2-phonecall') url.searchParams.set('numerals', 'true');
-      
-      const dgRes = await fetch(url.toString(), {
-        method: 'POST',
-        headers: {
-          'Authorization': `Token ${process.env.DEEPGRAM_API_KEY}`,
-          'Content-Type': 'audio/mulaw'
-        },
-        body: audioBuffer
-      });
-      
-      const dgData = await dgRes.json();
-      transcript = dgData.results?.channels?.[0]?.alternatives?.[0]?.transcript || '';
-      detectedLang = dgData.results?.channels?.[0]?.detected_language || targetLang;
-      
-      console.log(`[VOICE ALL-LANGS] Deepgram ${model} heard (${detectedLang}): "${transcript}"`);
-    } 
-    // FALLBACK: Whisper (good but not phone-optimized)
-    else {
-      console.log('[VOICE ALL-LANGS] DEEPGRAM_API_KEY missing, using Whisper fallback');
-      // ... Whisper code here (existing)
-      transcript = 'fallback transcript';
+    const VoiceResponse = twilio.twiml.VoiceResponse;
+    const response = new VoiceResponse();
+
+    // Get params safely - Twilio sends form-encoded
+    let body = '';
+    if (req.method === 'POST') {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      body = Buffer.concat(chunks).toString();
+      console.log('[VOICE] Body:', body.substring(0,200));
     }
 
-    return res.status(200).json({ 
-      transcript, 
-      detectedLang,
-      targetLang,
-      modelUsed: process.env.DEEPGRAM_API_KEY ? 'deepgram' : 'whisper',
-      supportsAllLangs: true // NqAI 7000 future ready
-    });
+    const CallSid = req.body?.CallSid || 'unknown';
+    const ConferenceSid = req.body?.ConferenceSid || CallSid;
+
+    // Fix VERCEL_URL - may be undefined, use host header
+    const host = req.headers.host || process.env.VERCEL_URL || 'nqai-llc.vercel.app';
+    const protocol = host.includes('localhost') ? 'http' : 'https';
+    const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `${protocol}://${host}`;
     
+    console.log(`[VOICE 3-WAY] Call: ${CallSid} Host: ${host} BaseUrl: ${baseUrl}`);
+
+    // 1. Welcome message - ensures TwiML always valid
+    response.say({ voice: 'Polly.Miguel', language: 'es-ES' }, 'Bienvenido a NqAI, conectando interprete. Welcome to NqAI, connecting interpreter.');
+
+    // 2. Join conference - main 3-way
+    const dial = response.dial();
+    dial.conference({
+      statusCallback: `${baseUrl}/api/conf-status`,
+      statusCallbackEvent: 'start end join leave',
+      startConferenceOnEnter: true,
+      endConferenceOnExit: false,
+    }, `NqAI-${ConferenceSid || CallSid}`);
+
+    // 3. Start Media Stream for real-time translation - use wss
+    // Comment out if translator-bot not deployed yet - this can cause app error if wss endpoint missing
+    try {
+      const streamUrl = baseUrl.replace('https://', 'wss://').replace('http://', 'ws://') + '/api/translator-bot';
+      console.log(`[VOICE] Stream URL: ${streamUrl}`);
+      
+      // Only add stream if translator-bot exists - for now comment to fix app error
+      // response.connect().stream({
+      //   url: streamUrl,
+      //   track: 'inbound_track',
+      // });
+      
+      // For debugging - just conference for now - no stream
+      console.log('[VOICE] Skipping media stream for now - conference only - fixes app error');
+    } catch (e) {
+      console.log('[VOICE] Stream setup error, continuing with conference only:', e.message);
+    }
+
+    res.setHeader('Content-Type', 'text/xml');
+    const twiml = response.toString();
+    console.log('[VOICE] TwiML:', twiml);
+    return res.status(200).send(twiml);
+
   } catch (err) {
-    console.error('[VOICE ALL-LANGS ERROR]', err);
-    return res.status(500).json({ error: err.message });
+    console.error('[VOICE ERROR - Application Error cause]', err);
+    // Fallback TwiML - ALWAYS return valid XML even on error - fixes Twilio Application Error
+    const fallback = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="Polly.Miguel" language="es-ES">Error en NqAI, pero conectado. Error in NqAI, but connected.</Say>
+  <Dial><Conference>NqAI-fallback</Conference></Dial>
+</Response>`;
+    res.setHeader('Content-Type', 'text/xml');
+    return res.status(200).send(fallback);
   }
 }
