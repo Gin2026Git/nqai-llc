@@ -1,20 +1,13 @@
-export default function handler(req,res){
-res.setHeader('Content-Type','text/xml; charset=utf-8');
-return res.status(200).send(`<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Connect>
-    <ConversationRelay 
-      url="wss://nqai.llc/api/relay"
-      transcriptionProvider="Deepgram"
-      ttsProvider="ElevenLabs"
-      transcriptionLanguage="multi"
-      speechModel="flux"
-      interruptible="speech"
-      interruptSensitivity="medium"
-      speechTimeout="800"
-      reportInputDuringAgentSpeech="speech"
-      ignoreBackchannel="true"
-      preemptible="true" />
-  </Connect>
-</Response>`);
+// translator-bot.js - PRIMARY - 3-way ConferenceRelay - NqAI LLC SOLE OWNER Gin P Khup
+export default function handler(req, res) {
+  const wssUrl = "wss://nqai-super-phone.fly.dev/api/relay";
+  const twiml = `
+    <Response>
+      <Connect>
+        <ConversationRelay url="${wssUrl}" transcriptionProvider="Deepgram" transcriptionLanguage="multi" speechModel="flux" ttsProvider="ElevenLabs" />
+      </Connect>
+    </Response>
+  `;
+  res.setHeader('Content-Type', 'text/xml');
+  res.status(200).send(twiml.trim());
 }
