@@ -1,13 +1,10 @@
-// relay-bot.js - SECONDARY - Same WSS - NqAI LLC SOLE OWNER Gin P Khup
-export default function handler(req, res) {
-  const wssUrl = "wss://nqai-super-phone.fly.dev/api/relay";
-  const twiml = `
-    <Response>
-      <Connect>
-        <ConversationRelay url="${wssUrl}" transcriptionProvider="Deepgram" transcriptionLanguage="multi" speechModel="flux" ttsProvider="ElevenLabs" />
-      </Connect>
-    </Response>
-  `;
-  res.setHeader('Content-Type', 'text/xml');
-  res.status(200).send(twiml.trim());
-}
+module.exports = (req, res) => {
+  const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Connect>
+    <ConversationRelay url="wss://nqai-super-phone.fly.dev/api/relay" transcriptionProvider="Deepgram" transcriptionLanguage="multi" speechModel="flux" ttsProvider="ElevenLabs" />
+  </Connect>
+</Response>`;
+  res.setHeader('Content-Type','text/xml');
+  res.send(twiml);
+};
