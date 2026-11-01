@@ -1,4 +1,6 @@
 'use client';
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect, useRef } from 'react';
 
 /* =======================================================================
@@ -1308,7 +1310,7 @@ export default function Page(){
           </div>
         </div>
         <div style={{marginTop:'12px',background:'#111',color:'#fff',borderRadius:'12px',padding:'14px',textAlign:'center'}}>
-          <div style={{fontWeight:800}}>© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved - 7000 Languages - FINAL 1000/1000 REAL BASIC - SEED1000_FINAL_1000/1000_REAL_BASIC_v2.0.0 - Smyrna, TN, USA</div>
+          <div style={{fontWeight:800}}>© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved - 7000 Languages - FINAL 1000/1000 REAL BASIC - SEED1000_FINAL_1000/1000_REAL_BASIC_v2.4.0_MASTER_AUTO_TRANSLIT_SOLE_OWNER_Gin_P_Khup - Smyrna, TN, USA</div>
           <div style={{fontSize:'11px',marginTop:'4px',color:'#aaa'}}>Workspace Clean - FINAL BUILD - 1000 Phrases Zero Error - SOLE OWNER Verified</div>
         </div>
       </div>
