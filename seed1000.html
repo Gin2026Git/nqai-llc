@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <style>
+  #stealthGate{position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#e2e8f0;font-family:system-ui;text-align:center;padding:20px}
+  #stealthGate input{background:#1e293b;border:2px solid #22c55e;color:#fff;padding:14px 20px;border-radius:999px;font-size:16px;width:280px;max-width:90vw;text-align:center;outline:none;margin-top:16px}
+  #stealthGate button{background:#22c55e;color:#000;border:none;padding:12px 28px;border-radius:999px;font-weight:900;font-size:14px;cursor:pointer;margin-top:12px}
+  #stealthGate .logo{font-size:48px;margin-bottom:12px}
+  #stealthGate h1{font-size:20px;font-weight:900;margin:0}
+  #stealthGate p{font-size:12px;color:#94a3b8;margin-top:8px;max-width:400px}
+  </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NqAI Seed1000 - 7000 Languages - SOLE OWNER Gin P Khup - v2.4.0 MASTER</title>
@@ -28,8 +38,41 @@
 .box.current{background:#3b82f6;color:#fff;border:2px solid #fff;font-weight:900}
 .box.locked{background:#ef4444;color:#fff}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
+<div id="stealthGate">
+  <div class="logo">🔒</div>
+  <h1>NqAI Seed1000 — STEALTH BUILD</h1>
+  <p>SOLE OWNER Gin P Khup — Smyrna, TN — This project is in stealth while building 7000 languages. People may exploit the languages. Enter owner code to access.</p>
+  <input id="stealthInput" type="password" placeholder="Enter SOLE OWNER code" autofocus>
+  <button onclick="unlockStealth()">UNLOCK — SOLE OWNER ONLY</button>
+  <p style="margin-top:16px;font-size:10px;color:#64748b">Hint: NqAI + year or Owner Name — Workspace Clean — v2.4.0</p>
+</div>
+<script>
+(function(){
+  const KEY='nqai_stealth_unlocked_v2_4';
+  function isUnlocked(){ return localStorage.getItem(KEY)==='true'; }
+  function hide(){ const el=document.getElementById('stealthGate'); if(el) el.style.display='none'; }
+  function show(){ const el=document.getElementById('stealthGate'); if(el) el.style.display='flex'; }
+  window.unlockStealth=function(){
+    const val=document.getElementById('stealthInput').value.trim();
+    const codes=['NqAI2026','nqai2026','Gin P Khup','Gin P Khup SOLE OWNER','ginpkhup','SOLEOWNER','NqAI-sole-2026','NqAI','7000'];
+    if(codes.includes(val) || val.toLowerCase().includes('gin') || val.toLowerCase().includes('nqai')){
+      localStorage.setItem(KEY,'true');
+      hide();
+    } else {
+      alert('Wrong code — SOLE OWNER only — Hint: NqAI2026 or your name');
+      document.getElementById('stealthInput').value='';
+    }
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    if(isUnlocked()) hide();
+    const inp=document.getElementById('stealthInput');
+    if(inp) inp.addEventListener('keydown',e=>{ if(e.key==='Enter') unlockStealth(); });
+  });
+})();
+</script>
 <div class="header">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
 <div>
@@ -47,19 +90,16 @@
 <div style="font-size:10px;color:#94a3b8">Current: <span id="cur">1</span> / 1000 | Language: <span id="clang">Zomi Tedim (zom)</span></div>
 </div>
 </div>
-
 <div style="display:flex;flex-wrap:wrap">
 <div style="flex:1;min-width:320px">
 <div class="card">
 <div style="font-weight:900;font-size:12px;color:#22c55e">BOX <span id="boxnum">1</span> - ENGLISH SOURCE (BIG FONT) - SOLE OWNER</div>
 <div id="eng" style="font-size:22px;font-weight:900;margin:12px 0;line-height:1.2">Hello</div>
 <div style="font-size:10px;color:#94a3b8">Type correct translation below - Use Zomi keyboard - Workspace Clean - 1000 REAL BASIC - NO Extra blessing</div>
-
 <div style="margin-top:12px">
 <div style="font-size:11px;font-weight:800;color:#22c55e">⌨️ ZOMI TEDIM KEYBOARD HELPER - TAP TO INSERT - SOLE OWNER</div>
 <div id="kb"></div>
 </div>
-
 <div style="margin-top:12px">
 <label style="font-size:11px;font-weight:800">Zomi (Tedim) Translation - Type Correct Zomi:</label>
 <input id="zomi" class="input" placeholder="Type correct Zomi! - Tap keyboard above!" oninput="onZomiInput(this.value)">
@@ -74,12 +114,10 @@
 <div style="margin-top:4px;font-size:9px;color:#94a3b8">Example: Type "ka pa" → Suggests "My father" → Voice "ka pa" → TTS reads plain</div>
 </div>
 </div>
-
 <div style="margin-top:12px">
 <label style="font-size:11px;font-weight:800">Voice Hint (lowercase for TTS):</label>
 <input id="hint" class="input" placeholder="voice hint lowercase">
 </div>
-
 <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
 <button class="btn btn-danger" onclick="startRec()">● RECORD</button>
 <button class="btn" id="stopBtn" onclick="stopRec()" disabled>■ STOP</button>
@@ -89,7 +127,6 @@
 </div>
 </div>
 </div>
-
 <div style="flex:0 0 340px;min-width:300px">
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:900;font-size:12px">📦 1000 BOXES - PROGRESS - SOLE OWNER</div><button class="btn" style="padding:4px 8px;font-size:10px" onclick="addLang()">+ Add Language 7000</button></div>
@@ -102,15 +139,12 @@
 </div>
 </div>
 </div>
-
 <div class="card" style="margin:12px;text-align:center;font-size:10px;color:#94a3b8">
 © 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved - NqAI Seed1000 7000 Languages - Smyrna, TN, USA - MASTER v2.4.0 - 1000/1000 REAL BASIC - ZERO Extra blessing - Workspace Clean - Version: SEED1000_FINAL_1000/1000_REAL_BASIC_v2.4.0_MASTER_AUTO_TRANSLIT_SOLE_OWNER_Gin_P_Khup - Route: /seed1000 - https://nqai.llc/seed1000
 </div>
-
 <script>
 // BASE_1000 - CLEAN - NO Extra blessing
 const BASE_1000 = ['Hello', 'How are you?', 'I am fine', 'What is your name?', 'My name is Gin', 'Good morning', 'Good afternoon', 'Good evening', 'Good night', 'Thank you', 'Please', 'Sorry', 'Yes', 'No', 'Welcome', 'Excuse me', 'I love you', 'I need help', 'Where is the market?', 'How much is this?', 'Too expensive', 'Water please', 'Food please', 'I am hungry', 'I am thirsty', 'My family', 'My father', 'My mother', 'My brother', 'My sister', 'My wife', 'My husband', 'My son', 'My daughter', 'House', 'Village', 'School', 'Church', 'Today', 'Tomorrow', 'Yesterday', 'Help me', 'Hospital', 'Doctor', 'Phone number', 'What time is it?', 'I am going home', 'I am coming', 'Where are you?', 'I am here', 'Come here', 'Go there', 'Sit down', 'Stand up', 'Open the door', 'Close the door', 'Turn on the light', 'Turn off the light', 'I understand', "I don't understand", 'What do you want?', 'I want water', 'I want food', 'Very good', 'Very bad', 'Big house', 'Small house', 'Long road', 'Short road', 'New clothes', 'Old clothes', 'Hot water', 'Cold water', 'Good weather', 'Bad weather', 'It is raining', 'It is sunny', 'It is windy', 'It is cold', 'It is hot', 'My friend', 'My friends', 'God loves you', 'Pray for me', 'Thank God', 'Bless you', 'Peace be with you', 'See you later', 'See you tomorrow', 'Take care', 'I am tired', 'I am sick', 'I am happy', 'I am sad', "Don't worry", 'Be careful', 'Hurry up', 'Slow down', 'Wait a minute', "Let's go", 'Where is the bathroom?', 'I need a doctor', 'Call the police', 'I am lost', 'Show me the way', 'How far is it?', 'It is near', 'It is far', 'Left side', 'Right side', 'Go straight', 'Turn left', 'Turn right', 'Stop here', 'I live here', 'This is my home', 'That is his house', 'This is good', 'That is bad', 'I like it', "I don't like it", 'I want to learn', 'I want to teach', 'Speak slowly', 'Say again please', 'Write it down', 'I can read', 'I can write', 'Do you understand?', 'I understand a little', 'What language do you speak?', 'I speak Zomi', 'I speak English', 'Learn together', "Let's eat", "Let's drink", 'Breakfast time', 'Lunch time', 'Dinner time', 'I cooked rice', 'Delicious food', 'Fresh water', 'Clean clothes', 'Dirty clothes', 'Wash your hands', 'Brush your teeth', 'Take a bath', 'Go to sleep', 'Wake up early', 'Good dreams', 'My name is written here', 'This is my book', 'That is your book', 'Open your book', 'Read this', 'Write your name', 'Count numbers', 'One, two, three', 'I have money', 'I have no money', 'I will pay', 'Keep the change', 'Cheaper please', 'I will buy this', 'I will sell that', 'Market day', 'Rice field', 'Corn field', 'Chicken', 'Cow', 'Goat', 'Dog', 'Cat', 'Bird', 'Fish', 'Tree', 'Flower', 'Mountain', 'River', 'Lake', 'Forest', 'Sun', 'Moon', 'Stars', 'Sky', 'Cloud', 'Rain', 'Wind', 'Fire', 'Earth', 'Stone', 'Road', 'Bridge', 'Car', 'Bicycle', 'Motorcycle', 'Bus', 'Walk fast', 'Walk slowly', 'Run', 'Jump', 'Swim', 'Fly', 'Sing a song', 'Dance', 'Play', 'Work', 'Rest', 'Sleep', 'Cook', 'Eat rice', 'Drink tea', 'Drink coffee', 'Make tea', 'Cut wood', 'Carry water', 'Build house', 'Clean house', 'Sweep floor', 'Wash dishes', 'My father works', 'My mother cooks', 'Children play', 'Teacher teaches', 'Student learns', 'Farmer farms', 'Pastor preaches', 'Doctor helps', 'We help each other', 'We love each other', 'I go to church', 'I go to school', 'I go to market', 'I go to hospital', 'I go to work', 'I stay home', 'I am at home', 'He is at work', 'She is at school', 'They are in church', 'Who is this?', 'Who is that?', 'What is this?', 'What is that?', 'Where is this?', 'Where is that?', 'Why are you crying?', 'Why are you laughing?', 'How old are you?', 'I am fifty six years old', 'Where were you born?', 'I was born in Myanmar', 'I live in Tennessee', 'Smyrna Tennessee', 'United States', 'I love my family', 'Family is important', 'Respect your parents', 'Love your neighbor', 'Help the poor', 'God is good', 'God is great', 'Jesus loves you', 'Trust in God', 'Faith', 'Hope', 'Love', 'Joy', 'Peace', 'Kindness', 'Good morning everyone', 'Good night everyone', 'Happy birthday', 'Merry Christmas', 'Happy New Year', 'Congratulations', 'Well done', 'Great job', 'Keep going', "Don't give up", 'I will try', 'I will come tomorrow', 'I will go now', 'I will wait here', 'I will call you', 'I will help you', 'You can do it', 'We can do it', "Let's work together", 'Together we are strong', 'One family', 'One community', 'One village', 'One church', 'One God', 'Be honest', 'Be kind', 'Be humble', 'Be patient', 'Be strong', 'Morning prayer', 'Evening prayer', 'Read the Bible', 'Sing hymn', 'Sunday service', 'Wednesday prayer', 'Youth meeting', "Women's meeting", "Men's meeting", "Children's meeting", 'Where is your father?', 'Where is your mother?', 'How is your father?', 'How is your mother?', 'How is your family?', 'My family is fine', 'Thank you for asking', 'You are welcome', 'No problem', "It's okay", 'I am busy', 'I am free', 'I am at work', 'I am on the way', 'I am in the market', 'I am cooking', 'I am eating', 'I am drinking', 'I am reading', 'I am writing', 'I am walking', 'I am running', 'I am working', 'I am resting', 'I am praying', 'I am singing', 'I am learning Zomi', 'I am teaching English', 'I am learning fast', 'I am improving', 'Speak Zomi please', 'Translate to English', 'Translate to Zomi', 'What does this mean?', 'It means hello', 'How do you say this?', 'Say it in Zomi', 'Say it in English', 'Correct pronunciation', 'Listen carefully', 'Repeat after me', 'Again please', 'One more time', 'Very clear', 'Not clear', 'Loud and clear', 'Soft voice', 'Fast speech', 'Slow speech', 'Good accent', 'Good job speaking', 'You speak well', 'Practice every day', 'Every day I learn', 'Language is important', 'Save our language', 'Teach our children', 'Keep our culture', 'Remember our village', 'Remember our history', 'I miss home', 'I miss my village', 'I miss my family', 'I will return home', 'Home sweet home', 'This is my village', 'That is my farm', 'Rice is ready', 'Harvest time', 'Planting time', 'Rainy season', 'Dry season', 'Hot season', 'Cold season', 'Morning time', 'Noon time', 'Afternoon', 'Evening time', 'Night time', 'Midnight', 'Today is Monday', 'Today is Tuesday', 'Today is Wednesday', 'Today is Thursday', 'Today is Friday', 'Today is Saturday', 'Today is Sunday', 'This week', 'Next week', 'Last week', 'This month', 'Next month', 'Last month', 'This year', 'Next year', 'Last year', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'What date today?', 'What month now?', 'Number one', 'Number two', 'Number three', 'Number four', 'Number five', 'Number six', 'Number seven', 'Number eight', 'Number nine', 'Number ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety', 'One hundred', 'One thousand', 'Many people', 'Few people', 'Some people', 'All people', 'Everybody', 'Nobody', 'Somebody', 'Anybody', 'Who knows?', 'I know', "I don't know", 'I think so', "I don't think so", 'Maybe', 'Probably', 'Certainly', 'Of course', 'Sure', 'Absolutely', 'Never', 'Always', 'Sometimes', 'Often', 'Usually', 'Rarely', 'Every day', 'Every night', 'Every morning', 'Every evening', 'Once a day', 'Twice a day', 'Three times a day', 'Morning to night', 'Day and night', 'Work hard', 'Study hard', 'Try hard', 'Do your best', 'Best wishes', 'Good luck', 'Take your time', 'Be safe', 'Be healthy', 'Get well soon', 'Feel better', 'Long life', 'Long live', 'Thank you very much', 'Thank you so much', 'Thanks a lot', 'Many thanks', "You're welcome very much", 'I appreciate you', 'I respect you', 'I trust you', 'I believe you', 'I support you', 'I need you', 'I miss you', 'I remember you', 'I will never forget you', 'Where do you work?', 'Where do you live?', 'Where do you study?', 'What do you do?', 'What is your job?', 'What is your favorite food?', 'What is your favorite color?', 'What is your favorite song?', 'How is life?', 'How is work?', 'How is school?', 'How is church?', 'Everything is good', 'Everything is okay', 'Nothing special', 'Something important', 'Something good', 'Something bad', 'Everything will be okay', 'God will help us', "Don't be afraid", "Don't be sad", "Don't be angry", 'Be happy', 'Stay happy', 'Stay strong', 'Stay healthy', 'Stay safe', 'Stay together', 'Stay in touch', 'I will pray for you', 'Pray for us', 'God bless you', 'God bless your family', 'God be with you', 'Peace of God', 'Love of God', 'Grace of God', 'Mercy of God', 'Glory to God', 'Thank you God for today', 'God gave us life', 'God gave us food', 'God gave us water', 'We thank God', 'We praise God', 'We worship God', 'We love God', 'We trust God', 'We need God', 'My heart is happy', 'My heart is sad', 'My heart is clean', 'Open your heart', 'Close your eyes', 'Open your eyes', 'Look here', 'Look there', 'Listen to me', 'Hear me', 'Hold my hand', 'Give me your hand', 'Come with me', 'Stay with me', 'Wait for me', 'Follow me', 'Lead the way', 'Show me', 'Teach me', 'Tell me', 'Tell me the truth', 'Tell me story', 'Story time', 'Long story', 'Short story', 'True story', 'Old story', 'New story', 'Funny story', 'Sad story', 'Good story', 'Bad story', 'My story', 'Your story', 'Our story', 'Village story', 'Family story', "God's story", 'Bible story', 'History story', 'Speak truth', 'Speak slowly please', 'Speak clearly', "Don't shout", "Don't whisper", 'Talk to me', 'Talk to him', 'Talk to her', 'Talk to them', 'Talk to us', 'Call me', 'Call him', 'Call her', 'Call them', 'Answer me', 'Answer the phone', 'Hang up', 'Call back', 'Text me', 'Message me', 'Send me', 'Give me', 'Take this', 'Take that', 'Bring this', 'Bring that', 'Carry this', 'Carry that', 'Hold this', 'Hold that', 'Put here', 'Put there', 'Keep here', 'Keep there', 'Leave it', 'Leave here', 'Leave now', 'Come back', 'Go back', 'Return soon', 'See you soon', 'See you again', 'See you next time', 'See you at church', 'See you at market', 'See you at home', 'See you at school', 'See you at work', 'See you tonight', 'See you in the morning', 'Goodbye', 'Bye bye', 'Take care bye', 'Have a nice day', 'Have a nice night', 'Have a good trip', 'Have a safe trip', 'Have fun', 'Enjoy your day', 'Enjoy your meal', 'Bon appetit', 'Eat well', 'Drink well', 'Sleep well', 'Work well', 'Study well', 'Live well', 'Love well', 'Pray well', 'Sing well', 'Walk well', 'Go well', 'Come well', 'Stay well', 'All is well', 'Everything is well', 'I am well', 'We are well', 'Family is well', 'Children are well', 'Parents are well', 'Friends are well', 'Village is well', 'Church is well', 'Thank God we are well', 'God keeps us well', 'God makes us well', 'God loves us well', 'God leads us well', 'Amen', 'Let us pray', 'Let us sing', 'Let us eat', 'Let us go', 'Let us work', 'Let us learn', 'Let us help', 'Let us love', 'Let us thank God', 'Let us praise God', 'I want to go to America', 'I want to go home', 'I want to help people', 'I want to save language', 'I want to teach children', 'I want to build church', 'I want to build school', 'I want to build house', 'I want to plant rice', 'I want to learn more', 'Knowledge is power', 'Education is important', 'Language is life', 'Culture is important', 'Tradition is important', 'Family is life', 'Love is life', 'God is life', 'Water is life', 'Food is life', 'Rice is life', 'Work is life', 'We work for family', 'We work for God', 'We live for God', 'We live for family', 'We live for love', 'We live for peace', 'Peace in village', 'Peace in family', 'Peace in church', 'Peace in heart', 'Love in family', 'Love in church', 'Love in village', 'Love in heart', 'Joy in heart', 'Joy in family', 'Joy in church', 'Joy in village', 'Faith in God', 'Hope in God', 'Love for God', 'Life with God', 'Walk with God', 'Talk with God', 'Live with God', 'Stay with God', 'Thank God always', 'I am Zomi', 'You are Zomi', 'We are Zomi', 'Zomi language', 'Zomi people', 'Zomi culture', 'Zomi village', 'Zomi house', 'Zomi food', 'Zomi song', 'Zomi dance', 'Zomi tradition', 'Zomi history', 'Zomi story', 'Zomi family', 'Zomi church', 'Zomi community', 'Zomi land', 'Zomi heart', 'Zomi pride', '7000 languages', 'Save languages', 'All languages are important', 'Every language has value', 'Language is identity', 'Language is heritage', 'Teach mother tongue', 'Learn mother tongue', 'Speak mother tongue', 'Write mother tongue', 'Read mother tongue', 'Sing in mother tongue', 'Pray in mother tongue', 'Dream in mother tongue', 'Live in mother tongue', 'Love mother tongue', 'Keep mother tongue', 'Save mother tongue', 'Share mother tongue', 'Spread mother tongue', 'NqAI LLC', 'SOLE OWNER Gin P Khup', 'Smyrna Tennessee USA', '2026 NqAI Seed1000', '1000 phrases real basic', 'FINAL version', 'Zero error', 'All rights reserved', 'God bless NqAI', 'Thank you for using NqAI', 'I am Gin P Khup', 'This is my project', 'This is my language work', 'This is my dream', 'This is my heart work', 'For Zomi people', 'For 7000 languages', 'For future generation', 'For our children', 'For our heritage', 'Start now', 'Begin now', 'Do it now', 'Finish well', 'Complete 1000', '1000 done', 'We made it', 'We finished', 'Praise God', 'Hallelujah', 'One more step', 'Last box', 'First box', 'Middle box', 'Every box matters', 'Save all boxes', 'Export all', 'Clean workspace', 'Final build', 'God bless America', 'My heart thanks you', 'My family thanks you', 'Our community thanks you', 'Zomi thanks you', '7000 languages thanks you', 'God bless your work', 'Keep up the good work', 'Continue learning', 'Continue teaching', 'Continue saving language', 'God bless you and your family', 'May God protect you', 'May God guide you', 'Walk in peace', 'Live in harmony', 'Speak with love', 'Work with joy', 'Help one another', 'Share your food', 'Share your water', 'Clean your heart', 'Open your mind', 'Learn new words', 'Teach old words', 'Keep your promise', 'Respect elders', 'Love children', 'Honor parents', 'Serve community', 'Build together', 'Plant seeds', 'Water plants', 'Harvest crops', 'Store rice', 'Cook together', 'Sing together', 'Pray together', 'Dance together', 'Laugh together', 'Cry together', 'Morning has come', 'Night has come', 'Sun is rising', 'Sun is setting', 'Moon is shining', 'Stars are bright', 'Rain is coming', 'Wind is blowing', 'Fire is burning', 'Water is flowing', 'Road is long', 'House is big', 'Village is beautiful', 'Church is open', 'School is closed', 'Market is busy', 'Food is ready', 'Water is clean', 'Clothes are new', 'Book is open', 'I am learning', 'You are teaching', 'We are listening', 'They are speaking', 'He is working', 'She is cooking', 'It is good', 'This is true', 'That is false', 'These are mine', 'Those are yours', 'All are welcome', 'None are left', 'Some are here', 'Many are coming', 'One more time please', 'Two more days', 'Three more nights', 'Four more weeks', 'Five more years', 'First day', 'Second day', 'Third day', 'Fourth day', 'Fifth day', 'Last day', 'Early morning', 'Late night', 'Midday', 'Midnight', 'Sunrise', 'Sunset', 'Good health', 'Good life', 'Good heart', 'Good mind', 'Good spirit', 'Be kind to all', 'Be true to yourself', 'Be faithful', 'Be grateful', 'Be joyful', 'Thank you for coming', 'Thank you for helping', 'Thank you for teaching', 'Thank you for sharing', 'Thank you for caring', 'Please come in', 'Please sit down', 'Please stand up', 'Please listen', 'Please speak', 'Come quickly', 'Go slowly', 'Wait patiently', 'Listen carefully', 'Speak kindly', 'Love never fails', 'Faith moves mountains', 'Hope never dies', 'Peace be still', 'Joy comes in morning', 'God is with us', 'God is for us', 'God loves us all', 'God hears our prayer', 'God answers prayer', 'My heart thanks you', 'My family thanks you', 'Our community thanks you', 'Zomi thanks you', '7000 languages thanks you', 'God bless your work', 'Keep up the good work', 'Continue learning', 'Continue teaching', 'Continue saving language', 'Language is treasure', 'Words are power', 'Stories are life', 'Songs are history', 'Culture is pride', 'One more step', 'Last box', 'First box', 'Middle box', 'Every box matters', 'Save all boxes', 'Export all', 'Clean workspace', 'Final build', 'God bless America', 'My heart thanks you again', 'Our village is happy', 'Our church is happy', 'Our children are happy', 'Our future is bright', 'Keep our language alive', 'Pass it to children', 'Write it down', 'Record your voice', 'Share with world', 'This is the end', 'We have finished', 'We did it together', 'Praise the Lord', 'Hallelujah amen', 'Begin again', 'Start new chapter', 'Open new door', 'Walk new path'];
-
 const ZOMI_KEYS = {
   vowels: ["a","aw","e","i","o","u","A","Aw","E","I","O","U"],
   tones: ["á","à","â","é","è","ê","í","ì","ó","ò","ô","ú","ù","Á","À","É","È","Ó","Ò","Ú","Ù"],
@@ -122,7 +156,6 @@ const ZOMI_KEYS = {
   pronouns: ["kei","keima","ka","nang","nangma","na","ama","amah","a","kou","kote","eite","i","noute","note","amau","amaute","keimah","nangmah","amahmah"],
   family: ["pa","nu","tapa","tanu","ta","upat","pupat","pipat","unaupa","unaunu","pu","pi","pupu","pipi","be","be le be","innkuan","sanggam","lawm","zi","leng","pate","nute"]
 };
-
 const ZOMI_EN_DICT = {
   "ka pa": "My father", "ka nu": "My mother", "ka tapa": "My son", "ka tanu": "My daughter",
   "ka innkuan": "My family", "ka sanggam": "My sibling", "ka zi": "My wife", "ka pasal": "My husband",
@@ -134,14 +167,11 @@ const ZOMI_EN_DICT = {
   "damdam": "Hello", "na dam maw": "How are you?", "ka dam": "I am fine", "ki mu thei": "see you",
   "lungdam": "thank you", "hehpih": "please", "ka it": "I love you", "hong huh": "help me"
 };
-
 function transliterateZomi(s){ const map={"á":"a","à":"a","â":"a","é":"e","è":"e","ê":"e","í":"i","ì":"i","ó":"o","ò":"o","ô":"o","ú":"u","ù":"u","Á":"A","À":"A","É":"E","È":"E","Ó":"O","Ò":"O","Ú":"U","Ù":"U"}; let out=s; for(const k in map){ out=out.split(k).join(map[k]); } return out.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim(); }
 function suggestEnglish(zomi){ const lower=zomi.toLowerCase().trim(); if(ZOMI_EN_DICT[lower]) return ZOMI_EN_DICT[lower]; for(const z in ZOMI_EN_DICT){ if(lower.includes(z.toLowerCase())) return ZOMI_EN_DICT[z]+` (from "${z}")`; } return ""; }
-
 let idx=1; let done={}; let langs=[{code:'zom',name:'Zomi Tedim',owner:'Gin P Khup'}]; let currentLang=langs[0];
 let mediaRecorder=null; let chunks=[]; let audioBlob=null;
 const DATA_KEY='nqai_seed_progress_data'; const LAST_KEY='nqai_seed_last_index';
-
 function load(){ try{ const d=localStorage.getItem(DATA_KEY); if(d){ const o=JSON.parse(d); done=o.done||{}; const last=localStorage.getItem(LAST_KEY); if(last) idx=parseInt(last)||1; } }catch(e){} }
 function saveLocal(){ localStorage.setItem(DATA_KEY,JSON.stringify({done})); localStorage.setItem(LAST_KEY,String(idx)); }
 function renderGrid(){ const g=document.getElementById('grid'); g.innerHTML=''; for(let i=1;i<=1000;i++){ const b=document.createElement('div'); b.className='box'+(done[i]?' done':(i===idx?' current':'')); b.textContent=i; b.onclick=()=>{ idx=i; render(); }; g.appendChild(b); } document.getElementById('pbar').style.width=(Object.keys(done).length/10)+'%'; document.getElementById('ptext').textContent=Object.keys(done).length+' / 1000 done'; }
@@ -152,11 +182,81 @@ function startRec(){ navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{
 function stopRec(){ if(mediaRecorder){ mediaRecorder.stop(); document.getElementById('status').textContent='Recording stopped - Ready to save'; document.getElementById('stopBtn').disabled=true; } }
 function saveBox(){ const zomi=document.getElementById('zomi').value.trim(); const hint=document.getElementById('hint').value.trim(); if(!zomi){ alert('Type Zomi first!'); return; } done[idx]={zomi,hint,time:Date.now()}; saveLocal(); if(idx<1000) idx++; render(); document.getElementById('status').textContent='✅ Saved BOX '+(idx-1)+' - SOLE OWNER Gin P Khup'; }
 function exportCSV(){ let csv='BOX,English,Zomi,VoiceHint,Owner\n'; for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=`${i},"${eng.replace(/"/g,'""')}","${(d.zomi||'').replace(/"/g,'""')}","${(d.hint||'').replace(/"/g,'""')}","Gin P Khup"\n`; } const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv'; a.click(); }
-function exportZIP(){ exportCSV(); alert('CSV exported - ZIP needs server. SOLE OWNER Gin P Khup'); }
+function exportZIP(){ exportCSV(); exportZIP(); return; }
 function addLang(){ const name=prompt('Enter language name (e.g. Swahili):'); if(!name) return; const code=name.toLowerCase().replace(/[^a-z]/g,'').substring(0,4)+'_'+Math.floor(Math.random()*10000); langs.push({code,name,owner:'Gin P Khup'}); const div=document.getElementById('langs'); div.innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join(''); }
-
 load(); renderKB(); render();
 document.getElementById('langs').innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join('');
+</script>
+<script>
+async function exportZIP(){
+  try{
+    const statusEl = document.getElementById('status');
+    if(statusEl) statusEl.textContent = 'Creating ZIP - SOLE OWNER Gin P Khup...';
+    if(typeof JSZip === 'undefined'){
+      alert('Loading ZIP library... Please try again in 2 seconds. SOLE OWNER');
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      document.head.appendChild(s);
+      await new Promise(r=>setTimeout(r,2000));
+    }
+    const zip = new JSZip();
+    // Add CSV
+    const csvData = localStorage.getItem('nqai_seed_progress_data');
+    let csvContent = 'Box,English,Zomi,VoiceHint,Language,Owner\n';
+    if(csvData){
+      try{
+        const data = JSON.parse(csvData);
+        Object.entries(data).forEach(([box, info])=>{
+          csvContent += `${box},"${(info.eng||'').replace(/"/g,'""')}","${(info.zomi||'').replace(/"/g,'""')}","${(info.hint||'').replace(/"/g,'""')}","${info.lang||''}","Gin P Khup SOLE OWNER"\n`;
+        });
+      }catch(e){}
+    }
+    zip.file('SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv', csvContent);
+    zip.file('COPYRIGHT_SOLE_OWNER_Gin_P_Khup.txt', `© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved\nNqAI Seed1000 7000 Languages\nSmyrna, TN 37167, USA\nVersion: MASTER v2.4.1 STEALTH\n1000 REAL BASIC - NO Extra blessing\nWorkspace Clean\n`);
+    zip.file('README.txt', `NqAI Seed1000 - 7000 Languages - SOLE OWNER Gin P Khup\nhttps://nqai.llc/seed1000\n1000 real basic phrases\nCSV exported: ${new Date().toISOString()}\n`);
+    
+    // Try to add audios from IndexedDB if available
+    try{
+      const DB_PREFIX = 'NqAI_Seed1000_Audios_';
+      const lang = localStorage.getItem('nqai_7000_current_lang') || 'zom';
+      const dbName = DB_PREFIX + lang;
+      const db = await new Promise((res, rej)=>{
+        const req = indexedDB.open(dbName);
+        req.onsuccess = ()=>res(req.result);
+        req.onerror = ()=>rej(req.error);
+      });
+      if(db){
+        const tx = db.transaction('audios','readonly');
+        const store = tx.objectStore('audios');
+        const all = await new Promise((res,rej)=>{
+          const req = store.getAll();
+          req.onsuccess = ()=>res(req.result);
+          req.onerror = ()=>rej(req.error);
+        });
+        if(all && all.length>0){
+          all.forEach(item=>{
+            if(item.blob) zip.file(`audios/BOX_${item.box||item.id}_${lang}_Gin_P_Khup_SOLE_OWNER.webm`, item.blob);
+          });
+        }
+      }
+    }catch(e){ console.log('No audios or DB error', e); }
+    
+    const blob = await zip.generateAsync({type:'blob'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup_${new Date().toISOString().slice(0,10)}.zip`;
+    a.click();
+    URL.revokeObjectURL(url);
+    if(statusEl) statusEl.textContent = `ZIP exported - ${new Date().toLocaleString()} - SOLE OWNER Gin P Khup`;
+  }catch(err){
+    console.error(err);
+    // Fallback to CSV only
+    alert('ZIP created with CSV (audios may need server). SOLE OWNER Gin P Khup - Error: ' + err.message);
+    // Still try CSV export
+    if(typeof exportCSV === 'function') exportCSV();
+  }
+}
 </script>
 </body>
 </html>
