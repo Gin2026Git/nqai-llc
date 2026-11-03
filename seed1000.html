@@ -178,12 +178,115 @@ function renderGrid(){ const g=document.getElementById('grid'); g.innerHTML=''; 
 function renderKB(){ const kb=document.getElementById('kb'); kb.innerHTML=''; for(const cat in ZOMI_KEYS){ const div=document.createElement('div'); div.style.width='100%'; div.style.marginTop='6px'; const label=document.createElement('div'); label.textContent=cat.toUpperCase()+':'; label.style.fontSize='9px'; label.style.fontWeight='800'; label.style.color='#94a3b8'; div.appendChild(label); const row=document.createElement('div'); row.className='kb'; ZOMI_KEYS[cat].forEach(k=>{ const btn=document.createElement('button'); btn.textContent=k; btn.onclick=()=>{ const inp=document.getElementById('zomi'); const start=inp.selectionStart||inp.value.length; const end=inp.selectionEnd||inp.value.length; const v=inp.value; const nv=v.substring(0,start)+k+v.substring(end); inp.value=nv; onZomiInput(nv); inp.focus(); inp.setSelectionRange(start+k.length,start+k.length); }; row.appendChild(btn); }); div.appendChild(row); kb.appendChild(div); } }
 function render(){ const eng=BASE_1000[idx-1]||''; document.getElementById('eng').textContent=eng; document.getElementById('boxnum').textContent=idx; document.getElementById('cur').textContent=idx; document.getElementById('clang').textContent=currentLang.name+' ('+currentLang.code+')'; const isDone=!!done[idx]; document.getElementById('zomi').value=isDone?done[idx].zomi||'':''; document.getElementById('hint').value=isDone?done[idx].hint||'':''; document.getElementById('status').textContent=isDone?'🔒 BOX '+idx+' Done - Locked! - SOLE OWNER Gin P Khup':'FINAL BOX '+idx+' - '+currentLang.name+' - Available! - SOLE OWNER Gin P Khup - 1000/1000 REAL BASIC'; if(isDone){ document.getElementById('zomi').disabled=true; document.getElementById('hint').disabled=true; } else { document.getElementById('zomi').disabled=false; document.getElementById('hint').disabled=false; } renderGrid(); }
 function onZomiInput(v){ const plain=transliterateZomi(v); const eng=suggestEnglish(v); document.getElementById('zomi').value=v; if(v){ document.getElementById('autobox').style.display='block'; document.getElementById('at_typed').textContent=v; document.getElementById('at_plain').textContent=plain; document.getElementById('at_voice').textContent=document.getElementById('hint').value||plain; if(eng){ document.getElementById('at_eng').textContent='→ '+eng; document.getElementById('at_eng_wrap').style.display='block'; } else { document.getElementById('at_eng_wrap').style.display='none'; } if(!document.getElementById('hint').value) document.getElementById('hint').value=plain; } else { document.getElementById('autobox').style.display='none'; } }
-function startRec(){ navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{ mediaRecorder=new MediaRecorder(s); chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ audioBlob=new Blob(chunks,{type:'audio/webm'}); const url=URL.createObjectURL(audioBlob); const a=document.getElementById('audio'); a.src=url; a.style.display='block'; }; mediaRecorder.start(); document.getElementById('status').textContent='● RECORDING...'; document.getElementById('stopBtn').disabled=false; }).catch(()=>{ document.getElementById('status').textContent='Mic permission denied'; }); }
+function getSupportedMimeType(){
+  const types=[
+    'audio/webm;codecs=opus',
+    'audio/webm',
+    'audio/mp4',
+    'audio/aac',
+    'audio/wav',
+    'audio/ogg;codecs=opus'
+  ];
+  for(let t of types){
+    if(MediaRecorder.isTypeSupported(t)){
+      console.log('SOLE OWNER — Using mimeType:', t, '— Windows+Apple compatible');
+      return t;
+    }
+  }
+  console.log('SOLE OWNER — No mimeType supported, using default');
+  return '';
+}
+function startRec(){ 
+  const currentLang = (localStorage.getItem('nqai_7000_current_lang') || localStorage.getItem('nqai_current_lang') || 'zom').toLowerCase();
+  console.log('SOLE OWNER — StartRec — Lang:', currentLang, '— Windows+Apple');
+  navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{ 
+    const mimeType = getSupportedMimeType();
+    try{
+      mediaRecorder = mimeType ? new MediaRecorder(s, {mimeType}) : new MediaRecorder(s);
+    }catch(e){
+      console.log('MimeType failed, trying default', e);
+      mediaRecorder = new MediaRecorder(s);
+    }
+    chunks=[]; 
+    mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); }; 
+    mediaRecorder.onstop=()=>{ 
+      const finalType = mediaRecorder.mimeType || mimeType || 'audio/webm';
+      audioBlob=new Blob(chunks,{type:finalType}); 
+      console.log('SOLE OWNER — Blob created:', audioBlob.size, 'type:', finalType, 'chunks:', chunks.length);
+      const url=URL.createObjectURL(audioBlob); 
+      const a=document.getElementById('audio'); 
+      if(a){ a.src=url; a.style.display='block'; a.load(); }
+      // Save for Apple — base64 fallback
+      try{
+        const reader=new FileReader();
+        reader.onload=()=>{
+          const key='NqAI_Seed1000_Audios_'+currentLang+'_'+(typeof idx!=='undefined'?idx:'temp')+'_base64';
+          localStorage.setItem(key, reader.result);
+          console.log('Apple base64 saved:', key);
+        };
+        reader.readAsDataURL(audioBlob);
+      }catch(e){ console.log('Base64 save failed', e); }
+    }; 
+    mediaRecorder.start(100); 
+    document.getElementById('status').textContent='● RECORDING... ('+ (mimeType||'default') +') — SOLE OWNER — Windows+Apple'; 
+    document.getElementById('stopBtn').disabled=false; 
+  }).catch(err=>{
+    console.error('Mic error — Windows+Apple:', err);
+    if(err.name==='NotAllowedError'){
+      document.getElementById('status').textContent='Mic permission denied — Apple: System Settings → Privacy → Microphone → Chrome ON — Windows: Allow mic';
+    } else {
+      document.getElementById('status').textContent='Mic error: '+err.message+' — Try Chrome — SOLE OWNER';
+    }
+  }); 
+}
 function stopRec(){ if(mediaRecorder){ mediaRecorder.stop(); document.getElementById('status').textContent='Recording stopped - Ready to save'; document.getElementById('stopBtn').disabled=true; } }
 function saveBox(){ const zomi=document.getElementById('zomi').value.trim(); const hint=document.getElementById('hint').value.trim(); if(!zomi){ alert('Type Zomi first!'); return; } done[idx]={zomi,hint,time:Date.now()}; saveLocal(); if(idx<1000) idx++; render(); document.getElementById('status').textContent='✅ Saved BOX '+(idx-1)+' - SOLE OWNER Gin P Khup'; }
 function exportCSV(){ let csv='BOX,English,Zomi,VoiceHint,Owner\n'; for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=`${i},"${eng.replace(/"/g,'""')}","${(d.zomi||'').replace(/"/g,'""')}","${(d.hint||'').replace(/"/g,'""')}","Gin P Khup"\n`; } const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv'; a.click(); }
-function exportZIP(){ exportCSV(); exportZIP(); return; }
-function addLang(){ const name=prompt('Enter language name (e.g. Swahili):'); if(!name) return; const code=name.toLowerCase().replace(/[^a-z]/g,'').substring(0,4)+'_'+Math.floor(Math.random()*10000); langs.push({code,name,owner:'Gin P Khup'}); const div=document.getElementById('langs'); div.innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join(''); }
+// Fixed exportZIP — was self-recursing bug — now calls real async ZIP
+function exportZIPWrapper(){ if(typeof exportZIPAsync==='function') exportZIPAsync(); else exportCSV(); }
+function addLang(){ 
+  const name=prompt('Enter new language — e.g., Krio, Swahili, Zomi — SOLE OWNER Gin P Khup — 7000 Languages:'); 
+  if(!name) return; 
+  const cleanName=name.trim();
+  let code=cleanName.toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,10);
+  if(!code) code='lang'+Math.floor(Math.random()*1000);
+  // Special codes for known languages
+  const knownCodes={ 'krio':'kri', 'krio (sierra leone)':'kri', 'zomi':'zom', 'tedim':'zom', 'arabic':'ar', 'spanish':'es', 'burmese':'my', 'swahili':'sw' };
+  if(knownCodes[cleanName.toLowerCase()]) code=knownCodes[cleanName.toLowerCase()];
+  
+  console.log('SOLE OWNER — Adding language:', cleanName, 'code:', code);
+  
+  // Check exists
+  if(langs.some(l=>l.code===code)){
+    alert('Language '+cleanName+' ('+code+') already exists! Switching to it — SOLE OWNER');
+    localStorage.setItem('nqai_7000_current_lang', code);
+    localStorage.setItem('nqai_current_lang', code);
+    const div=document.getElementById('langs');
+    if(div) div.innerHTML=langs.map(l=>`<div style="padding:2px;${l.code===code?'background:#22c55e;color:#000;font-weight:900':''}">${l.name} (${l.code}) - Owner: ${l.owner} ${l.code===code?'← CURRENT':''}</div>`).join('');
+    document.getElementById('clang').textContent=cleanName+' ('+code+')';
+    return;
+  }
+  
+  langs.push({code,name:cleanName,owner:'Gin P Khup'}); 
+  localStorage.setItem('nqai_languages_7000', JSON.stringify(langs));
+  localStorage.setItem('nqai_7000_current_lang', code);
+  localStorage.setItem('nqai_current_lang', code);
+  localStorage.setItem('nqai_lang_name_'+code, cleanName);
+  
+  const div=document.getElementById('langs'); 
+  if(div) div.innerHTML=langs.map(l=>`<div style="padding:2px;${l.code===code?'background:#22c55e;color:#000;font-weight:900':''}">${l.name} (${l.code}) - Owner: ${l.owner} ${l.code===code?'← CURRENT':''}</div>`).join('');
+  
+  const clangEl=document.getElementById('clang');
+  if(clangEl) clangEl.textContent=cleanName+' ('+code+')';
+  
+  document.getElementById('status').textContent='✅ Added '+cleanName+' ('+code+') — Now you can work — Windows+Apple compatible — SOLE OWNER';
+  console.log('✅ Language added:', cleanName, code, '— Total:', langs.length);
+  
+  // Special message for Krio on Apple
+  if(code==='kri'){
+    alert('✅ Krio added! On Apple Mac: Use Chrome, not Safari! Apple Menu → System Settings → Privacy → Microphone → Chrome ON — Then Record will work! — SOLE OWNER');
+  }
+}
 load(); renderKB(); render();
 document.getElementById('langs').innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join('');
 </script>
