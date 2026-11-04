@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-  <meta name="googlebot" content="noindex, nofollow">
-  <style>
-  #stealthGate{position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#e2e8f0;font-family:system-ui;text-align:center;padding:20px}
-  #stealthGate input{background:#1e293b;border:2px solid #22c55e;color:#fff;padding:14px 20px;border-radius:999px;font-size:16px;width:280px;max-width:90vw;text-align:center;outline:none;margin-top:16px}
-  #stealthGate button{background:#22c55e;color:#000;border:none;padding:12px 28px;border-radius:999px;font-weight:900;font-size:14px;cursor:pointer;margin-top:12px}
-  #stealthGate .logo{font-size:48px;margin-bottom:12px}
-  #stealthGate h1{font-size:20px;font-weight:900;margin:0}
-  #stealthGate p{font-size:12px;color:#94a3b8;margin-top:8px;max-width:400px}
-  </style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NqAI Seed1000 - 7000 Languages - SOLE OWNER Gin P Khup - v2.4.0 MASTER</title>
+<title>NqAI Seed1000 - 7000 Languages - SOLE OWNER Gin P Khup - v2.4.5 SAFARI FIX MASTER</title>
 <meta name="description" content="1000 real basic phrases - Save Zomi & 7000 languages - SOLE OWNER Gin P Khup - Smyrna, TN - NqAI LLC">
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto; background:#0f172a; color:#e2e8f0}
@@ -38,47 +28,36 @@
 .box.current{background:#3b82f6;color:#fff;border:2px solid #fff;font-weight:900}
 .box.locked{background:#ef4444;color:#fff}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
-<div id="stealthGate">
-  <div class="logo">🔒</div>
-  <h1>NqAI Seed1000 — STEALTH BUILD</h1>
-  <p>SOLE OWNER Gin P Khup — Smyrna, TN — This project is in stealth while building 7000 languages. People may exploit the languages. Enter owner code to access.</p>
-  <input id="stealthInput" type="password" placeholder="Enter SOLE OWNER code" autofocus>
-  <button onclick="unlockStealth()">UNLOCK — SOLE OWNER ONLY</button>
-  <p style="margin-top:16px;font-size:10px;color:#64748b">Hint: NqAI + year or Owner Name — Workspace Clean — v2.4.0</p>
+<!-- NqAI LLC LANDING HEADER - SOLE OWNER Gin P Khup - Added v2.4.1 -->
+<div style="background:#020617;border-bottom:1px solid #1e293b;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:100">
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="https://nqai.llc/" style="text-decoration:none;display:flex;align-items:center;gap:8px">
+      <div style="background:#22c55e;color:#000;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px">Nq</div>
+      <div>
+        <div style="font-weight:900;color:#e2e8f0;font-size:14px;line-height:1">NqAI LLC</div>
+        <div style="font-size:9px;color:#94a3b8;line-height:1">Smyrna, TN • SOLE OWNER Gin P Khup</div>
+      </div>
+    </a>
+    <div style="height:24px;width:1px;background:#334155;margin:0 4px"></div>
+    <div style="font-size:10px;color:#22c55e;font-weight:800;background:#052e16;padding:4px 8px;border-radius:999px;border:1px solid #15803d">🌍 7000 Languages Project</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <a href="https://nqai.llc/" style="color:#94a3b8;text-decoration:none;font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid #334155;background:#1e293b">🏠 Home</a>
+    <a href="https://nqai.llc/about.html" style="color:#94a3b8;text-decoration:none;font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid #334155;background:#1e293b">ℹ️ About</a>
+    <a href="https://nqai.llc/interpreter.html" style="color:#94a3b8;text-decoration:none;font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid #334155;background:#1e293b">🗣️ Interpreter</a>
+    <a href="https://nqai.llc/seed1000" style="color:#000;text-decoration:none;font-size:11px;font-weight:900;padding:6px 12px;border-radius:999px;background:#22c55e;border:1px solid #22c55e">🌱 Seed1000 LIVE v2.4.0</a>
+    <a href="mailto:hello@nqai.llc" style="color:#e2e8f0;text-decoration:none;font-size:11px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid #3b82f6;background:#1e3a5f">✉️ hello@nqai.llc</a>
+  </div>
 </div>
-<script>
-(function(){
-  const KEY='nqai_stealth_unlocked_v2_4';
-  function isUnlocked(){ return localStorage.getItem(KEY)==='true'; }
-  function hide(){ const el=document.getElementById('stealthGate'); if(el) el.style.display='none'; }
-  function show(){ const el=document.getElementById('stealthGate'); if(el) el.style.display='flex'; }
-  window.unlockStealth=function(){
-    const val=document.getElementById('stealthInput').value.trim();
-    const codes=['NqAI2026','nqai2026','Gin P Khup','Gin P Khup SOLE OWNER','ginpkhup','SOLEOWNER','NqAI-sole-2026','NqAI','7000'];
-    if(codes.includes(val) || val.toLowerCase().includes('gin') || val.toLowerCase().includes('nqai')){
-      localStorage.setItem(KEY,'true');
-      hide();
-    } else {
-      alert('Wrong code — SOLE OWNER only — Hint: NqAI2026 or your name');
-      document.getElementById('stealthInput').value='';
-    }
-  };
-  document.addEventListener('DOMContentLoaded',()=>{
-    if(isUnlocked()) hide();
-    const inp=document.getElementById('stealthInput');
-    if(inp) inp.addEventListener('keydown',e=>{ if(e.key==='Enter') unlockStealth(); });
-  });
-})();
-</script>
+<!-- END LANDING HEADER -->
 <div class="header">
 <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
 <div>
-<div style="font-weight:900;font-size:16px">🌍 SEED1000 FINAL 1000/1000 REAL BASIC - SOLE OWNER Gin P Khup - v2.4.0 MASTER</div>
+<div style="font-weight:900;font-size:16px">🌍 SEED1000 FINAL 1000/1000 REAL BASIC - SOLE OWNER Gin P Khup - v2.4.5 SAFARI FIX MASTER</div>
 <div style="font-size:10px;color:#94a3b8;margin-top:2px">© 2026 NqAI LLC - SOLE OWNER Gin P Khup - Smyrna, TN, USA - 1000 REAL - Auto-translit ka pa → My father - NqAI Seed1000 7000 Languages - Workspace Clean - CLEAN - NO Extra blessing</div>
-<div style="margin-top:6px"><span class="badge">MASTER v2.4.0</span><span class="badge2">1000 REAL</span><span class="badge3">AUTO-TRANSLIT</span><span class="badge">SOLE OWNER Gin P Khup</span><span class="badge2">7000 Languages</span></div>
+<div style="margin-top:6px"><span class="badge">MASTER v2.4.5 SAFARI FIX</span><span class="badge2">1000 REAL</span><span class="badge3">AUTO-TRANSLIT</span><span class="badge">SOLE OWNER Gin P Khup</span><span class="badge2">7000 Languages</span></div>
 </div>
 <div style="display:flex;gap:6px;flex-wrap:wrap">
 <button class="btn" onclick="exportCSV()">📥 CSV</button>
@@ -140,7 +119,7 @@
 </div>
 </div>
 <div class="card" style="margin:12px;text-align:center;font-size:10px;color:#94a3b8">
-© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved - NqAI Seed1000 7000 Languages - Smyrna, TN, USA - MASTER v2.4.0 - 1000/1000 REAL BASIC - ZERO Extra blessing - Workspace Clean - Version: SEED1000_FINAL_1000/1000_REAL_BASIC_v2.4.0_MASTER_AUTO_TRANSLIT_SOLE_OWNER_Gin_P_Khup - Route: /seed1000 - https://nqai.llc/seed1000
+© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved - NqAI Seed1000 7000 Languages - Smyrna, TN, USA - MASTER v2.4.5 SAFARI FIX - 1000/1000 REAL BASIC - ZERO Extra blessing - Workspace Clean - Version: SEED1000_FINAL_1000/1000_REAL_BASIC_v2.4.0_MASTER_AUTO_TRANSLIT_SOLE_OWNER_Gin_P_Khup - Route: /seed1000 - https://nqai.llc/seed1000
 </div>
 <script>
 // BASE_1000 - CLEAN - NO Extra blessing
@@ -178,188 +157,240 @@ function renderGrid(){ const g=document.getElementById('grid'); g.innerHTML=''; 
 function renderKB(){ const kb=document.getElementById('kb'); kb.innerHTML=''; for(const cat in ZOMI_KEYS){ const div=document.createElement('div'); div.style.width='100%'; div.style.marginTop='6px'; const label=document.createElement('div'); label.textContent=cat.toUpperCase()+':'; label.style.fontSize='9px'; label.style.fontWeight='800'; label.style.color='#94a3b8'; div.appendChild(label); const row=document.createElement('div'); row.className='kb'; ZOMI_KEYS[cat].forEach(k=>{ const btn=document.createElement('button'); btn.textContent=k; btn.onclick=()=>{ const inp=document.getElementById('zomi'); const start=inp.selectionStart||inp.value.length; const end=inp.selectionEnd||inp.value.length; const v=inp.value; const nv=v.substring(0,start)+k+v.substring(end); inp.value=nv; onZomiInput(nv); inp.focus(); inp.setSelectionRange(start+k.length,start+k.length); }; row.appendChild(btn); }); div.appendChild(row); kb.appendChild(div); } }
 function render(){ const eng=BASE_1000[idx-1]||''; document.getElementById('eng').textContent=eng; document.getElementById('boxnum').textContent=idx; document.getElementById('cur').textContent=idx; document.getElementById('clang').textContent=currentLang.name+' ('+currentLang.code+')'; const isDone=!!done[idx]; document.getElementById('zomi').value=isDone?done[idx].zomi||'':''; document.getElementById('hint').value=isDone?done[idx].hint||'':''; document.getElementById('status').textContent=isDone?'🔒 BOX '+idx+' Done - Locked! - SOLE OWNER Gin P Khup':'FINAL BOX '+idx+' - '+currentLang.name+' - Available! - SOLE OWNER Gin P Khup - 1000/1000 REAL BASIC'; if(isDone){ document.getElementById('zomi').disabled=true; document.getElementById('hint').disabled=true; } else { document.getElementById('zomi').disabled=false; document.getElementById('hint').disabled=false; } renderGrid(); }
 function onZomiInput(v){ const plain=transliterateZomi(v); const eng=suggestEnglish(v); document.getElementById('zomi').value=v; if(v){ document.getElementById('autobox').style.display='block'; document.getElementById('at_typed').textContent=v; document.getElementById('at_plain').textContent=plain; document.getElementById('at_voice').textContent=document.getElementById('hint').value||plain; if(eng){ document.getElementById('at_eng').textContent='→ '+eng; document.getElementById('at_eng_wrap').style.display='block'; } else { document.getElementById('at_eng_wrap').style.display='none'; } if(!document.getElementById('hint').value) document.getElementById('hint').value=plain; } else { document.getElementById('autobox').style.display='none'; } }
-function getSupportedMimeType(){
-  const types=[
-    'audio/webm;codecs=opus',
-    'audio/webm',
-    'audio/mp4',
-    'audio/aac',
-    'audio/wav',
-    'audio/ogg;codecs=opus'
-  ];
+function startRec(){ navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{ mediaRecorder=new MediaRecorder(s); chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ audioBlob=new Blob(chunks,{type:'audio/webm'}); const url=URL.createObjectURL(audioBlob); const a=document.getElementById('audio'); a.src=url; a.style.display='block'; }; mediaRecorder.start(); document.getElementById('status').textContent='● RECORDING...'; document.getElementById('stopBtn').disabled=false; }).catch(()=>{ document.getElementById('status').textContent='Mic permission denied'; }); }
+function stopRec(){ if(mediaRecorder){ mediaRecorder.stop(); document.getElementById('status').textContent='Recording stopped - Ready to save'; document.getElementById('stopBtn').disabled=true; } }
+// ===== SAFARI FIX v2.4.5 — Fixes voice indicator shooting to end without recording =====
+let audioContext=null, analyser=null, dataArray=null, animationId=null, localStream=null;
+let mediaRecorder=null, chunks=[], audioBlob=null;
+function getSupportedMimeTypeSafari(){
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome'));
+  const types = isSafari ? ['audio/mp4','audio/aac','audio/wav','audio/x-m4a','audio/webm'] : ['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/aac'];
+  console.log('Browser:', isSafari ? 'SAFARI' : 'CHROME', 'UA:', navigator.userAgent.slice(0,80));
   for(let t of types){
-    if(MediaRecorder.isTypeSupported(t)){
-      console.log('SOLE OWNER — Using mimeType:', t, '— Windows+Apple compatible');
-      return t;
-    }
-  }
-  console.log('SOLE OWNER — No mimeType supported, using default');
-  return '';
-}
-function startRec(){ 
-  const currentLang = (localStorage.getItem('nqai_7000_current_lang') || localStorage.getItem('nqai_current_lang') || 'zom').toLowerCase();
-  console.log('SOLE OWNER — StartRec — Lang:', currentLang, '— Windows+Apple');
-  navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{ 
-    const mimeType = getSupportedMimeType();
     try{
-      mediaRecorder = mimeType ? new MediaRecorder(s, {mimeType}) : new MediaRecorder(s);
-    }catch(e){
-      console.log('MimeType failed, trying default', e);
-      mediaRecorder = new MediaRecorder(s);
+      if(typeof MediaRecorder!=='undefined' && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)){
+        console.log('Using mimeType:', t, '—', isSafari?'SAFARI FIX':'CHROME');
+        return t;
+      }
+    }catch(e){}
+  }
+  return isSafari ? 'audio/mp4' : '';
+}
+function startRec(){
+  const currentLang = (localStorage.getItem('nqai_7000_current_lang') || localStorage.getItem('nqai_current_lang') || 'zom').toLowerCase();
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome'));
+  console.log('SOLE OWNER — StartRec SAFARI FIX v2.4.5 — Safari:', isSafari, 'Lang:', currentLang);
+  
+  const statusEl = document.getElementById('status');
+  const pbar = document.getElementById('pbar');
+  const audioEl = document.getElementById('audio');
+  if(pbar){ pbar.style.width='0%'; pbar.style.transition='none'; pbar.style.background='#334155'; }
+  if(audioEl){ audioEl.style.display='none'; audioEl.src=''; }
+  if(statusEl) statusEl.textContent = (isSafari ? 'Safari: Requesting mic...' : 'Requesting mic...') + ' — SOLE OWNER v2.4.5';
+  
+  if(animationId){ cancelAnimationFrame(animationId); animationId=null; }
+  if(audioContext && audioContext.state!=='closed'){ try{ audioContext.close(); }catch(e){} audioContext=null; }
+  
+  const audioConstraints = isSafari ? {echoCancellation:false, noiseSuppression:false, autoGainControl:false} : {echoCancellation:true, noiseSuppression:true, autoGainControl:true, sampleRate:48000, channelCount:1};
+  
+  navigator.mediaDevices.getUserMedia({audio:audioConstraints}).then(s=>{
+    localStream=s;
+    console.log('Mic stream — Safari:', isSafari, 'Tracks:', s.getAudioTracks().length);
+    
+    const track = s.getAudioTracks()[0];
+    if(!track || track.readyState!=='live'){
+      if(statusEl) statusEl.textContent='❌ Mic not live — Safari: Safari → Settings → Websites → Microphone → Allow nqai.llc — SOLE OWNER';
+      return;
     }
-    chunks=[]; 
-    mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); }; 
-    mediaRecorder.onstop=()=>{ 
-      const finalType = mediaRecorder.mimeType || mimeType || 'audio/webm';
-      audioBlob=new Blob(chunks,{type:finalType}); 
-      console.log('SOLE OWNER — Blob created:', audioBlob.size, 'type:', finalType, 'chunks:', chunks.length);
-      const url=URL.createObjectURL(audioBlob); 
-      const a=document.getElementById('audio'); 
-      if(a){ a.src=url; a.style.display='block'; a.load(); }
-      // Save for Apple — base64 fallback
+    
+    try{
+      const AC = window.AudioContext || window.webkitAudioContext;
+      audioContext = new AC();
+      if(audioContext.state==='suspended'){ audioContext.resume().then(()=>console.log('AudioContext resumed')); }
+      const source = audioContext.createMediaStreamSource(s);
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = isSafari ? 512 : 256;
+      analyser.smoothingTimeConstant=0.8;
+      source.connect(analyser);
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+    }catch(e){ console.log('AudioContext failed', e); analyser=null; }
+    
+    if(typeof MediaRecorder==='undefined'){
+      if(statusEl) statusEl.textContent='❌ MediaRecorder not supported — Safari old — Enable Develop → Experimental → MediaRecorder ON — Or use Chrome — SOLE OWNER';
+      return;
+    }
+    
+    const mimeType = getSupportedMimeTypeSafari();
+    try{
+      if(mimeType){
+        try{ mediaRecorder = new MediaRecorder(s, {mimeType}); }
+        catch(e){ console.log('Failed with mimeType', mimeType, 'trying default'); mediaRecorder = new MediaRecorder(s); }
+      }else{ mediaRecorder = new MediaRecorder(s); }
+      console.log('MediaRecorder created — type:', mediaRecorder.mimeType);
+    }catch(e){
+      console.error('MediaRecorder creation failed', e);
+      if(statusEl) statusEl.textContent='❌ MediaRecorder failed: '+e.message+' — Use Chrome — SOLE OWNER';
+      return;
+    }
+    
+    chunks=[];
+    mediaRecorder.ondataavailable=e=>{
+      console.log('ondataavailable — Safari:', isSafari, 'size:', e.data.size);
+      if(e.data && e.data.size>0) chunks.push(e.data);
+    };
+    
+    mediaRecorder.onstart=()=>{
+      console.log('MediaRecorder STARTED — v2.4.5');
+      if(statusEl) statusEl.textContent='● RECORDING... ('+(mediaRecorder.mimeType||mimeType||'default')+') — Safari — Speak now — v2.4.5';
+      const stopBtn=document.getElementById('stopBtn');
+      if(stopBtn) stopBtn.disabled=false;
+      
+      if(analyser && pbar){
+        function updateIndicator(){
+          if(!analyser || !mediaRecorder || mediaRecorder.state!=='recording') return;
+          try{
+            analyser.getByteFrequencyData(dataArray);
+            let sum=0; for(let i=0;i<dataArray.length;i++) sum+=dataArray[i];
+            const avg=sum/dataArray.length;
+            const scale=isSafari?2.5:1.5;
+            const percent=Math.min(95, (avg/128)*100*scale);
+            if(pbar){
+              const cur=parseFloat(pbar.style.width)||0;
+              const target=percent>5?percent:cur*0.95;
+              pbar.style.width=target+'%';
+              pbar.style.background=target>10?'#22c55e':'#475569';
+              pbar.style.transition='width 0.15s ease-out';
+            }
+          }catch(e){}
+          animationId=requestAnimationFrame(updateIndicator);
+        }
+        updateIndicator();
+      }else if(pbar){
+        pbar.style.transition='width 0.2s ease-out';
+        let w=5; pbar.style.width='5%';
+        const interval=setInterval(()=>{
+          if(!mediaRecorder || mediaRecorder.state!=='recording'){ clearInterval(interval); return; }
+          w=Math.min(90,w+Math.random()*3+1); pbar.style.width=w+'%'; pbar.style.background='#22c55e';
+        },300);
+        mediaRecorder._progressInterval=interval;
+      }
+    };
+    
+    mediaRecorder.onstop=()=>{
+      console.log('STOPPED — chunks:', chunks.length);
+      if(animationId){ cancelAnimationFrame(animationId); animationId=null; }
+      if(mediaRecorder._progressInterval) clearInterval(mediaRecorder._progressInterval);
+      
+      if(chunks.length===0){
+        console.error('No chunks — indicator shot to end bug');
+        if(statusEl) statusEl.textContent='❌ 0 bytes — Safari: Settings → Websites → Microphone → Allow nqai.llc + System Settings → Privacy → Microphone → Safari ON — SOLE OWNER';
+        if(pbar){ pbar.style.width='0%'; pbar.style.background='#ef4444'; }
+        if(localStream) localStream.getTracks().forEach(t=>t.stop());
+        return;
+      }
+      
+      const finalType=mediaRecorder.mimeType||mimeType||(isSafari?'audio/mp4':'audio/webm');
+      audioBlob=new Blob(chunks,{type:finalType});
+      console.log('Blob:', audioBlob.size, finalType);
+      
+      if(audioBlob.size<100){
+        if(statusEl) statusEl.textContent='❌ Too short — '+audioBlob.size+' bytes — Speak longer — SOLE OWNER';
+        return;
+      }
+      
+      const url=URL.createObjectURL(audioBlob);
+      const a=document.getElementById('audio');
+      if(a){ a.src=url; a.style.display='block'; a.controls=true; a.load(); }
+      
+      if(pbar){ pbar.style.width='100%'; pbar.style.background='#22c55e'; pbar.style.transition='width 0.3s'; }
+      
       try{
         const reader=new FileReader();
         reader.onload=()=>{
           const key='NqAI_Seed1000_Audios_'+currentLang+'_'+(typeof idx!=='undefined'?idx:'temp')+'_base64';
-          localStorage.setItem(key, reader.result);
-          console.log('Apple base64 saved:', key);
+          try{ localStorage.setItem(key, reader.result); }catch(e){}
         };
         reader.readAsDataURL(audioBlob);
-      }catch(e){ console.log('Base64 save failed', e); }
-    }; 
-    mediaRecorder.start(100); 
-    document.getElementById('status').textContent='● RECORDING... ('+ (mimeType||'default') +') — SOLE OWNER — Windows+Apple'; 
-    document.getElementById('stopBtn').disabled=false; 
+      }catch(e){}
+      
+      if(statusEl) statusEl.textContent='✅ Stopped — '+(audioBlob.size/1024).toFixed(1)+'KB — '+finalType+' — Ready — SOLE OWNER v2.4.5 Safari:'+isSafari;
+      const stopBtn=document.getElementById('stopBtn');
+      if(stopBtn) stopBtn.disabled=true;
+      
+      setTimeout(()=>{
+        if(localStream) localStream.getTracks().forEach(t=>t.stop());
+        if(audioContext && audioContext.state!=='closed'){ try{ audioContext.close(); }catch(e){} audioContext=null; }
+      },500);
+    };
+    
+    mediaRecorder.onerror=(e)=>{ console.error('Recorder error', e); if(statusEl) statusEl.textContent='❌ Recorder error: '+(e.error?e.error.name:e.message)+' — Try Chrome — SOLE OWNER'; };
+    
+    try{ mediaRecorder.start(); console.log('start() WITHOUT timeslice — FIXES jump-to-end'); }
+    catch(e){ try{ mediaRecorder.start(1000); }catch(e2){ console.error('start failed', e2); } }
+    
   }).catch(err=>{
-    console.error('Mic error — Windows+Apple:', err);
+    console.error('Mic error v2.4.5', err);
+    const statusEl=document.getElementById('status');
+    const pbar=document.getElementById('pbar');
+    if(pbar){ pbar.style.width='0%'; pbar.style.background='#ef4444'; }
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     if(err.name==='NotAllowedError'){
-      document.getElementById('status').textContent='Mic permission denied — Apple: System Settings → Privacy → Microphone → Chrome ON — Windows: Allow mic';
-    } else {
-      document.getElementById('status').textContent='Mic error: '+err.message+' — Try Chrome — SOLE OWNER';
+      if(isSafari){
+        if(statusEl) statusEl.textContent='❌ Mic denied — Safari: Safari → Settings → Websites → Microphone → nqai.llc → Allow + System Settings → Privacy → Microphone → Safari ON — SOLE OWNER';
+      }else{
+        if(statusEl) statusEl.textContent='❌ Mic denied — Apple: System Settings → Privacy → Microphone → Chrome ON — SOLE OWNER';
+      }
+    }else if(err.name==='NotFoundError'){
+      if(statusEl) statusEl.textContent='❌ No mic — Connect mic — SOLE OWNER';
+    }else{
+      if(statusEl) statusEl.textContent='❌ Mic error: '+err.message+' — Try Chrome — SOLE OWNER';
     }
-  }); 
+  });
 }
-function stopRec(){ if(mediaRecorder){ mediaRecorder.stop(); document.getElementById('status').textContent='Recording stopped - Ready to save'; document.getElementById('stopBtn').disabled=true; } }
-function saveBox(){ const zomi=document.getElementById('zomi').value.trim(); const hint=document.getElementById('hint').value.trim(); if(!zomi){ alert('Type Zomi first!'); return; } done[idx]={zomi,hint,time:Date.now()}; saveLocal(); if(idx<1000) idx++; render(); document.getElementById('status').textContent='✅ Saved BOX '+(idx-1)+' - SOLE OWNER Gin P Khup'; }
-function exportCSV(){ let csv='BOX,English,Zomi,VoiceHint,Owner\n'; for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=`${i},"${eng.replace(/"/g,'""')}","${(d.zomi||'').replace(/"/g,'""')}","${(d.hint||'').replace(/"/g,'""')}","Gin P Khup"\n`; } const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv'; a.click(); }
-// Fixed exportZIP — was self-recursing bug — now calls real async ZIP
-function exportZIPWrapper(){ if(typeof exportZIPAsync==='function') exportZIPAsync(); else exportCSV(); }
+function stopRec(){
+  if(mediaRecorder && mediaRecorder.state==='recording'){
+    console.log('Stopping...');
+    try{ mediaRecorder.stop(); document.getElementById('status').textContent='Processing... Safari... — SOLE OWNER'; }
+    catch(e){ console.error('Stop error', e); }
+    const stopBtn=document.getElementById('stopBtn');
+    if(stopBtn) stopBtn.disabled=true;
+  }else{
+    console.log('Not recording');
+    const statusEl=document.getElementById('status');
+    if(statusEl) statusEl.textContent='Not recording — Click RECORD — SOLE OWNER';
+  }
+}
+// ===== END SAFARI FIX v2.4.5 =====
 function addLang(){ 
   const name=prompt('Enter new language — e.g., Krio, Swahili, Zomi — SOLE OWNER Gin P Khup — 7000 Languages:'); 
   if(!name) return; 
   const cleanName=name.trim();
   let code=cleanName.toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,10);
   if(!code) code='lang'+Math.floor(Math.random()*1000);
-  // Special codes for known languages
-  const knownCodes={ 'krio':'kri', 'krio (sierra leone)':'kri', 'zomi':'zom', 'tedim':'zom', 'arabic':'ar', 'spanish':'es', 'burmese':'my', 'swahili':'sw' };
+  const knownCodes={ 'krio':'kri', 'zomi':'zom', 'tedim':'zom', 'arabic':'ar', 'spanish':'es', 'burmese':'my', 'swahili':'sw' };
   if(knownCodes[cleanName.toLowerCase()]) code=knownCodes[cleanName.toLowerCase()];
-  
-  console.log('SOLE OWNER — Adding language:', cleanName, 'code:', code);
-  
-  // Check exists
-  if(langs.some(l=>l.code===code)){
-    alert('Language '+cleanName+' ('+code+') already exists! Switching to it — SOLE OWNER');
-    localStorage.setItem('nqai_7000_current_lang', code);
-    localStorage.setItem('nqai_current_lang', code);
-    const div=document.getElementById('langs');
-    if(div) div.innerHTML=langs.map(l=>`<div style="padding:2px;${l.code===code?'background:#22c55e;color:#000;font-weight:900':''}">${l.name} (${l.code}) - Owner: ${l.owner} ${l.code===code?'← CURRENT':''}</div>`).join('');
-    document.getElementById('clang').textContent=cleanName+' ('+code+')';
-    return;
-  }
-  
-  langs.push({code,name:cleanName,owner:'Gin P Khup'}); 
-  localStorage.setItem('nqai_languages_7000', JSON.stringify(langs));
-  localStorage.setItem('nqai_7000_current_lang', code);
-  localStorage.setItem('nqai_current_lang', code);
-  localStorage.setItem('nqai_lang_name_'+code, cleanName);
-  
-  const div=document.getElementById('langs'); 
-  if(div) div.innerHTML=langs.map(l=>`<div style="padding:2px;${l.code===code?'background:#22c55e;color:#000;font-weight:900':''}">${l.name} (${l.code}) - Owner: ${l.owner} ${l.code===code?'← CURRENT':''}</div>`).join('');
-  
-  const clangEl=document.getElementById('clang');
-  if(clangEl) clangEl.textContent=cleanName+' ('+code+')';
-  
-  document.getElementById('status').textContent='✅ Added '+cleanName+' ('+code+') — Now you can work — Windows+Apple compatible — SOLE OWNER';
-  console.log('✅ Language added:', cleanName, code, '— Total:', langs.length);
-  
-  // Special message for Krio on Apple
-  if(code==='kri'){
-    alert('✅ Krio added! On Apple Mac: Use Chrome, not Safari! Apple Menu → System Settings → Privacy → Microphone → Chrome ON — Then Record will work! — SOLE OWNER');
-  }
-}
+  console.log('Adding language:', cleanName, code);
+  if(langs.some(l=>l.code===code)){ alert('Language '+cleanName+' ('+code+') exists! Switching — SOLE OWNER'); localStorage.setItem('nqai_7000_current_lang', code); localStorage.setItem('nqai_current_lang', code); document.getElementById('clang').textContent=cleanName+' ('+code+')'; return; }
+  langs.push({code,name:cleanName,owner:'Gin P Khup'}); localStorage.setItem('nqai_languages_7000', JSON.stringify(langs)); localStorage.setItem('nqai_7000_current_lang', code); localStorage.setItem('nqai_current_lang', code); const div=document.getElementById('langs'); if(div) div.innerHTML=langs.map(l=>`<div style="padding:2px;${l.code===code?'background:#22c55e;color:#000;font-weight:900':''}">${l.name} (${l.code}) - Owner: ${l.owner} ${l.code===code?'← CURRENT':''}</div>`).join(''); const clangEl=document.getElementById('clang'); if(clangEl) clangEl.textContent=cleanName+' ('+code+')'; document.getElementById('status').textContent='✅ Added '+cleanName+' ('+code+') — SOLE OWNER'; if(code==='kri'){ alert('✅ Krio added! Safari: Safari → Settings → Websites → Microphone → Allow nqai.llc — Then Record! — SOLE OWNER'); } }
+function saveBox(){ const zomi=document.getElementById('zomi').value.trim(); const hint=document.getElementById('hint').value.trim(); if(!zomi){ alert('Type Zomi first!'); return; } done[idx]={zomi,hint,time:Date.now()}; saveLocal(); if(idx<1000) idx++; render(); document.getElementById('status').textContent='✅ Saved BOX '+(idx-1)+' - SOLE OWNER Gin P Khup'; }
+function exportCSV(){ let csv='BOX,English,Zomi,VoiceHint,Owner\n'; for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=`${i},"${eng.replace(/"/g,'""')}","${(d.zomi||'').replace(/"/g,'""')}","${(d.hint||'').replace(/"/g,'""')}","Gin P Khup"\n`; } const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv'; a.click(); }
+function exportZIP(){ exportCSV(); alert('CSV exported - ZIP needs server. SOLE OWNER Gin P Khup'); }
+function addLang(){ const name=prompt('Enter language name (e.g. Swahili):'); if(!name) return; const code=name.toLowerCase().replace(/[^a-z]/g,'').substring(0,4)+'_'+Math.floor(Math.random()*10000); langs.push({code,name,owner:'Gin P Khup'}); const div=document.getElementById('langs'); div.innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join(''); }
 load(); renderKB(); render();
 document.getElementById('langs').innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join('');
 </script>
-<script>
-async function exportZIP(){
-  try{
-    const statusEl = document.getElementById('status');
-    if(statusEl) statusEl.textContent = 'Creating ZIP - SOLE OWNER Gin P Khup...';
-    if(typeof JSZip === 'undefined'){
-      alert('Loading ZIP library... Please try again in 2 seconds. SOLE OWNER');
-      const s = document.createElement('script');
-      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-      document.head.appendChild(s);
-      await new Promise(r=>setTimeout(r,2000));
-    }
-    const zip = new JSZip();
-    // Add CSV
-    const csvData = localStorage.getItem('nqai_seed_progress_data');
-    let csvContent = 'Box,English,Zomi,VoiceHint,Language,Owner\n';
-    if(csvData){
-      try{
-        const data = JSON.parse(csvData);
-        Object.entries(data).forEach(([box, info])=>{
-          csvContent += `${box},"${(info.eng||'').replace(/"/g,'""')}","${(info.zomi||'').replace(/"/g,'""')}","${(info.hint||'').replace(/"/g,'""')}","${info.lang||''}","Gin P Khup SOLE OWNER"\n`;
-        });
-      }catch(e){}
-    }
-    zip.file('SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv', csvContent);
-    zip.file('COPYRIGHT_SOLE_OWNER_Gin_P_Khup.txt', `© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved\nNqAI Seed1000 7000 Languages\nSmyrna, TN 37167, USA\nVersion: MASTER v2.4.1 STEALTH\n1000 REAL BASIC - NO Extra blessing\nWorkspace Clean\n`);
-    zip.file('README.txt', `NqAI Seed1000 - 7000 Languages - SOLE OWNER Gin P Khup\nhttps://nqai.llc/seed1000\n1000 real basic phrases\nCSV exported: ${new Date().toISOString()}\n`);
-    
-    // Try to add audios from IndexedDB if available
-    try{
-      const DB_PREFIX = 'NqAI_Seed1000_Audios_';
-      const lang = localStorage.getItem('nqai_7000_current_lang') || 'zom';
-      const dbName = DB_PREFIX + lang;
-      const db = await new Promise((res, rej)=>{
-        const req = indexedDB.open(dbName);
-        req.onsuccess = ()=>res(req.result);
-        req.onerror = ()=>rej(req.error);
-      });
-      if(db){
-        const tx = db.transaction('audios','readonly');
-        const store = tx.objectStore('audios');
-        const all = await new Promise((res,rej)=>{
-          const req = store.getAll();
-          req.onsuccess = ()=>res(req.result);
-          req.onerror = ()=>rej(req.error);
-        });
-        if(all && all.length>0){
-          all.forEach(item=>{
-            if(item.blob) zip.file(`audios/BOX_${item.box||item.id}_${lang}_Gin_P_Khup_SOLE_OWNER.webm`, item.blob);
-          });
-        }
-      }
-    }catch(e){ console.log('No audios or DB error', e); }
-    
-    const blob = await zip.generateAsync({type:'blob'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup_${new Date().toISOString().slice(0,10)}.zip`;
-    a.click();
-    URL.revokeObjectURL(url);
-    if(statusEl) statusEl.textContent = `ZIP exported - ${new Date().toLocaleString()} - SOLE OWNER Gin P Khup`;
-  }catch(err){
-    console.error(err);
-    // Fallback to CSV only
-    alert('ZIP created with CSV (audios may need server). SOLE OWNER Gin P Khup - Error: ' + err.message);
-    // Still try CSV export
-    if(typeof exportCSV === 'function') exportCSV();
-  }
-}
-</script>
+<div style="background:#020617;border-top:1px solid #1e293b;padding:16px;margin-top:20px;text-align:center">
+  <div style="font-weight:900;color:#e2e8f0;font-size:12px">© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved</div>
+  <div style="font-size:10px;color:#94a3b8;margin-top:4px">NqAI Seed1000 - 7000 Languages - Smyrna, TN 37167, USA - hello@nqai.llc - Websites: nqai.llc, www.nqai.llc - MASTER v2.4.1 LANDING HEADER - 1000/1000 REAL BASIC - NO Extra blessing - Workspace Clean</div>
+  <div style="margin-top:8px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap">
+    <a href="https://nqai.llc/" style="color:#22c55e;text-decoration:none;font-size:10px">nqai.llc</a>
+    <span style="color:#334155">•</span>
+    <a href="https://nqai.llc/privacy.html" style="color:#94a3b8;text-decoration:none;font-size:10px">Privacy</a>
+    <span style="color:#334155">•</span>
+    <a href="https://nqai.llc/terms.html" style="color:#94a3b8;text-decoration:none;font-size:10px">Terms</a>
+    <span style="color:#334155">•</span>
+    <span style="color:#94a3b8;font-size:10px">v2.4.1 LANDING HEADER</span>
+  </div>
+</div>
 </body>
 </html>
