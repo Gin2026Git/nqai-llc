@@ -1,765 +1,149 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<meta name="robots" content="noindex, nofollow, noarchive">
-<meta name="googlebot" content="noindex, nofollow">
-<meta http-equiv="X-Robots-Tag" content="noindex, nofollow, noarchive">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<title>NqAI Seed1000 v2.5.1 - ALL BROWSERS - ALL LANGUAGES READY - 7000 FRAMEWORK - SOLE OWNER Gin P Khup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NqAI Seed1000 - 7000 Languages - SOLE OWNER Gin P Khup - v2.4.0 MASTER</title>
+<meta name="description" content="1000 real basic phrases - Save Zomi & 7000 languages - SOLE OWNER Gin P Khup - Smyrna, TN - NqAI LLC">
 <style>
-*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#0f172a;color:#e2e8f0;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
-.header{background:#1e293b;border-bottom:1px solid #334155;padding:12px;position:sticky;top:0;z-index:20}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto; background:#0f172a; color:#e2e8f0}
+.header{background:#1e293b; border-bottom:1px solid #334155; padding:12px; position:sticky; top:0; z-index:10}
 .badge{background:#22c55e;color:#000;font-weight:900;padding:4px 10px;border-radius:999px;font-size:10px;display:inline-block;margin:2px}
 .badge2{background:#3b82f6;color:#fff;font-weight:900;padding:4px 10px;border-radius:999px;font-size:10px}
 .badge3{background:#f59e0b;color:#000;font-weight:900;padding:4px 10px;border-radius:999px;font-size:10px}
-.badge4{background:#a855f7;color:#fff;font-weight:900;padding:4px 10px;border-radius:999px;font-size:10px}
-.badge5{background:#06b6d4;color:#000;font-weight:900;padding:4px 10px;border-radius:999px;font-size:10px}
 .card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:16px;margin:12px}
-.btn{background:#22c55e;color:#000;border:none;border-radius:999px;padding:10px 16px;font-weight:900;cursor:pointer;margin:4px;font-size:12px;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.btn{background:#22c55e;color:#000;border:none;border-radius:999px;padding:10px 16px;font-weight:900;cursor:pointer;margin:4px;font-size:12px}
 .btn:disabled{opacity:0.5}
 .btn-danger{background:#ef4444;color:#fff}
 .btn-blue{background:#3b82f6;color:#fff}
-.btn-purple{background:#a855f7;color:#fff}
-.btn-cyan{background:#06b6d4;color:#000}
-.btn-tab{background:#334155;color:#94a3b8;border:1px solid #475569;padding:7px 12px;border-radius:999px;font-weight:700;cursor:pointer;margin:3px;font-size:11px;display:inline-flex;align-items:center;gap:4px;-webkit-appearance:none;touch-action:manipulation}
-.btn-tab.active{background:#22c55e;color:#000;border-color:#22c55e;font-weight:900;box-shadow:0 0 0 2px rgba(34,197,94,0.3)}
-.btn-tab.has-data{border-color:#22c55e;color:#e2e8f0}
-.input{width:100%;padding:12px;border-radius:10px;border:2px solid #22c55e;background:#fff;color:#000;font-size:16px;margin-top:8px;-webkit-appearance:none;appearance:none}
-.input-search{width:100%;padding:12px;border-radius:10px;border:2px solid #3b82f6;background:#0f172a;color:#fff;font-size:16px;-webkit-appearance:none}
-.grid-seeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
-.seed-card{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px;position:relative;min-height:80px}
-.seed-card.done{border-color:#22c55e;background:#052e16}
-.seed-card .eng{font-size:9px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.seed-card .trans{font-size:13px;font-weight:800;color:#e2e8f0;margin:4px 0;min-height:18px;word-break:break-word}
-.seed-card .idx{position:absolute;top:6px;right:8px;font-size:8px;color:#64748b}
+.input{width:100%;padding:10px;border-radius:10px;border:2px solid #22c55e;background:#fff;color:#000;font-size:14px;margin-top:8px}
+.kb{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.kb button{background:#334155;color:#e2e8f0;border:1px solid #475569;border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer}
+.kb button:hover{background:#22c55e;color:#000}
 .progress{height:8px;background:#334155;border-radius:999px;overflow:hidden;margin:8px 0}
 .progress-bar{height:100%;background:#22c55e;transition:width 0.3s}
-.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:12px;max-height:400px;overflow:auto;-webkit-overflow-scrolling:touch}
-.lang-item{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px;cursor:pointer;transition:all 0.2s;touch-action:manipulation}
-.lang-item:hover{border-color:#22c55e;background:#1e293b}
-.lang-item.active{border-color:#22c55e;background:#052e16;box-shadow:0 0 0 2px rgba(34,197,94,0.2)}
-.lang-item.has-data{border-color:#22c55e}
-.lang-count{font-size:10px;color:#22c55e;font-weight:800}
-.browser-badge{font-size:9px;padding:3px 8px;border-radius:999px;font-weight:800;display:inline-block;margin:2px}
-.browser-chrome{background:#4285f4;color:#fff}
-.browser-firefox{background:#ff7139;color:#fff}
-.browser-safari{background:#000;color:#fff}
-.browser-edge{background:#0078d7;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:4px;max-height:300px;overflow:auto}
+.box{aspect-ratio:1;background:#334155;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;border:1px solid #475569}
+.box.done{background:#22c55e;color:#000;font-weight:900}
+.box.current{background:#3b82f6;color:#fff;border:2px solid #fff;font-weight:900}
+.box.locked{background:#ef4444;color:#fff}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
-<div id="stealthGate" style="position:fixed;inset:0;z-index:99999;background:#0f172a;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#e2e8f0;font-family:system-ui;text-align:center;padding:20px">
-  <div style="font-size:48px">🔒</div>
-  <h1 style="font-size:20px;font-weight:900;margin:12px 0 0">NqAI Seed1000 — ALL BROWSERS — ALL LANGUAGES</h1>
-  <p style="font-size:12px;color:#94a3b8;margin-top:8px;max-width:520px">SOLE OWNER Gin P Khup — Smyrna, TN — Chrome • Firefox • Safari • Edge — 7000 languages — Stealth.</p>
-  <div style="margin-top:8px"><span class="browser-badge browser-chrome">Chrome</span><span class="browser-badge browser-firefox">Firefox</span><span class="browser-badge browser-safari">Safari</span><span class="browser-badge browser-edge">Edge</span></div>
-  <input id="stealthInput" type="password" placeholder="Enter SOLE OWNER code" style="background:#1e293b;border:2px solid #22c55e;color:#fff;padding:14px 20px;border-radius:999px;font-size:16px;width:300px;max-width:90vw;text-align:center;outline:none;margin-top:16px">
-  <button onclick="unlockStealth()" style="background:#22c55e;color:#000;border:none;padding:12px 28px;border-radius:999px;font-weight:900;font-size:14px;cursor:pointer;margin-top:12px">UNLOCK — SOLE OWNER ONLY</button>
-  <p style="margin-top:16px;font-size:10px;color:#64748b">NqAI2026 • Gin P Khup • SOLEOWNER • v2.5.1 ALL BROWSERS</p>
-  <div id="browserDetect" style="margin-top:12px;font-size:10px;color:#94a3b8"></div>
-</div>
-<script>
-(function(){
-  const KEY='nqai_stealth_unlocked_v2_4';
-  function isUnlocked(){ return localStorage.getItem(KEY)==='true'; }
-  function hide(){ const el=document.getElementById('stealthGate'); if(el) el.style.display='none'; }
-  window.unlockStealth=function(){
-    const val=document.getElementById('stealthInput').value.trim();
-    const codes=['NqAI2026','nqai2026','Gin P Khup','ginpkhup','SOLEOWNER','NqAI','7000','soleowner','gin'];
-    if(codes.includes(val) || val.toLowerCase().includes('gin') || val.toLowerCase().includes('nqai')){
-      localStorage.setItem(KEY,'true'); hide();
-    }else{ alert('Wrong code — Hint: NqAI2026'); document.getElementById('stealthInput').value=''; }
-  };
-  document.addEventListener('DOMContentLoaded',()=>{
-    if(isUnlocked()) hide();
-    const inp=document.getElementById('stealthInput');
-    if(inp) inp.addEventListener('keydown',e=>{ if(e.key==='Enter') unlockStealth(); });
-    const bd=document.getElementById('browserDetect');
-    if(bd){ bd.textContent='Detected: '+detectBrowser()+' — '+navigator.userAgent.slice(0,80); }
-  });
-  window.detectBrowser=function(){
-    const ua=navigator.userAgent;
-    if(ua.includes('Edg/')) return 'Edge '+ua.match(/Edg\/([\d.]+)/)?.[1]||'';
-    if(ua.includes('Chrome') && !ua.includes('Edg') && !ua.includes('OPR')) return 'Chrome '+ua.match(/Chrome\/([\d.]+)/)?.[1]||'';
-    if(ua.includes('Firefox')) return 'Firefox '+ua.match(/Firefox\/([\d.]+)/)?.[1]||'';
-    if(ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari '+ua.match(/Version\/([\d.]+)/)?.[1]||'';
-    return 'Unknown — '+ua.slice(0,40);
-  };
-})();
-</script>
 <div class="header">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-    <div>
-      <div style="font-weight:900;font-size:15px">🌍 SEED1000 v2.5.1 — ALL BROWSERS — ALL LANGUAGES READY — 7000 FRAMEWORK — SOLE OWNER Gin P Khup</div>
-      <div style="font-size:10px;color:#94a3b8;margin-top:2px">© 2026 NqAI LLC — SOLE OWNER Gin P Khup — Smyrna, TN — Chrome Firefox Safari Edge Compatible — 1000 REAL — 7000 Languages Pre-built — More coming soon — Workspace Clean — v2.5.1</div>
-      <div style="margin-top:6px">
-        <span class="badge">v2.5.1 ALL BROWSERS</span>
-        <span class="badge2">7000 FRAMEWORK</span>
-        <span class="badge3">1000 REAL</span>
-        <span class="badge">SOLE OWNER</span>
-        <span class="badge4">MORE COMING SOON</span>
-        <span class="badge5" id="browserBadge">Detecting...</span>
-        <span class="badge2" id="totalLangsBadge">50+ LANGUAGES</span>
-      </div>
-      <div style="margin-top:4px">
-        <span class="browser-badge browser-chrome">✓ Chrome</span>
-        <span class="browser-badge browser-firefox">✓ Firefox</span>
-        <span class="browser-badge browser-safari">✓ Safari</span>
-        <span class="browser-badge browser-edge">✓ Edge</span>
-        <span style="font-size:9px;color:#94a3b8;margin-left:6px">Audio: <span id="audioFormat">detecting...</span> — IndexedDB + localStorage — No mix — v2.5.1</span>
-      </div>
-    </div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button class="btn" onclick="exportCSV()">📥 CSV</button>
-      <button class="btn btn-blue" onclick="exportZIP()">📦 ZIP</button>
-      <button class="btn btn-purple" onclick="exportAllLangs()">🌍 ALL LANGS ZIP</button>
-    </div>
-  </div>
-  <div style="margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <div style="flex:1;min-width:240px"><div class="progress"><div id="pbar" class="progress-bar" style="width:0%"></div></div><div id="ptext" style="font-size:10px;color:#94a3b8">0 / 1000</div></div>
-    <div style="font-size:10px;color:#94a3b8">Current: <span id="cur">1</span>/1000 | Lang: <span id="clang" style="color:#22c55e;font-weight:900">Zomi Tedim (zom)</span> | Storage: <span id="cstorage" style="font-size:9px"></span></div>
-  </div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+<div>
+<div style="font-weight:900;font-size:16px">🌍 SEED1000 FINAL 1000/1000 REAL BASIC - SOLE OWNER Gin P Khup - v2.4.0 MASTER</div>
+<div style="font-size:10px;color:#94a3b8;margin-top:2px">© 2026 NqAI LLC - SOLE OWNER Gin P Khup - Smyrna, TN, USA - 1000 REAL - Auto-translit ka pa → My father - NqAI Seed1000 7000 Languages - Workspace Clean - CLEAN - NO Extra blessing</div>
+<div style="margin-top:6px"><span class="badge">MASTER v2.4.0</span><span class="badge2">1000 REAL</span><span class="badge3">AUTO-TRANSLIT</span><span class="badge">SOLE OWNER Gin P Khup</span><span class="badge2">7000 Languages</span></div>
 </div>
-<!-- BROWSER COMPATIBILITY PANEL -->
-<div class="card" style="background:#0f172a;border:1px solid #334155">
-  <div style="font-weight:900;font-size:11px;color:#06b6d4">🌐 ALL BROWSER PLATFORMS — COMPATIBILITY — v2.5.1 — SOLE OWNER</div>
-  <div id="compatPanel" style="margin-top:8px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:10px"></div>
-  <div style="margin-top:8px;font-size:9px;color:#94a3b8">Chrome: webm opus • Firefox: webm/ogg • Safari: mp4 aac • Edge: webm opus • All use IndexedDB for audio + localStorage fallback — No server needed — SOLE OWNER Gin P Khup</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn" onclick="exportCSV()">📥 CSV</button>
+<button class="btn btn-blue" onclick="exportZIP()">📦 ZIP</button>
 </div>
-<!-- LANGUAGES PRE-BUILT -->
+</div>
+<div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<div style="flex:1;min-width:200px"><div class="progress"><div id="pbar" class="progress-bar" style="width:0%"></div></div><div id="ptext" style="font-size:10px;color:#94a3b8">0 / 1000 done</div></div>
+<div style="font-size:10px;color:#94a3b8">Current: <span id="cur">1</span> / 1000 | Language: <span id="clang">Zomi Tedim (zom)</span></div>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap">
+<div style="flex:1;min-width:320px">
 <div class="card">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-    <div style="font-weight:900;font-size:13px;color:#22c55e">🌍 ALL LANGUAGES READY — 7000 FRAMEWORK — PRE-BUILT — ALL BROWSERS — More coming soon</div>
-    <div style="display:flex;gap:6px">
-      <button class="btn btn-blue" style="padding:6px 12px;font-size:10px" onclick="showAllLangs()">SHOW ALL 50+</button>
-      <button class="btn" style="padding:6px 12px;font-size:10px" onclick="addLang()">+ Add Language 7000</button>
-    </div>
-  </div>
-  
-  <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-    <div style="flex:1;min-width:200px">
-      <input id="langSearch" class="input-search" placeholder="🔍 Search languages — Krio, Zomi, Swahili, Spanish..." oninput="filterLangs(this.value)">
-    </div>
-    <div style="font-size:10px;color:#94a3b8;display:flex;align-items:center">50+ pre-built • Each own storage • No mix • Click to switch • All browsers</div>
-  </div>
-  <div id="langTabs" style="margin-top:10px;display:flex;gap:4px;flex-wrap:wrap;max-height:140px;overflow:auto;-webkit-overflow-scrolling:touch"></div>
-  
-  <div id="allLangsPanel" style="display:none;margin-top:12px;border-top:1px solid #334155;padding-top:12px">
-    <div style="font-weight:800;font-size:11px;color:#3b82f6">📚 ALL PRE-BUILT LANGUAGES — CLICK TO SWITCH — Green border = has data — All browsers compatible</div>
-    <div id="allLangsGrid" class="lang-grid"></div>
-  </div>
-  <div id="langInfo" style="margin-top:10px;font-size:11px;color:#e2e8f0;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:10px"></div>
+<div style="font-weight:900;font-size:12px;color:#22c55e">BOX <span id="boxnum">1</span> - ENGLISH SOURCE (BIG FONT) - SOLE OWNER</div>
+<div id="eng" style="font-size:22px;font-weight:900;margin:12px 0;line-height:1.2">Hello</div>
+<div style="font-size:10px;color:#94a3b8">Type correct translation below - Use Zomi keyboard - Workspace Clean - 1000 REAL BASIC - NO Extra blessing</div>
+<div style="margin-top:12px">
+<div style="font-size:11px;font-weight:800;color:#22c55e">⌨️ ZOMI TEDIM KEYBOARD HELPER - TAP TO INSERT - SOLE OWNER</div>
+<div id="kb"></div>
 </div>
-<!-- CURRENT SEED -->
+<div style="margin-top:12px">
+<label style="font-size:11px;font-weight:800">Zomi (Tedim) Translation - Type Correct Zomi:</label>
+<input id="zomi" class="input" placeholder="Type correct Zomi! - Tap keyboard above!" oninput="onZomiInput(this.value)">
+<div id="autobox" style="display:none;margin-top:8px;background:#f8fafc;color:#000;border:1px dashed #22c55e;border-radius:8px;padding:8px;font-size:11px">
+<div style="font-weight:800;color:#15803d;margin-bottom:4px">✨ AUTO-TRANSLITERATION - SOLE OWNER Gin P Khup</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<div><span style="color:#666">Zomi Typed:</span> <b id="at_typed" style="color:#111"></b></div>
+<div><span style="color:#666">Plain (TTS):</span> <b id="at_plain" style="color:#0d9488"></b></div>
+<div id="at_eng_wrap"><span style="color:#666">English Suggest:</span> <b id="at_eng" style="background:#fef3c7;padding:2px 6px;border-radius:999px;color:#92400e"></b></div>
+<div><span style="color:#666">Voice Hint:</span> <b id="at_voice"></b></div>
+</div>
+<div style="margin-top:4px;font-size:9px;color:#94a3b8">Example: Type "ka pa" → Suggests "My father" → Voice "ka pa" → TTS reads plain</div>
+</div>
+</div>
+<div style="margin-top:12px">
+<label style="font-size:11px;font-weight:800">Voice Hint (lowercase for TTS):</label>
+<input id="hint" class="input" placeholder="voice hint lowercase">
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn btn-danger" onclick="startRec()">● RECORD</button>
+<button class="btn" id="stopBtn" onclick="stopRec()" disabled>■ STOP</button>
+<button class="btn btn-blue" onclick="saveBox()">💾 SAVE & LOCK BOX</button>
+<audio id="audio" controls style="width:100%;margin-top:8px;display:none"></audio>
+<div id="status" style="font-size:11px;color:#94a3b8;margin-top:8px">Ready - SOLE OWNER Gin P Khup - 1000/1000 REAL BASIC</div>
+</div>
+</div>
+</div>
+<div style="flex:0 0 340px;min-width:300px">
 <div class="card">
-  <div style="font-weight:900;font-size:12px;color:#22c55e">CURRENT SEED — ENGLISH SOURCE — AUDIO-FIRST — ALL BROWSERS</div>
-  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
-    <div style="flex:1;min-width:300px">
-      <div style="font-size:10px;color:#94a3b8">BOX <span id="boxnum">1</span> / 1000 — English (BIG FONT):</div>
-      <div id="eng" style="font-size:32px;font-weight:900;margin:10px 0;line-height:1.2">Hello</div>
-      
-      <div style="margin-top:12px">
-        <label style="font-size:11px;font-weight:800" id="transLabel">Zomi Tedim Translation:</label>
-        <input id="zomi" class="input" placeholder="Type correct translation! Audio-first!" oninput="onZomiInput(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
-        <div style="margin-top:8px">
-          <label style="font-size:11px;font-weight:800">Voice Hint (lowercase for TTS):</label>
-          <input id="hint" class="input" placeholder="lowercase voice hint — e.g., ka pa" autocomplete="off" autocorrect="off" spellcheck="false">
-        </div>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-danger" onclick="startRec()" id="recBtn">● RECORD</button>
-          <button class="btn" id="stopBtn" onclick="stopRec()" disabled>■ STOP</button>
-          <button class="btn btn-blue" onclick="saveBox()">💾 SAVE & LOCK</button>
-          <button class="btn" onclick="nextBox()">NEXT →</button>
-          <button class="btn btn-purple" onclick="prevBox()">← PREV</button>
-        </div>
-        <audio id="audio" controls playsinline webkit-playsinline style="width:100%;margin-top:8px;display:none"></audio>
-        <div id="status" style="font-size:11px;color:#94a3b8;margin-top:8px">Ready — v2.5.1 — ALL BROWSERS — SOLE OWNER</div>
-        
-        <div style="margin-top:12px;background:#0f172a;border:1px dashed #22c55e;border-radius:8px;padding:8px;font-size:10px">
-          <div style="font-weight:800;color:#22c55e">⌨️ ZOMI TEDIM KEYBOARD — TAP TO INSERT — ALL BROWSERS</div>
-          <div id="kb" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px"></div>
-        </div>
-      </div>
-    </div>
-    <div style="flex:0 0 360px;min-width:300px">
-      <div style="font-weight:900;font-size:11px">📦 1000 BOXES GRID — CLICK TO JUMP — Green=Done, Blue=Current — All browsers</div>
-      <div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:4px;max-height:360px;overflow:auto;margin-top:8px;-webkit-overflow-scrolling:touch"></div>
-      <div style="margin-top:8px;font-size:9px;color:#94a3b8">🔒 Green=Locked Done | 🔵 Blue=Current | Gray=Available | Click to jump | SOLE OWNER — All browsers compatible</div>
-    </div>
-  </div>
+<div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:900;font-size:12px">📦 1000 BOXES - PROGRESS - SOLE OWNER</div><button class="btn" style="padding:4px 8px;font-size:10px" onclick="addLang()">+ Add Language 7000</button></div>
+<div id="grid" class="grid" style="margin-top:8px"></div>
+<div style="margin-top:8px;font-size:10px;color:#94a3b8">🔒 = Locked Done | 🔵 = Current | Gray = Available | Click to jump | SOLE OWNER Gin P Khup</div>
 </div>
-<!-- SEEDS LIST -->
 <div class="card">
-  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-    <div style="font-weight:900;font-size:14px;color:#22c55e" id="seedsTitle">Zomi Tedim (zom) — 0 seeds</div>
-    <div style="display:flex;gap:6px;align-items:center">
-      <span style="font-size:10px;color:#94a3b8">Green = done — Click EDIT — All browsers</span>
-      <button class="btn" style="padding:4px 8px;font-size:10px" onclick="clearCurrentLang()">🗑️ Clear This Language</button>
-    </div>
-  </div>
-  <div id="seedsGrid" class="grid-seeds"></div>
+<div style="font-weight:900;font-size:11px">🌍 LANGUAGES - 7000 - SOLE OWNER</div>
+<div id="langs" style="margin-top:8px;font-size:10px"></div>
 </div>
-<div class="card" style="background:#052e16;border-color:#22c55e">
-  <div style="font-weight:900;font-size:11px;color:#22c55e">✅ v2.5.1 ALL BROWSERS + ALL LANGUAGES READY — PRE-BUILT 50+ LANGUAGES — MORE COMING SOON — SOLE OWNER Gin P Khup</div>
-  <div style="font-size:10px;color:#94a3b8;margin-top:6px">
-    • <b>All Browsers:</b> Chrome (webm opus) ✓, Firefox (webm/ogg) ✓, Safari (mp4 aac) ✓, Edge (webm opus) ✓, Mobile Safari ✓, Mobile Chrome ✓ — Auto-detect mime, smooth indicator, no silence bug (fixed v2.4.5 Safari)
-    • <b>Storage:</b> IndexedDB for audio (unlimited) + localStorage fallback + separate per language nqai_seed_data_{code} — No mix — Zomi=150 (tui,nipi,lei) not Krio
-    • <b>50+ Languages:</b> Zomi, Krio, 31 unlock (es,ar,vi,my,zh,hi...), Myanmar minorities (Hakha,Falam,Mizo,Kachin,Karen,Shan...), plus major — Ready for 7000
-    • <b>Features:</b> Search, SHOW ALL, ALL LANGS ZIP, Clear, PREV/NEXT, CSV/ZIP per language, + Add Language 7000
-    • <b>Cross-browser export:</b> CSV, ZIP via JSZip — Works on all browsers — No server needed
-    • © 2026 NqAI LLC — SOLE OWNER Gin P Khup — Smyrna, TN — Workspace Clean — 1000 REAL BASIC — v2.5.1 — All browsers + all languages — More coming soon
-  </div>
+</div>
+</div>
+<div class="card" style="margin:12px;text-align:center;font-size:10px;color:#94a3b8">
+© 2026 NqAI LLC - SOLE OWNER Gin P Khup - All Rights Reserved - NqAI Seed1000 7000 Languages - Smyrna, TN, USA - MASTER v2.4.0 - 1000/1000 REAL BASIC - ZERO Extra blessing - Workspace Clean - Version: SEED1000_FINAL_1000/1000_REAL_BASIC_v2.4.0_MASTER_AUTO_TRANSLIT_SOLE_OWNER_Gin_P_Khup - Route: /seed1000 - https://nqai.llc/seed1000
 </div>
 <script>
-const BASE_1000 = ["Hello","Goodbye","Thank you","Please","Yes","No","My father","My mother","Water","Food","House","Come here","Go away","I love you","How are you?","What is your name?","Where are you from?","I am from...","How much?","Very good","Good morning","Good night","Excuse me","Sorry","Help me","I don't understand","Do you understand?","Speak slowly","Where is...?","Market","Church","School","Hospital","Road","Mountain","River","Sun","Moon","Star","Rain","Wind","Fire","Tree","Flower","Dog","Cat","Chicken","Cow","Pig","Man","Woman","Child","Boy","Girl","Friend","Family","Love","Peace","War","Work","Eat","Drink","Sleep","Wake up","Sit down","Stand up","Walk","Run","Give me","Take this","Open","Close","Big","Small","Long","Short","New","Old","Hot","Cold","Heavy","Light","Today","Tomorrow","Yesterday","Now","Later","Morning","Evening","Night","Day","Week","Month","Year","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Twenty","Thirty","Hundred","Thousand","I","You","He","She","We","They","Me","Us","My","Your","His","Her","Our","Their","This","That","These","Those","Who","What","When","Where","Why","How","Which","Is","Are","Was","Were","Will","Can","Cannot","Do","Does","Did","Have","Has","Had","Go","Come","See","Look","Hear","Listen","Say","Tell","Speak","Ask","Answer","Know","Think","Want","Need","Like","Love","Hate","Buy","Sell","Pay","Money","Cheap","Expensive","Full","Empty","Clean","Dirty","Happy","Sad","Angry","Tired","Sick","Healthy","Strong","Weak","Fast","Slow","Near","Far","Left","Right","Up","Down","Front","Back","Inside","Outside","Above","Below","Between","Among","With","Without","For","Against","About","Under","Over","Before","After","During","While","Because","If","Then","Else","And","Or","But","So","Too","Very","More","Most","Less","Least","Many","Few","Some","All","None","Every","Each","Other","Another","Same","Different","First","Last","Next","Previous","Own","Mine","Yours","Ours","God","Prayer","Blessing","Life","Death","Birth","Marriage","Husband","Wife","Brother","Sister","Uncle","Aunt","Grandfather","Grandmother","Father-in-law","Mother-in-law","Son","Daughter","Baby","Young","Old man","Old woman","Chief","King","Village","Town","City","Country","World","Language","Word","Name","Book","Paper","Pen","Letter","Story","Song","Music","Dance","Play","Laugh","Cry","Smile","Shout","Whisper","Call","Wait","Search","Find","Lose","Keep","Bring","Carry","Hold","Put","Take","Throw","Push","Pull","Break","Fix","Build","Make","Create","Destroy","Cut","Tie","Untie","Wash","Cook","Burn","Fly","Fall","Rise","Sink","Swim","Jump","Climb","Hide","Show","Open your eyes","Close your eyes","Open your mouth","Raise your hand","Lower your hand","Come in","Go out","Go up","Go down","Turn left","Turn right","Stop","Start","Continue","Finish","Begin","End","Return","Leave","Stay","Live","Die","Kill","Save","Protect","Attack","Defend","Fight","Win","Lose a fight","Hunt","Fish","Farm","Plant","Harvest","Seed","Soil","Grass","Leaf","Root","Branch","Wood","Stone","Iron","Gold","Silver","Cloth","Clothes","Hat","Shoe","Hand","Foot","Head","Face","Eye","Ear","Nose","Mouth","Tooth","Tongue","Lip","Neck","Shoulder","Arm","Elbow","Wrist","Finger","Nail","Chest","Back","Stomach","Leg","Knee","Blood","Bone","Skin","Hair","Beard","Sweat","Tear","Pain","Itch","Fever","Cough","Cold sickness","Medicine","Doctor","Nurse","Teacher","Student","Farmer","Soldier","Police","Thief","Rich","Poor","Kind","Cruel","Honest","Liar","Brave","Coward","Wise","Foolish","Beautiful","Ugly","Sweet","Bitter","Sour","Salty","Spicy","Soft","Hard","Sharp","Dull","Smooth","Rough","Wet","Dry","Dark","Light color","Red","Blue","Green","Yellow","White","Black","Brown","Gray","Sky","Cloud","Fog","Thunder","Lightning","Earthquake","Flood","Drought","Season","Summer","Winter","Spring","Autumn","North","South","East","West","Direction","Map","Path","Bridge","Boat","Car","Bicycle","Airplane","Train","Phone","Computer","Internet","Electricity","Light bulb","Battery","Firewood","Knife","Spoon","Plate","Cup","Pot","Basket","Rope","Needle","Thread","Button","Zipper","Mirror","Soap","Towel","Bed","Chair","Table","Door","Window","Wall","Floor","Roof","Key","Lock","Bell","Drum","Flute","Guitar","Picture","Color","Shadow","Reflection","Dream","Thought","Idea","Memory","Hope","Faith","Trust","Truth","Lie","Promise","Secret","Mystery","Problem","Solution","Question","Answer question","History","Future","Past","Present","Time","Clock","Hour","Minute","Second","Moment","Age","Growth","Change","Chance","Luck","Blessing extra","Curse","Spirit","Soul","Heart","Mind","Body","Health","Strength","Power","Right","Wrong","Good","Bad","Better","Best","Worse","Worst","Enough","Too much","Too little","Almost","Already","Still","Yet","Just","Only","Even","Also","Again","Once","Twice","Three times","Always","Never","Sometimes","Often","Rarely","Usually","Maybe","Perhaps","Certainly","Surely","Probably","Possibly","Impossible","Possible","Easy","Difficult","Simple","Complex","Clear","Confusing","Quiet","Loud","Noisy","Silent","Crowded","Empty place","Safe","Dangerous","Careful","Careless","Ready","Unready","Free","Busy","Lazy","Active","Patient","Impatient","Polite","Rude","Generous","Selfish","Humble","Proud","Grateful","Thankful","Sorry sorry","Welcome","Congratulations","Good luck","Take care","See you later","See you tomorrow","See you soon","Long time no see","How is family?","I am fine","I am sick","I am tired","I am hungry","I am thirsty","I am happy","I am sad","I am angry","I am scared","Don't worry","Be careful","Be quiet","Be patient","Come quickly","Wait a moment","Help yourself","God bless you","Good job","Well done","I agree","I disagree","I think so","I don't think so","I don't know","I know","I remember","I forgot","I lost","I found","I have it","I don't have it","It is mine","It is yours","It is his","It is hers","It is ours","It is theirs","Whose is this?","What is this?","Who is that?","Where is he?","Where is she?","Where are they?","When will you come?","Why did you go?","How did you do?","How old are you?","How many?","How far?","How long?","What time is it?","What day is it?","What is the price?","Can you help me?","Can I help you?","Do you need help?","I need help","I need water","I need food","I need money","I need time","I want to go","I want to eat","I want to drink","I want to sleep","I want to buy","I want to sell","I want to learn","I want to teach","I want to work","I want to rest","Let's go","Let's eat","Let's talk","Let's play","Let's work together","Let's be friends","We are friends","We are family","I love my family","My family loves me","God loves you","I love God","Thank God","Praise God","Peace be with you","And also with you","May God protect you","Travel safely","Sleep well","Eat well","Live long","Be healthy","Be strong","Be happy","Be safe","Take your time","No hurry","Hurry up","Be quick","Slow down","Look carefully","Listen carefully","Think carefully","Speak clearly","Write clearly","Read this","Write that","Count them","Measure it","Cut it","Break it","Fix it","Clean it","Wash it","Cook it","Eat it","Drink it","Bring it","Take it away","Put it here","Put it there","Give it to me","Give it to him","Give it to her","Give it to them","Show me","Tell me","Teach me","Help me please","Forgive me","Excuse me please","I'm sorry please","Thank you very much","You are welcome","You're welcome very much","Nice to meet you","Nice to see you","How have you been?","I have been fine","I missed you","I love you too","I love you all","We love you","They love you","God loves us all","Let us pray","Let us eat","Let us go home","Go home","Come home","Welcome home","This is my home","That is your home","This is my village","That is your village","Our village is beautiful","My country is...","Your country is...","What is your country?","Where is your country?","I am from Myanmar","I am from America","I speak Zomi","I speak English","Do you speak Zomi?","Do you speak English?","I understand a little","I don't understand much","Please repeat","Please say again","Please write it down","What does it mean?","How do you say...?","How do you write...?","What is it called?","It is called...","This is called...","That is called...","My name is...","His name is...","Her name is...","What is his name?","What is her name?","I don't know his name","I don't know her name","I know his name","I know her name","Who is he?","Who is she?","He is my father","She is my mother","He is my brother","She is my sister","They are my parents","We are brothers","We are sisters","We are family","Family is important","Family is love","Love your family","Respect your parents","Respect your elders","Help your parents","Help your family","God is love","God is good","God is great","God is with us","We trust God","We love God","God bless our family","God bless our village","God bless our country","Peace in our village","Peace in our family","We want peace","We need peace","Peace is good","War is bad","No war","Stop war","Make peace","Keep peace","Love peace","We are peaceful people","We are hardworking people","We are kind people","We are honest people","We are strong people","We are brave people","We are humble people","We are grateful people","Thank you for your help","Thank you for your kindness","Thank you for everything","You are kind","You are good","You are strong","You are beautiful","You are smart","You are wise","You are brave","You are honest","You are humble","You are generous","You are patient","You are polite","I like you","I like your family","I like your village","I like your country","I like your language","Your language is beautiful","Your culture is beautiful","Your village is beautiful","Your family is beautiful","We are happy to meet you","We are happy to see you","We are happy to help you","We are here to help","We will help you","We can help you","We want to help you","Please help us","Please help our village","Please help our family","Please help our children","Our children need help","Our village needs help","Our family needs help","We need your help","We need water","We need food","We need medicine","We need school","We need teacher","We need doctor","We need hospital","We need road","We need bridge","We need electricity","We need internet","We need phone","We need computer","We need books","We need clothes","We need house","We need work","We need money","We need peace","We need love","We need God","God will help us","God will provide","God will protect us","Trust in God","Have faith in God","Pray to God","Talk to God","God hears us","God loves us","God cares for us","God is with us always","We are never alone","God is never far","God is close to us","We are children of God","We are family of God","Love one another","Help one another","Respect one another","Forgive one another","Be kind to one another","Be patient with one another","Peace be with you all","May peace be with you","May God be with you","May God bless you","May God keep you","May God protect you","Goodbye for now","See you again","Until next time","Take care of yourself","Take care of your family","Take care of your village","God be with you","Go with God","Travel with God","Live with God","Walk with God","Talk with God","Pray with God","Work with God","Love with God","Peace with God","Amen","Hallelujah","Thank you Lord","Praise the Lord","Glory to God","God is good all the time","All the time God is good"];
-while(BASE_1000.length<1000){BASE_1000.push('Extra '+BASE_1000.length);} BASE_1000=BASE_1000.slice(0,1000);
-const PREBUILT_LANGS = [
-  {code:'zom',name:'Zomi Tedim',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'tui,nipi,lei,vantang — YOUR 150!'},
-  {code:'kri',name:'Krio',flag:'SL',region:'Sierra Leone',owner:'Gin P Khup',priority:1,desc:'kushe, aw di bodi — Sierra Leone'},
-  {code:'es',name:'Spanish',flag:'ES',region:'World',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 1 — GT+NLLB'},
-  {code:'ar',name:'Arabic',flag:'SA',region:'Middle East',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 2 — GT+NLLB'},
-  {code:'vi',name:'Vietnamese',flag:'VN',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 3 — GT+NLLB'},
-  {code:'my',name:'Burmese',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 4 — Myanmar'},
-  {code:'zh',name:'Chinese',flag:'CN',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 5 — GT+NLLB'},
-  {code:'hi',name:'Hindi',flag:'IN',region:'India',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 6'},
-  {code:'fr',name:'French',flag:'FR',region:'World',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 7'},
-  {code:'ru',name:'Russian',flag:'RU',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 8'},
-  {code:'pt',name:'Portuguese',flag:'PT',region:'World',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 9'},
-  {code:'bn',name:'Bengali',flag:'BD',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 10'},
-  {code:'cs',name:'Czech',flag:'CZ',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 11'},
-  {code:'de',name:'German',flag:'DE',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 12'},
-  {code:'el',name:'Greek',flag:'GR',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 13'},
-  {code:'he',name:'Hebrew',flag:'IL',region:'Middle East',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 14'},
-  {code:'id',name:'Indonesian',flag:'ID',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 15'},
-  {code:'it',name:'Italian',flag:'IT',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 16'},
-  {code:'ja',name:'Japanese',flag:'JP',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 17'},
-  {code:'ko',name:'Korean',flag:'KR',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 18'},
-  {code:'ms',name:'Malay',flag:'MY',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 19'},
-  {code:'nl',name:'Dutch',flag:'NL',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 20'},
-  {code:'pl',name:'Polish',flag:'PL',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 21'},
-  {code:'ro',name:'Romanian',flag:'RO',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 22'},
-  {code:'sw',name:'Swahili',flag:'TZ',region:'Africa',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 23'},
-  {code:'th',name:'Thai',flag:'TH',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 24'},
-  {code:'tl',name:'Tagalog',flag:'PH',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 25'},
-  {code:'tr',name:'Turkish',flag:'TR',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 26'},
-  {code:'uk',name:'Ukrainian',flag:'UA',region:'Europe',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 27'},
-  {code:'ur',name:'Urdu',flag:'PK',region:'Asia',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 28'},
-  {code:'yo',name:'Yoruba',flag:'NG',region:'Africa',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 29'},
-  {code:'am',name:'Amharic',flag:'ET',region:'Africa',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 30'},
-  {code:'so',name:'Somali',flag:'SO',region:'Africa',owner:'Gin P Khup',priority:2,desc:'NUM_MAP 31'},
-  {code:'en',name:'English',flag:'US',region:'World',owner:'Gin P Khup',priority:3,desc:'Source language — 1000 REAL'},
-  {code:'hak',name:'Hakha Chin',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Chin — Rare — Coming soon'},
-  {code:'cfl',name:'Falam Chin',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Chin — Rare — Coming soon'},
-  {code:'lus',name:'Mizo',flag:'IN',region:'India',owner:'Gin P Khup',priority:1,desc:'Mizo — Mizoram — Rare'},
-  {code:'kac',name:'Kachin Jingpho',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Kachin — Rare'},
-  {code:'kar',name:'Karen S\'gaw',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Karen — Rare'},
-  {code:'shn',name:'Shan',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Shan — Rare'},
-  {code:'mnw',name:'Mon',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Mon — Rare'},
-  {code:'rki',name:'Rakhine Arakanese',flag:'MM',region:'Myanmar',owner:'Gin P Khup',priority:1,desc:'Rakhine — Rare'},
-  {code:'tcz',name:'Thado Chin',flag:'IN',region:'India',owner:'Gin P Khup',priority:1,desc:'Thado — Rare'},
-  {code:'ne',name:'Nepali',flag:'NP',region:'Asia',owner:'Gin P Khup',priority:3,desc:'Nepal'},
-  {code:'si',name:'Sinhala',flag:'LK',region:'Asia',owner:'Gin P Khup',priority:3,desc:'Sri Lanka'},
-  {code:'km',name:'Khmer',flag:'KH',region:'Asia',owner:'Gin P Khup',priority:3,desc:'Cambodia'},
-  {code:'lo',name:'Lao',flag:'LA',region:'Asia',owner:'Gin P Khup',priority:3,desc:'Laos'},
-  {code:'ha',name:'Hausa',flag:'NG',region:'Africa',owner:'Gin P Khup',priority:3,desc:'Africa'},
-  {code:'ig',name:'Igbo',flag:'NG',region:'Africa',owner:'Gin P Khup',priority:3,desc:'Africa'},
-  {code:'zu',name:'Zulu',flag:'ZA',region:'Africa',owner:'Gin P Khup',priority:3,desc:'Africa'},
-];
-let langs = JSON.parse(localStorage.getItem('nqai_languages_7000')||'null');
-if(!langs || langs.length < 10){
-  langs = PREBUILT_LANGS;
-  localStorage.setItem('nqai_languages_7000', JSON.stringify(langs));
-} else {
-  const existingCodes = new Set(langs.map(l=>l.code));
-  PREBUILT_LANGS.forEach(pl=>{ if(!existingCodes.has(pl.code)){ langs.push(pl); } });
-  localStorage.setItem('nqai_languages_7000', JSON.stringify(langs));
-}
-let currentLangCode = localStorage.getItem('nqai_7000_current_lang') || 'zom';
-let idx = parseInt(localStorage.getItem('nqai_seed_last_index_'+currentLangCode)||'1') || 1;
-let done = {};
-let mediaRecorder=null, chunks=[], audioBlob=null;
-let audioContext=null, analyser=null, dataArray=null, animationId=null, localStream=null;
-let showAll = false;
-// ===== INDEXEDDB FOR AUDIO — ALL BROWSERS =====
-const IDB_NAME='NqAI_Seed1000_Audios';
-const IDB_VERSION=1;
-let idb=null;
-function openIDB(){
-  return new Promise((resolve,reject)=>{
-    if(idb){ resolve(idb); return; }
-    if(!window.indexedDB){ resolve(null); return; }
-    const req=indexedDB.open(IDB_NAME, IDB_VERSION);
-    req.onupgradeneeded=e=>{
-      const db=e.target.result;
-      if(!db.objectStoreNames.contains('audios')){
-        const store=db.createObjectStore('audios',{keyPath:'id'});
-        store.createIndex('lang','lang',{unique:false});
-        store.createIndex('box','box',{unique:false});
-      }
-    };
-    req.onsuccess=e=>{ idb=e.target.result; resolve(idb); };
-    req.onerror=e=>{ console.error('IDB error',e); resolve(null); };
-  });
-}
-async function saveAudioIDB(lang, box, blob){
-  try{
-    const db=await openIDB();
-    if(!db) return false;
-    return new Promise((resolve)=>{
-      const tx=db.transaction('audios','readwrite');
-      const store=tx.objectStore('audios');
-      const id=lang+'_'+box;
-      const reader=new FileReader();
-      reader.onload=()=>{
-        const rec={id,lang,box,time:Date.now(),data:reader.result,mime:blob.type,size:blob.size};
-        const req=store.put(rec);
-        req.onsuccess=()=>resolve(true);
-        req.onerror=()=>resolve(false);
-      };
-      reader.readAsDataURL(blob);
-    });
-  }catch(e){ return false; }
-}
-async function getAudioIDB(lang, box){
-  try{
-    const db=await openIDB();
-    if(!db) return null;
-    return new Promise((resolve)=>{
-      const tx=db.transaction('audios','readonly');
-      const store=tx.objectStore('audios');
-      const req=store.get(lang+'_'+box);
-      req.onsuccess=()=>{ resolve(req.result||null); };
-      req.onerror=()=>resolve(null);
-    });
-  }catch(e){ return null; }
-}
-function getLangDataKey(code){ return 'nqai_seed_data_'+code; }
-function getLastIndexKey(code){ return 'nqai_seed_last_index_'+code; }
-function loadLangData(code){
-  try{ const raw=localStorage.getItem(getLangDataKey(code)); done=raw?JSON.parse(raw):{}; }catch(e){ done={}; }
-  try{ const last=localStorage.getItem(getLastIndexKey(code)); idx=last?parseInt(last):1; if(idx<1||idx>1000) idx=1; }catch(e){ idx=1; }
-}
-function saveLangData(){
-  try{
-    localStorage.setItem(getLangDataKey(currentLangCode), JSON.stringify(done));
-    localStorage.setItem(getLastIndexKey(currentLangCode), String(idx));
-    localStorage.setItem('nqai_languages_7000', JSON.stringify(langs));
-    localStorage.setItem('nqai_7000_current_lang', currentLangCode);
-  }catch(e){}
-}
-function getLangName(code){ const l=langs.find(x=>x.code===code); return l?l.name+' ('+l.code+')':code; }
-function getLang(code){ return langs.find(x=>x.code===code); }
-function getCount(code){
-  try{ const raw=localStorage.getItem(getLangDataKey(code)); if(!raw) return 0; const o=JSON.parse(raw); return Object.keys(o).length; }catch(e){ return 0; }
-}
-function switchLang(code){
-  saveLangData();
-  currentLangCode=code;
-  loadLangData(code);
-  renderAll();
-  saveLangData();
-  document.getElementById('status').textContent='Switched to '+getLangName(code)+' — '+Object.keys(done).length+' / 1000 — SOLE OWNER — '+detectBrowser()+' — v2.5.1 ALL BROWSERS';
-}
-function filterLangs(q){ renderLangTabs(q); if(showAll) renderAllLangsGrid(q); }
-function showAllLangs(){ showAll=!showAll; document.getElementById('allLangsPanel').style.display=showAll?'block':'none'; if(showAll) renderAllLangsGrid(document.getElementById('langSearch').value||''); }
-function renderLangTabs(filter=''){
-  const tabs=document.getElementById('langTabs'); tabs.innerHTML='';
-  let list = langs;
-  if(filter){
-    const f=filter.toLowerCase();
-    list = langs.filter(l=> l.name.toLowerCase().includes(f) || l.code.toLowerCase().includes(f) || (l.flag&&l.flag.toLowerCase().includes(f)) || (l.region&&l.region.toLowerCase().includes(f)));
-  }
-  list = list.slice().sort((a,b)=>{
-    const ca=getCount(a.code), cb=getCount(b.code);
-    if(ca!==cb) return cb-ca;
-    if(a.priority!==b.priority) return a.priority-b.priority;
-    return a.name.localeCompare(b.name);
-  });
-  const top = list.slice(0,15);
-  top.forEach(l=>{
-    const c=getCount(l.code);
-    const btn=document.createElement('button');
-    btn.className='btn-tab'+(l.code===currentLangCode?' active':'')+(c>0?' has-data':'');
-    btn.innerHTML=(l.flag||'')+' '+l.name+' <span style="font-size:9px;opacity:0.8">('+l.code+') '+ (c>0?'✅'+c:'') +'</span>';
-    btn.onclick=()=>switchLang(l.code);
-    tabs.appendChild(btn);
-  });
-  if(list.length>15){
-    const more=document.createElement('button');
-    more.className='btn-tab'; more.style.background='#a855f7'; more.style.color='#fff';
-    more.textContent='+'+(list.length-15)+' more — SHOW ALL';
-    more.onclick=showAllLangs;
-    tabs.appendChild(more);
-  }
-  const addBtn=document.createElement('button'); addBtn.className='btn-tab'; addBtn.style.background='#3b82f6'; addBtn.style.color='#fff'; addBtn.textContent='+ Add Language 7000'; addBtn.onclick=addLang; tabs.appendChild(addBtn);
-  const info=document.getElementById('langInfo');
-  const count=Object.keys(done).length;
-  const curLang=getLang(currentLangCode);
-  const totalLangs=langs.length;
-  const langsWithData=langs.filter(l=>getCount(l.code)>0).length;
-  document.getElementById('totalLangsBadge').textContent=totalLangs+' LANGUAGES — '+langsWithData+' WITH DATA';
-  info.innerHTML=
-    '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">'+
-    '<div><b style="color:#22c55e;font-size:13px">'+getLangName(currentLangCode)+'</b> '+(curLang?' — '+curLang.flag+' '+curLang.region+' — '+(curLang.desc||''):'')+'<br>'+
-    '<span style="color:#22c55e;font-weight:900;font-size:14px">'+count+' / 1000 seeds done</span> — Storage: <code style="background:#334155;padding:2px 6px;border-radius:4px">'+getLangDataKey(currentLangCode)+'</code> — '+(count===150&&currentLangCode==='zom'?'✅ YOUR 150 ZOMI! tui,nipi,lei,vantang... — SOLE OWNER':'')+'</div>'+
-    '<div style="font-size:10px;color:#94a3b8">Total: '+totalLangs+' pre-built • '+langsWithData+' with data • Each own storage • No mix • All browsers • v2.5.1<br>Zomi: '+getCount('zom')+' seeds (tui,nipi,lei) — Krio: '+getCount('kri')+' seeds (kushe) — Separated! Browser: '+detectBrowser()+'</div>'+
-    '</div>';
-}
-function renderAllLangsGrid(filter=''){
-  const grid=document.getElementById('allLangsGrid'); grid.innerHTML='';
-  let list=langs;
-  if(filter){
-    const f=filter.toLowerCase();
-    list=langs.filter(l=> l.name.toLowerCase().includes(f) || l.code.toLowerCase().includes(f) || l.region.toLowerCase().includes(f));
-  }
-  list=list.slice().sort((a,b)=>{
-    const ca=getCount(a.code), cb=getCount(b.code);
-    if(ca!==cb) return cb-ca;
-    if(a.priority!==b.priority) return a.priority-b.priority;
-    return a.name.localeCompare(b.name);
-  });
-  list.forEach(l=>{
-    const c=getCount(l.code);
-    const div=document.createElement('div');
-    div.className='lang-item'+(l.code===currentLangCode?' active':'')+(c>0?' has-data':'');
-    div.innerHTML='<div style="display:flex;justify-content:space-between"><b>'+(l.flag||'')+' '+l.name+'</b><span style="font-size:9px;color:#64748b">'+l.code+'</span></div><div style="font-size:9px;color:#94a3b8;margin-top:2px">'+(l.region||'')+' — '+(l.desc||'')+'</div><div class="lang-count">'+c+' / 1000 '+(c>0?'✅':'')+' — Storage: nqai_seed_data_'+l.code+'</div>';
-    div.onclick=()=>switchLang(l.code);
-    grid.appendChild(div);
-  });
-}
-function renderGrid(){
-  const g=document.getElementById('grid'); g.innerHTML='';
-  for(let i=1;i<=1000;i++){
-    const b=document.createElement('div');
-    b.style.cssText='aspect-ratio:1;background:#334155;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;cursor:pointer;border:1px solid #475569';
-    if(done[i]){ b.style.background='#22c55e'; b.style.color='#000'; b.style.fontWeight='900'; }
-    if(i===idx){ b.style.background='#3b82f6'; b.style.color='#fff'; b.style.border='2px solid #fff'; b.style.fontWeight='900'; }
-    b.textContent=i; b.onclick=()=>{ idx=i; saveLangData(); renderAll(); }; g.appendChild(b);
-  }
-}
-function renderSeedsGrid(){
-  const grid=document.getElementById('seedsGrid'); const title=document.getElementById('seedsTitle');
-  const count=Object.keys(done).length;
-  const curLang=getLang(currentLangCode);
-  title.textContent=getLangName(currentLangCode)+' — '+count+' seeds'+(curLang&&curLang.desc?' — '+curLang.desc:'')+(currentLangCode==='zom'?' — YOUR 150 ZOMI!':'');
-  grid.innerHTML='';
-  const sortedKeys=Object.keys(done).sort((a,b)=>parseInt(a)-parseInt(b));
-  if(sortedKeys.length===0){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#64748b;padding:20px">No seeds yet for '+getLangName(currentLangCode)+' — Start at BOX 1 — Pre-built ready — All browsers — SOLE OWNER — v2.5.1</div>'; return; }
-  sortedKeys.forEach(k=>{
-    const d=done[k]; const eng=BASE_1000[parseInt(k)-1]||'';
-    const card=document.createElement('div'); card.className='seed-card done';
-    card.innerHTML='<div class="idx">#'+k+'</div><div class="eng">'+eng+'</div><div class="trans">'+(d.zomi||'')+'</div><div style="font-size:9px;color:#94a3b8">'+(d.hint||'')+'</div><div style="margin-top:6px"><button class="btn" style="padding:4px 8px;font-size:9px" onclick="idx='+k+';saveLangData();renderAll();window.scrollTo(0,0)">EDIT</button> <button class="btn btn-blue" style="padding:4px 8px;font-size:9px" onclick="playAudioBox('+k+')">▶ PLAY</button></div>';
-    grid.appendChild(card);
-  });
-}
-function renderCurrent(){
-  const eng=BASE_1000[idx-1]||''; document.getElementById('eng').textContent=eng; document.getElementById('boxnum').textContent=idx; document.getElementById('cur').textContent=idx; document.getElementById('clang').textContent=getLangName(currentLangCode); document.getElementById('cstorage').textContent=getLangDataKey(currentLangCode);
-  document.getElementById('transLabel').textContent=getLangName(currentLangCode)+' Translation:';
-  const d=done[idx]; document.getElementById('zomi').value=d?(d.zomi||''):'';
-  document.getElementById('hint').value=d?(d.hint||''):'';
-  document.getElementById('status').textContent=d?'🔒 BOX '+idx+' Done — '+getLangName(currentLangCode)+' — '+Object.keys(done).length+'/1000 — '+detectBrowser()+' — v2.5.1':'BOX '+idx+' — '+getLangName(currentLangCode)+' — Available — '+detectBrowser()+' — v2.5.1 ALL BROWSERS';
-  document.getElementById('pbar').style.width=(Object.keys(done).length/10)+'%';
-  document.getElementById('ptext').textContent=Object.keys(done).length+' / 1000 — '+getLangName(currentLangCode)+' — '+langs.length+' languages ready — '+detectBrowser();
-  renderKB();
-  renderCompat();
-}
-function renderAll(){ renderLangTabs(document.getElementById('langSearch').value||''); if(showAll) renderAllLangsGrid(document.getElementById('langSearch').value||''); renderGrid(); renderSeedsGrid(); renderCurrent(); }
-function onZomiInput(v){ if(!document.getElementById('hint').value) document.getElementById('hint').value=v.toLowerCase(); }
-function nextBox(){ if(idx<1000){ idx++; saveLangData(); renderAll(); } }
-function prevBox(){ if(idx>1){ idx--; saveLangData(); renderAll(); } }
-function saveBox(){
-  const zomi=document.getElementById('zomi').value.trim(); const hint=document.getElementById('hint').value.trim();
-  if(!zomi){ alert('Type '+getLangName(currentLangCode)+' first! — SOLE OWNER'); return; }
-  done[idx]={zomi,hint,time:Date.now(),lang:currentLangCode,owner:'Gin P Khup'}; saveLangData(); if(idx<1000) idx++; renderAll();
-  document.getElementById('status').textContent='✅ Saved BOX '+(idx-1)+' — '+getLangName(currentLangCode)+' — '+Object.keys(done).length+'/1000 — '+detectBrowser()+' — v2.5.1';
-}
-function renderKB(){
-  const kb=document.getElementById('kb'); if(!kb) return;
-  const keys=['á','à','â','é','è','ê','í','ì','î','ó','ò','ô','ú','ù','û','ch','kh','ng','th','ph','tui','nipi','lei','ka','la','hi','nang','hong','ding','ka pa','kei ma'];
-  kb.innerHTML='';
-  keys.forEach(k=>{
-    const b=document.createElement('button');
-    b.textContent=k;
-    b.style.cssText='background:#334155;color:#e2e8f0;border:1px solid #475569;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;touch-action:manipulation';
-    b.onclick=()=>{ const inp=document.getElementById('zomi'); const start=inp.selectionStart; const end=inp.selectionEnd; const v=inp.value; inp.value=v.substring(0,start)+k+v.substring(end); inp.selectionStart=inp.selectionEnd=start+k.length; inp.focus(); onZomiInput(inp.value); };
-    kb.appendChild(b);
-  });
-}
-function renderCompat(){
-  const panel=document.getElementById('compatPanel');
-  if(!panel) return;
-  const ua=navigator.userAgent;
-  const isChrome=ua.includes('Chrome') && !ua.includes('Edg');
-  const isFirefox=ua.includes('Firefox');
-  const isSafari=ua.includes('Safari') && !ua.includes('Chrome');
-  const isEdge=ua.includes('Edg');
-  const mime=getSupportedMimeType();
-  const idbSupport=!!window.indexedDB;
-  const mrSupport=!!window.MediaRecorder;
-  panel.innerHTML=
-    '<div style="background:#1e293b;border:1px solid '+(isChrome?'#22c55e':'#334155')+';border-radius:8px;padding:8px"><b>Chrome</b><br>webm opus • MediaRecorder '+(mrSupport?'✅':'❌')+' • '+(isChrome?'You are here ✅':'')+'</div>'+
-    '<div style="background:#1e293b;border:1px solid '+(isFirefox?'#22c55e':'#334155')+';border-radius:8px;padding:8px"><b>Firefox</b><br>webm/ogg • MediaRecorder '+(mrSupport?'✅':'❌')+' • '+(isFirefox?'You are here ✅':'')+'</div>'+
-    '<div style="background:#1e293b;border:1px solid '+(isSafari?'#22c55e':'#334155')+';border-radius:8px;padding:8px"><b>Safari</b><br>mp4 aac • MediaRecorder '+(mrSupport?'✅':'❌')+' • v2.4.5 fix • '+(isSafari?'You are here ✅':'')+'</div>'+
-    '<div style="background:#1e293b;border:1px solid '+(isEdge?'#22c55e':'#334155')+';border-radius:8px;padding:8px"><b>Edge</b><br>webm opus • MediaRecorder '+(mrSupport?'✅':'❌')+' • '+(isEdge?'You are here ✅':'')+'</div>'+
-    '<div style="background:#1e293b;border:1px solid #22c55e;border-radius:8px;padding:8px"><b>Current: '+detectBrowser()+'</b><br>Audio: '+mime+'<br>IDB: '+(idbSupport?'✅':'❌ fallback LS')+' • JSZip: '+(window.JSZip?'✅':'❌')+'</div>';
-  const badge=document.getElementById('browserBadge');
-  const af=document.getElementById('audioFormat');
-  if(badge) badge.textContent=detectBrowser()+' — '+mime;
-  if(af) af.textContent=mime+' — '+(idbSupport?'IndexedDB':'localStorage');
-}
-function exportCSV(){
-  let csv='BOX,English,'+getLangName(currentLangCode)+',VoiceHint,Language\n';
-  for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=i+',"'+eng.replace(/"/g,'""')+'","'+(d.zomi||'').replace(/"/g,'""')+'","'+(d.hint||'').replace(/"/g,'""')+'","'+currentLangCode+'"\n'; }
-  const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_'+currentLangCode+'_SOLE_OWNER_Gin_P_Khup.csv'; a.click();
-}
-async function exportZIP(){
-  const zip=new JSZip(); let csv='BOX,English,'+getLangName(currentLangCode)+',VoiceHint,Language\n';
-  for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=i+',"'+eng.replace(/"/g,'""')+'","'+(d.zomi||'').replace(/"/g,'""')+'","'+(d.hint||'').replace(/"/g,'""')+'","'+currentLangCode+'"\n'; }
-  zip.file('SEED1000_'+currentLangCode+'.csv', csv); zip.file('COPYRIGHT.txt','© 2026 NqAI LLC — SOLE OWNER Gin P Khup — Smyrna, TN — '+getLangName(currentLangCode)+' — '+Object.keys(done).length+'/1000 — '+detectBrowser()); const blob=await zip.generateAsync({type:'blob'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_'+currentLangCode+'_'+Object.keys(done).length+'_SEEDS_'+detectBrowser().replace(/\s+/g,'_')+'.zip'; a.click();
-}
-async function exportAllLangs(){
-  const zip=new JSZip(); let summary='NqAI Seed1000 — ALL LANGUAGES — SOLE OWNER Gin P Khup — '+new Date().toISOString()+' — Browser: '+detectBrowser()+'\n\n';
-  for(const l of langs){
-    const raw=localStorage.getItem(getLangDataKey(l.code)); if(!raw) continue; try{ const data=JSON.parse(raw); const cnt=Object.keys(data).length; if(cnt===0) continue;
-      let csv='BOX,English,'+l.name+',VoiceHint,Language\n';
-      for(let i=1;i<=1000;i++){ const d=data[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=i+',"'+eng.replace(/"/g,'""')+'","'+(d.zomi||'').replace(/"/g,'""')+'","'+(d.hint||'').replace(/"/g,'""')+'","'+l.code+'"\n'; }
-      zip.file(l.code+'_'+l.name.replace(/\s+/g,'_')+'.csv', csv);
-      summary+=l.flag+' '+l.name+' ('+l.code+'): '+cnt+' / 1000\n';
-    }catch(e){}
-  }
-  zip.file('SUMMARY.txt', summary); zip.file('COPYRIGHT.txt','© 2026 NqAI LLC — SOLE OWNER Gin P Khup — Smyrna, TN — ALL LANGUAGES — '+langs.length+' languages — More coming soon — '+detectBrowser());
-  const blob=await zip.generateAsync({type:'blob'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_ALL_'+langs.filter(l=>getCount(l.code)>0).length+'_LANGS_'+new Date().toISOString().slice(0,10)+'_'+detectBrowser().replace(/\s+/g,'_')+'.zip'; a.click();
-}
-function addLang(){
-  const name=prompt('Enter new language — e.g., Swahili, Mizo, Karen — SOLE OWNER 7000 Languages:'); if(!name) return;
-  const cleanName=name.trim(); let code=cleanName.toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,10);
-  const known={'krio':'kri','zomi':'zom','tedim':'zom','hakha':'hak','falam':'cfl','mizo':'lus','swahili':'sw','karen':'kar'};
-  if(known[cleanName.toLowerCase()]) code=known[cleanName.toLowerCase()];
-  if(langs.some(l=>l.code===code)){ alert('Language '+cleanName+' ('+code+') exists! Switching'); switchLang(code); return; }
-  const flag=prompt('Flag code (e.g., TZ for Swahili, IN for Mizo, MM for Hakha):')||code.toUpperCase().slice(0,2);
-  const region=prompt('Region (e.g., Africa, Myanmar, India):')||'World';
-  langs.push({code,name:cleanName,flag:flag.toUpperCase(),region,owner:'Gin P Khup',priority:1,desc:'Added via + Add Language 7000 — More coming soon — All browsers'});
-  localStorage.setItem('nqai_languages_7000', JSON.stringify(langs));
-  switchLang(code);
-  document.getElementById('status').textContent='✅ Added '+cleanName+' ('+code+') — Now pre-built! Own storage nqai_seed_data_'+code+' — All browsers — v2.5.1 — SOLE OWNER';
-}
-function clearCurrentLang(){
-  if(!confirm('Clear all '+getLangName(currentLangCode)+' data? '+Object.keys(done).length+' seeds will be deleted! SOLE OWNER only — Type OK?')) return;
-  const confirm2=prompt('Type DELETE to confirm clearing '+getLangName(currentLangCode)+':');
-  if(confirm2!=='DELETE'){ alert('Cancelled'); return; }
-  localStorage.removeItem(getLangDataKey(currentLangCode));
-  localStorage.removeItem(getLastIndexKey(currentLangCode));
-  done={}; idx=1; saveLangData(); renderAll();
-  document.getElementById('status').textContent='🗑️ Cleared '+getLangName(currentLangCode)+' — 0/1000 — SOLE OWNER — '+detectBrowser();
-}
-async function playAudioBox(boxNum){
-  const a=document.getElementById('audio');
-  // Try IndexedDB first (all browsers)
-  const idbData=await getAudioIDB(currentLangCode, boxNum);
-  if(idbData && idbData.data){
-    a.src=idbData.data; a.style.display='block'; a.play(); document.getElementById('status').textContent='Playing BOX '+boxNum+' from IndexedDB — '+getLangName(currentLangCode)+' — '+detectBrowser();
-    return;
-  }
-  // Fallback localStorage base64 (old)
-  const key='NqAI_Seed1000_Audios_'+currentLangCode+'_'+boxNum+'_base64';
-  const data=localStorage.getItem(key);
-  if(data){
-    a.src=data; a.style.display='block'; a.play(); document.getElementById('status').textContent='Playing BOX '+boxNum+' from localStorage — '+getLangName(currentLangCode);
-  }else{
-    document.getElementById('status').textContent='No audio for BOX '+boxNum+' — '+getLangName(currentLangCode)+' — Record first — '+detectBrowser();
-  }
-}
-// ===== ALL BROWSERS AUDIO RECORDING — FIXED =====
-function getSupportedMimeType(){
-  const ua=navigator.userAgent;
-  const isSafari = /^((?!chrome|android).)*safari/i.test(ua) || (ua.includes('Safari') && !ua.includes('Chrome'));
-  const isFirefox = ua.includes('Firefox');
-  const isChrome = ua.includes('Chrome') && !ua.includes('Edg');
-  const isEdge = ua.includes('Edg');
-  
-  // Test support in order per browser
-  let candidates=[];
-  if(isSafari){
-    candidates=['audio/mp4','audio/aac','audio/x-m4a','audio/wav','audio/webm'];
-  }else if(isFirefox){
-    candidates=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/ogg','audio/mp4'];
-  }else if(isChrome || isEdge){
-    candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/wav'];
-  }else{
-    candidates=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/wav','audio/ogg'];
-  }
-  
-  for(let t of candidates){
-    try{ if(MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) return t; }catch(e){}
-  }
-  return isSafari?'audio/mp4':'audio/webm';
-}
-function startRec(){
-  const browser=detectBrowser();
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || (navigator.userAgent.includes('Safari') && !navigator.userAgent.includes('Chrome'));
-  const statusEl=document.getElementById('status'); const pbar=document.getElementById('pbar'); const audioEl=document.getElementById('audio');
-  if(pbar){ pbar.style.width='0%'; pbar.style.background='#334155'; pbar.style.transition='none'; }
-  if(audioEl){ audioEl.style.display='none'; audioEl.src=''; }
-  if(statusEl) statusEl.textContent='Requesting mic... — '+browser+' — v2.5.1 ALL BROWSERS';
-  if(animationId) cancelAnimationFrame(animationId);
-  if(audioContext&&audioContext.state!=='closed'){ try{ audioContext.close(); }catch(e){} audioContext=null; }
-  
-  // Browser-specific constraints — all browsers compatible
-  let audioConstraints;
-  if(isSafari){
-    audioConstraints={echoCancellation:false, noiseSuppression:false, autoGainControl:false, sampleRate:44100};
-  }else{
-    audioConstraints={echoCancellation:true, noiseSuppression:true, autoGainControl:true, sampleRate:48000, channelCount:1};
-  }
-  
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-    if(statusEl) statusEl.textContent='❌ getUserMedia not supported — Use Chrome/Firefox/Safari/Edge latest — SOLE OWNER';
-    return;
-  }
-  
-  navigator.mediaDevices.getUserMedia({audio:audioConstraints}).then(s=>{
-    localStream=s;
-    const track=s.getAudioTracks()[0];
-    if(!track || track.readyState!=='live'){ if(statusEl) statusEl.textContent='❌ Mic not live — Allow mic in browser settings — '+browser; return; }
-    try{
-      const AC=window.AudioContext||window.webkitAudioContext;
-      audioContext=new AC();
-      if(audioContext.state==='suspended') audioContext.resume();
-      const source=audioContext.createMediaStreamSource(s);
-      analyser=audioContext.createAnalyser();
-      analyser.fftSize=isSafari?512:256;
-      analyser.smoothingTimeConstant=0.8;
-      source.connect(analyser);
-      dataArray=new Uint8Array(analyser.frequencyBinCount);
-    }catch(e){ analyser=null; console.log('Analyser failed',e); }
-    
-    if(typeof MediaRecorder==='undefined'){
-      if(statusEl) statusEl.textContent='❌ MediaRecorder not supported — Update '+browser+' — SOLE OWNER';
-      return;
-    }
-    
-    const mimeType=getSupportedMimeType();
-    try{
-      if(mimeType){
-        try{ mediaRecorder=new MediaRecorder(s,{mimeType}); }catch(e){ mediaRecorder=new MediaRecorder(s); }
-      }else{
-        mediaRecorder=new MediaRecorder(s);
-      }
-    }catch(e){
-      if(statusEl) statusEl.textContent='❌ MediaRecorder failed: '+e.message+' — '+browser+' — Try Chrome';
-      return;
-    }
-    
-    chunks=[];
-    mediaRecorder.ondataavailable=e=>{ if(e.data&&e.data.size>0) chunks.push(e.data); };
-    mediaRecorder.onstart=()=>{
-      if(statusEl) statusEl.textContent='● RECORDING... ('+(mediaRecorder.mimeType||mimeType)+') — Speak now — '+getLangName(currentLangCode)+' — '+browser;
-      document.getElementById('stopBtn').disabled=false;
-      const recBtn=document.getElementById('recBtn');
-      if(recBtn){ recBtn.textContent='● REC...'; recBtn.style.background='#f59e0b'; }
-      if(analyser&&pbar){
-        function updateIndicator(){
-          if(!analyser||!mediaRecorder||mediaRecorder.state!=='recording') return;
-          try{
-            analyser.getByteFrequencyData(dataArray);
-            let sum=0; for(let i=0;i<dataArray.length;i++) sum+=dataArray[i];
-            const avg=sum/dataArray.length;
-            const scale=isSafari?2.5:1.2;
-            const percent=Math.min(95,(avg/128)*100*scale);
-            if(pbar){
-              const cur=parseFloat(pbar.style.width)||0;
-              const target=percent>5?percent:cur*0.95;
-              pbar.style.width=target+'%';
-              pbar.style.background=target>10?'#22c55e':'#475569';
-              pbar.style.transition='width 0.15s ease-out';
-            }
-          }catch(e){}
-          animationId=requestAnimationFrame(updateIndicator);
-        }
-        updateIndicator();
-      }
-    };
-    mediaRecorder.onstop=async()=>{
-      if(animationId) cancelAnimationFrame(animationId);
-      const recBtn=document.getElementById('recBtn');
-      if(recBtn){ recBtn.textContent='● RECORD'; recBtn.style.background='#ef4444'; }
-      if(chunks.length===0){
-        if(statusEl) statusEl.textContent='❌ 0 bytes — Allow mic — '+browser+' — Check mic permissions';
-        if(pbar){ pbar.style.width='0%'; pbar.style.background='#ef4444'; }
-        if(localStream) localStream.getTracks().forEach(t=>t.stop());
-        return;
-      }
-      const finalType=mediaRecorder.mimeType||mimeType||getSupportedMimeType();
-      audioBlob=new Blob(chunks,{type:finalType});
-      if(audioBlob.size<100){
-        if(statusEl) statusEl.textContent='❌ Too short — Speak longer — '+browser;
-        return;
-      }
-      const url=URL.createObjectURL(audioBlob);
-      const a=document.getElementById('audio');
-      if(a){ a.src=url; a.style.display='block'; a.load(); }
-      if(pbar){ pbar.style.width='100%'; pbar.style.background='#22c55e'; pbar.style.transition='width 0.3s'; }
-      
-      // Save to IndexedDB (all browsers) + localStorage fallback
-      try{
-        const saved=await saveAudioIDB(currentLangCode, idx, audioBlob);
-        if(saved){
-          if(statusEl) statusEl.textContent='✅ Stopped — '+(audioBlob.size/1024).toFixed(1)+'KB — '+finalType+' — Saved to IndexedDB — '+browser+' — v2.5.1';
-        }else{
-          // Fallback localStorage base64
-          const reader=new FileReader();
-          reader.onload=()=>{
-            const key='NqAI_Seed1000_Audios_'+currentLangCode+'_'+idx+'_base64';
-            try{ localStorage.setItem(key, reader.result); }catch(e){ console.log('LS quota',e); }
-            if(statusEl) statusEl.textContent='✅ Stopped — '+(audioBlob.size/1024).toFixed(1)+'KB — '+finalType+' — Saved to localStorage (fallback) — '+browser+' — v2.5.1';
-          };
-          reader.readAsDataURL(audioBlob);
-        }
-      }catch(e){
-        if(statusEl) statusEl.textContent='✅ Stopped — '+(audioBlob.size/1024).toFixed(1)+'KB — '+finalType+' — '+browser+' — v2.5.1';
-      }
-      
-      document.getElementById('stopBtn').disabled=true;
-      setTimeout(()=>{
-        if(localStream) localStream.getTracks().forEach(t=>t.stop());
-        if(audioContext&&audioContext.state!=='closed'){ try{ audioContext.close(); }catch(e){} audioContext=null; }
-      },500);
-    };
-    mediaRecorder.onerror=(e)=>{
-      if(statusEl) statusEl.textContent='❌ Recorder error: '+(e.error?e.error.name:e.message)+' — '+browser+' — SOLE OWNER';
-    };
-    try{ mediaRecorder.start(); }catch(e){ try{ mediaRecorder.start(1000); }catch(e2){ if(statusEl) statusEl.textContent='❌ Start failed: '+e2.message; } }
-  }).catch(err=>{
-    const statusEl=document.getElementById('status'); const pbar=document.getElementById('pbar');
-    if(pbar){ pbar.style.width='0%'; pbar.style.background='#ef4444'; }
-    const browser=detectBrowser();
-    if(err.name==='NotAllowedError'){
-      if(isSafari){
-        if(statusEl) statusEl.textContent='❌ Mic denied — Safari: Settings → Websites → Microphone → Allow + System Settings → Privacy → Microphone → Safari ON — '+browser;
-      }else{
-        if(statusEl) statusEl.textContent='❌ Mic denied — '+browser+': Address bar → Lock icon → Site settings → Microphone → Allow';
-      }
-    }else if(err.name==='NotFoundError'){
-      if(statusEl) statusEl.textContent='❌ No mic found — Connect mic — '+browser;
-    }else{
-      if(statusEl) statusEl.textContent='❌ Mic error: '+err.name+' '+err.message+' — '+browser+' — SOLE OWNER';
-    }
-  });
-}
-function stopRec(){
-  if(mediaRecorder&&mediaRecorder.state==='recording'){
-    try{ mediaRecorder.stop(); document.getElementById('status').textContent='Processing... — '+detectBrowser()+' — v2.5.1'; }catch(e){ console.log(e); }
-    document.getElementById('stopBtn').disabled=true;
-  }
-}
-// Init
-openIDB().then(()=>{ console.log('IDB ready — All browsers'); });
-loadLangData(currentLangCode);
-renderAll();
+// BASE_1000 - CLEAN - NO Extra blessing
+const BASE_1000 = ['Hello', 'How are you?', 'I am fine', 'What is your name?', 'My name is Gin', 'Good morning', 'Good afternoon', 'Good evening', 'Good night', 'Thank you', 'Please', 'Sorry', 'Yes', 'No', 'Welcome', 'Excuse me', 'I love you', 'I need help', 'Where is the market?', 'How much is this?', 'Too expensive', 'Water please', 'Food please', 'I am hungry', 'I am thirsty', 'My family', 'My father', 'My mother', 'My brother', 'My sister', 'My wife', 'My husband', 'My son', 'My daughter', 'House', 'Village', 'School', 'Church', 'Today', 'Tomorrow', 'Yesterday', 'Help me', 'Hospital', 'Doctor', 'Phone number', 'What time is it?', 'I am going home', 'I am coming', 'Where are you?', 'I am here', 'Come here', 'Go there', 'Sit down', 'Stand up', 'Open the door', 'Close the door', 'Turn on the light', 'Turn off the light', 'I understand', "I don't understand", 'What do you want?', 'I want water', 'I want food', 'Very good', 'Very bad', 'Big house', 'Small house', 'Long road', 'Short road', 'New clothes', 'Old clothes', 'Hot water', 'Cold water', 'Good weather', 'Bad weather', 'It is raining', 'It is sunny', 'It is windy', 'It is cold', 'It is hot', 'My friend', 'My friends', 'God loves you', 'Pray for me', 'Thank God', 'Bless you', 'Peace be with you', 'See you later', 'See you tomorrow', 'Take care', 'I am tired', 'I am sick', 'I am happy', 'I am sad', "Don't worry", 'Be careful', 'Hurry up', 'Slow down', 'Wait a minute', "Let's go", 'Where is the bathroom?', 'I need a doctor', 'Call the police', 'I am lost', 'Show me the way', 'How far is it?', 'It is near', 'It is far', 'Left side', 'Right side', 'Go straight', 'Turn left', 'Turn right', 'Stop here', 'I live here', 'This is my home', 'That is his house', 'This is good', 'That is bad', 'I like it', "I don't like it", 'I want to learn', 'I want to teach', 'Speak slowly', 'Say again please', 'Write it down', 'I can read', 'I can write', 'Do you understand?', 'I understand a little', 'What language do you speak?', 'I speak Zomi', 'I speak English', 'Learn together', "Let's eat", "Let's drink", 'Breakfast time', 'Lunch time', 'Dinner time', 'I cooked rice', 'Delicious food', 'Fresh water', 'Clean clothes', 'Dirty clothes', 'Wash your hands', 'Brush your teeth', 'Take a bath', 'Go to sleep', 'Wake up early', 'Good dreams', 'My name is written here', 'This is my book', 'That is your book', 'Open your book', 'Read this', 'Write your name', 'Count numbers', 'One, two, three', 'I have money', 'I have no money', 'I will pay', 'Keep the change', 'Cheaper please', 'I will buy this', 'I will sell that', 'Market day', 'Rice field', 'Corn field', 'Chicken', 'Cow', 'Goat', 'Dog', 'Cat', 'Bird', 'Fish', 'Tree', 'Flower', 'Mountain', 'River', 'Lake', 'Forest', 'Sun', 'Moon', 'Stars', 'Sky', 'Cloud', 'Rain', 'Wind', 'Fire', 'Earth', 'Stone', 'Road', 'Bridge', 'Car', 'Bicycle', 'Motorcycle', 'Bus', 'Walk fast', 'Walk slowly', 'Run', 'Jump', 'Swim', 'Fly', 'Sing a song', 'Dance', 'Play', 'Work', 'Rest', 'Sleep', 'Cook', 'Eat rice', 'Drink tea', 'Drink coffee', 'Make tea', 'Cut wood', 'Carry water', 'Build house', 'Clean house', 'Sweep floor', 'Wash dishes', 'My father works', 'My mother cooks', 'Children play', 'Teacher teaches', 'Student learns', 'Farmer farms', 'Pastor preaches', 'Doctor helps', 'We help each other', 'We love each other', 'I go to church', 'I go to school', 'I go to market', 'I go to hospital', 'I go to work', 'I stay home', 'I am at home', 'He is at work', 'She is at school', 'They are in church', 'Who is this?', 'Who is that?', 'What is this?', 'What is that?', 'Where is this?', 'Where is that?', 'Why are you crying?', 'Why are you laughing?', 'How old are you?', 'I am fifty six years old', 'Where were you born?', 'I was born in Myanmar', 'I live in Tennessee', 'Smyrna Tennessee', 'United States', 'I love my family', 'Family is important', 'Respect your parents', 'Love your neighbor', 'Help the poor', 'God is good', 'God is great', 'Jesus loves you', 'Trust in God', 'Faith', 'Hope', 'Love', 'Joy', 'Peace', 'Kindness', 'Good morning everyone', 'Good night everyone', 'Happy birthday', 'Merry Christmas', 'Happy New Year', 'Congratulations', 'Well done', 'Great job', 'Keep going', "Don't give up", 'I will try', 'I will come tomorrow', 'I will go now', 'I will wait here', 'I will call you', 'I will help you', 'You can do it', 'We can do it', "Let's work together", 'Together we are strong', 'One family', 'One community', 'One village', 'One church', 'One God', 'Be honest', 'Be kind', 'Be humble', 'Be patient', 'Be strong', 'Morning prayer', 'Evening prayer', 'Read the Bible', 'Sing hymn', 'Sunday service', 'Wednesday prayer', 'Youth meeting', "Women's meeting", "Men's meeting", "Children's meeting", 'Where is your father?', 'Where is your mother?', 'How is your father?', 'How is your mother?', 'How is your family?', 'My family is fine', 'Thank you for asking', 'You are welcome', 'No problem', "It's okay", 'I am busy', 'I am free', 'I am at work', 'I am on the way', 'I am in the market', 'I am cooking', 'I am eating', 'I am drinking', 'I am reading', 'I am writing', 'I am walking', 'I am running', 'I am working', 'I am resting', 'I am praying', 'I am singing', 'I am learning Zomi', 'I am teaching English', 'I am learning fast', 'I am improving', 'Speak Zomi please', 'Translate to English', 'Translate to Zomi', 'What does this mean?', 'It means hello', 'How do you say this?', 'Say it in Zomi', 'Say it in English', 'Correct pronunciation', 'Listen carefully', 'Repeat after me', 'Again please', 'One more time', 'Very clear', 'Not clear', 'Loud and clear', 'Soft voice', 'Fast speech', 'Slow speech', 'Good accent', 'Good job speaking', 'You speak well', 'Practice every day', 'Every day I learn', 'Language is important', 'Save our language', 'Teach our children', 'Keep our culture', 'Remember our village', 'Remember our history', 'I miss home', 'I miss my village', 'I miss my family', 'I will return home', 'Home sweet home', 'This is my village', 'That is my farm', 'Rice is ready', 'Harvest time', 'Planting time', 'Rainy season', 'Dry season', 'Hot season', 'Cold season', 'Morning time', 'Noon time', 'Afternoon', 'Evening time', 'Night time', 'Midnight', 'Today is Monday', 'Today is Tuesday', 'Today is Wednesday', 'Today is Thursday', 'Today is Friday', 'Today is Saturday', 'Today is Sunday', 'This week', 'Next week', 'Last week', 'This month', 'Next month', 'Last month', 'This year', 'Next year', 'Last year', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'What date today?', 'What month now?', 'Number one', 'Number two', 'Number three', 'Number four', 'Number five', 'Number six', 'Number seven', 'Number eight', 'Number nine', 'Number ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety', 'One hundred', 'One thousand', 'Many people', 'Few people', 'Some people', 'All people', 'Everybody', 'Nobody', 'Somebody', 'Anybody', 'Who knows?', 'I know', "I don't know", 'I think so', "I don't think so", 'Maybe', 'Probably', 'Certainly', 'Of course', 'Sure', 'Absolutely', 'Never', 'Always', 'Sometimes', 'Often', 'Usually', 'Rarely', 'Every day', 'Every night', 'Every morning', 'Every evening', 'Once a day', 'Twice a day', 'Three times a day', 'Morning to night', 'Day and night', 'Work hard', 'Study hard', 'Try hard', 'Do your best', 'Best wishes', 'Good luck', 'Take your time', 'Be safe', 'Be healthy', 'Get well soon', 'Feel better', 'Long life', 'Long live', 'Thank you very much', 'Thank you so much', 'Thanks a lot', 'Many thanks', "You're welcome very much", 'I appreciate you', 'I respect you', 'I trust you', 'I believe you', 'I support you', 'I need you', 'I miss you', 'I remember you', 'I will never forget you', 'Where do you work?', 'Where do you live?', 'Where do you study?', 'What do you do?', 'What is your job?', 'What is your favorite food?', 'What is your favorite color?', 'What is your favorite song?', 'How is life?', 'How is work?', 'How is school?', 'How is church?', 'Everything is good', 'Everything is okay', 'Nothing special', 'Something important', 'Something good', 'Something bad', 'Everything will be okay', 'God will help us', "Don't be afraid", "Don't be sad", "Don't be angry", 'Be happy', 'Stay happy', 'Stay strong', 'Stay healthy', 'Stay safe', 'Stay together', 'Stay in touch', 'I will pray for you', 'Pray for us', 'God bless you', 'God bless your family', 'God be with you', 'Peace of God', 'Love of God', 'Grace of God', 'Mercy of God', 'Glory to God', 'Thank you God for today', 'God gave us life', 'God gave us food', 'God gave us water', 'We thank God', 'We praise God', 'We worship God', 'We love God', 'We trust God', 'We need God', 'My heart is happy', 'My heart is sad', 'My heart is clean', 'Open your heart', 'Close your eyes', 'Open your eyes', 'Look here', 'Look there', 'Listen to me', 'Hear me', 'Hold my hand', 'Give me your hand', 'Come with me', 'Stay with me', 'Wait for me', 'Follow me', 'Lead the way', 'Show me', 'Teach me', 'Tell me', 'Tell me the truth', 'Tell me story', 'Story time', 'Long story', 'Short story', 'True story', 'Old story', 'New story', 'Funny story', 'Sad story', 'Good story', 'Bad story', 'My story', 'Your story', 'Our story', 'Village story', 'Family story', "God's story", 'Bible story', 'History story', 'Speak truth', 'Speak slowly please', 'Speak clearly', "Don't shout", "Don't whisper", 'Talk to me', 'Talk to him', 'Talk to her', 'Talk to them', 'Talk to us', 'Call me', 'Call him', 'Call her', 'Call them', 'Answer me', 'Answer the phone', 'Hang up', 'Call back', 'Text me', 'Message me', 'Send me', 'Give me', 'Take this', 'Take that', 'Bring this', 'Bring that', 'Carry this', 'Carry that', 'Hold this', 'Hold that', 'Put here', 'Put there', 'Keep here', 'Keep there', 'Leave it', 'Leave here', 'Leave now', 'Come back', 'Go back', 'Return soon', 'See you soon', 'See you again', 'See you next time', 'See you at church', 'See you at market', 'See you at home', 'See you at school', 'See you at work', 'See you tonight', 'See you in the morning', 'Goodbye', 'Bye bye', 'Take care bye', 'Have a nice day', 'Have a nice night', 'Have a good trip', 'Have a safe trip', 'Have fun', 'Enjoy your day', 'Enjoy your meal', 'Bon appetit', 'Eat well', 'Drink well', 'Sleep well', 'Work well', 'Study well', 'Live well', 'Love well', 'Pray well', 'Sing well', 'Walk well', 'Go well', 'Come well', 'Stay well', 'All is well', 'Everything is well', 'I am well', 'We are well', 'Family is well', 'Children are well', 'Parents are well', 'Friends are well', 'Village is well', 'Church is well', 'Thank God we are well', 'God keeps us well', 'God makes us well', 'God loves us well', 'God leads us well', 'Amen', 'Let us pray', 'Let us sing', 'Let us eat', 'Let us go', 'Let us work', 'Let us learn', 'Let us help', 'Let us love', 'Let us thank God', 'Let us praise God', 'I want to go to America', 'I want to go home', 'I want to help people', 'I want to save language', 'I want to teach children', 'I want to build church', 'I want to build school', 'I want to build house', 'I want to plant rice', 'I want to learn more', 'Knowledge is power', 'Education is important', 'Language is life', 'Culture is important', 'Tradition is important', 'Family is life', 'Love is life', 'God is life', 'Water is life', 'Food is life', 'Rice is life', 'Work is life', 'We work for family', 'We work for God', 'We live for God', 'We live for family', 'We live for love', 'We live for peace', 'Peace in village', 'Peace in family', 'Peace in church', 'Peace in heart', 'Love in family', 'Love in church', 'Love in village', 'Love in heart', 'Joy in heart', 'Joy in family', 'Joy in church', 'Joy in village', 'Faith in God', 'Hope in God', 'Love for God', 'Life with God', 'Walk with God', 'Talk with God', 'Live with God', 'Stay with God', 'Thank God always', 'I am Zomi', 'You are Zomi', 'We are Zomi', 'Zomi language', 'Zomi people', 'Zomi culture', 'Zomi village', 'Zomi house', 'Zomi food', 'Zomi song', 'Zomi dance', 'Zomi tradition', 'Zomi history', 'Zomi story', 'Zomi family', 'Zomi church', 'Zomi community', 'Zomi land', 'Zomi heart', 'Zomi pride', '7000 languages', 'Save languages', 'All languages are important', 'Every language has value', 'Language is identity', 'Language is heritage', 'Teach mother tongue', 'Learn mother tongue', 'Speak mother tongue', 'Write mother tongue', 'Read mother tongue', 'Sing in mother tongue', 'Pray in mother tongue', 'Dream in mother tongue', 'Live in mother tongue', 'Love mother tongue', 'Keep mother tongue', 'Save mother tongue', 'Share mother tongue', 'Spread mother tongue', 'NqAI LLC', 'SOLE OWNER Gin P Khup', 'Smyrna Tennessee USA', '2026 NqAI Seed1000', '1000 phrases real basic', 'FINAL version', 'Zero error', 'All rights reserved', 'God bless NqAI', 'Thank you for using NqAI', 'I am Gin P Khup', 'This is my project', 'This is my language work', 'This is my dream', 'This is my heart work', 'For Zomi people', 'For 7000 languages', 'For future generation', 'For our children', 'For our heritage', 'Start now', 'Begin now', 'Do it now', 'Finish well', 'Complete 1000', '1000 done', 'We made it', 'We finished', 'Praise God', 'Hallelujah', 'One more step', 'Last box', 'First box', 'Middle box', 'Every box matters', 'Save all boxes', 'Export all', 'Clean workspace', 'Final build', 'God bless America', 'My heart thanks you', 'My family thanks you', 'Our community thanks you', 'Zomi thanks you', '7000 languages thanks you', 'God bless your work', 'Keep up the good work', 'Continue learning', 'Continue teaching', 'Continue saving language', 'God bless you and your family', 'May God protect you', 'May God guide you', 'Walk in peace', 'Live in harmony', 'Speak with love', 'Work with joy', 'Help one another', 'Share your food', 'Share your water', 'Clean your heart', 'Open your mind', 'Learn new words', 'Teach old words', 'Keep your promise', 'Respect elders', 'Love children', 'Honor parents', 'Serve community', 'Build together', 'Plant seeds', 'Water plants', 'Harvest crops', 'Store rice', 'Cook together', 'Sing together', 'Pray together', 'Dance together', 'Laugh together', 'Cry together', 'Morning has come', 'Night has come', 'Sun is rising', 'Sun is setting', 'Moon is shining', 'Stars are bright', 'Rain is coming', 'Wind is blowing', 'Fire is burning', 'Water is flowing', 'Road is long', 'House is big', 'Village is beautiful', 'Church is open', 'School is closed', 'Market is busy', 'Food is ready', 'Water is clean', 'Clothes are new', 'Book is open', 'I am learning', 'You are teaching', 'We are listening', 'They are speaking', 'He is working', 'She is cooking', 'It is good', 'This is true', 'That is false', 'These are mine', 'Those are yours', 'All are welcome', 'None are left', 'Some are here', 'Many are coming', 'One more time please', 'Two more days', 'Three more nights', 'Four more weeks', 'Five more years', 'First day', 'Second day', 'Third day', 'Fourth day', 'Fifth day', 'Last day', 'Early morning', 'Late night', 'Midday', 'Midnight', 'Sunrise', 'Sunset', 'Good health', 'Good life', 'Good heart', 'Good mind', 'Good spirit', 'Be kind to all', 'Be true to yourself', 'Be faithful', 'Be grateful', 'Be joyful', 'Thank you for coming', 'Thank you for helping', 'Thank you for teaching', 'Thank you for sharing', 'Thank you for caring', 'Please come in', 'Please sit down', 'Please stand up', 'Please listen', 'Please speak', 'Come quickly', 'Go slowly', 'Wait patiently', 'Listen carefully', 'Speak kindly', 'Love never fails', 'Faith moves mountains', 'Hope never dies', 'Peace be still', 'Joy comes in morning', 'God is with us', 'God is for us', 'God loves us all', 'God hears our prayer', 'God answers prayer', 'My heart thanks you', 'My family thanks you', 'Our community thanks you', 'Zomi thanks you', '7000 languages thanks you', 'God bless your work', 'Keep up the good work', 'Continue learning', 'Continue teaching', 'Continue saving language', 'Language is treasure', 'Words are power', 'Stories are life', 'Songs are history', 'Culture is pride', 'One more step', 'Last box', 'First box', 'Middle box', 'Every box matters', 'Save all boxes', 'Export all', 'Clean workspace', 'Final build', 'God bless America', 'My heart thanks you again', 'Our village is happy', 'Our church is happy', 'Our children are happy', 'Our future is bright', 'Keep our language alive', 'Pass it to children', 'Write it down', 'Record your voice', 'Share with world', 'This is the end', 'We have finished', 'We did it together', 'Praise the Lord', 'Hallelujah amen', 'Begin again', 'Start new chapter', 'Open new door', 'Walk new path'];
+const ZOMI_KEYS = {
+  vowels: ["a","aw","e","i","o","u","A","Aw","E","I","O","U"],
+  tones: ["á","à","â","é","è","ê","í","ì","ó","ò","ô","ú","ù","Á","À","É","È","Ó","Ò","Ú","Ù"],
+  cons: ["b","ch","d","g","h","k","kh","l","m","n","ng","p","ph","s","t","th","v","z","zh","B","Ch","D","G","H","K","L","M","N","Ng","P","S","T","V","Z"],
+  common: ["ka","la","hi","na","ni","te","pi","pu","nu","ta","kua","nang","hong","ding","ah","lo","ve","mah","zong","teh"],
+  numbers: ["khat","nih","thum","li","nga","guk","sagi","giat","kua","sawm","sawm le khat","sawm le nih","sawm le thum","sawm le li","sawm le nga","sawm le guk","sawm le sagi","sawm le giat","sawm le kua","sawmnih","sawmthum","sawmli","sawmnga","sawmguk","sawmsagi","sawmgiat","sawmkua","za khat","1","2","3","4","5","6","7","8","9","10","20","30","100","1000"],
+  days: ["Nipi","Seppatni","Sepnilehni","Nilaini","Ningani","Singelni","Kiginni","tuni","zing","zingsang","nitaklam","zankim"],
+  months: ["January","February","March","April","May","June","July","August","September","October","November","December","Kha Khar","Thla Khar"],
+  pronouns: ["kei","keima","ka","nang","nangma","na","ama","amah","a","kou","kote","eite","i","noute","note","amau","amaute","keimah","nangmah","amahmah"],
+  family: ["pa","nu","tapa","tanu","ta","upat","pupat","pipat","unaupa","unaunu","pu","pi","pupu","pipi","be","be le be","innkuan","sanggam","lawm","zi","leng","pate","nute"]
+};
+const ZOMI_EN_DICT = {
+  "ka pa": "My father", "ka nu": "My mother", "ka tapa": "My son", "ka tanu": "My daughter",
+  "ka innkuan": "My family", "ka sanggam": "My sibling", "ka zi": "My wife", "ka pasal": "My husband",
+  "kei": "I / me", "nang": "you", "ama": "he / she", "kote": "we", "note": "you all", "amau": "they",
+  "ka": "my", "na": "your", "a": "his/her", "i": "our",
+  "khat": "one", "nih": "two", "thum": "three", "li": "four", "nga": "five",
+  "guk": "six", "sagi": "seven", "giat": "eight", "kua": "nine", "sawm": "ten", "za khat": "one hundred",
+  "Nipi": "Sunday", "Seppatni": "Monday", "tuni": "today", "zing": "morning",
+  "damdam": "Hello", "na dam maw": "How are you?", "ka dam": "I am fine", "ki mu thei": "see you",
+  "lungdam": "thank you", "hehpih": "please", "ka it": "I love you", "hong huh": "help me"
+};
+function transliterateZomi(s){ const map={"á":"a","à":"a","â":"a","é":"e","è":"e","ê":"e","í":"i","ì":"i","ó":"o","ò":"o","ô":"o","ú":"u","ù":"u","Á":"A","À":"A","É":"E","È":"E","Ó":"O","Ò":"O","Ú":"U","Ù":"U"}; let out=s; for(const k in map){ out=out.split(k).join(map[k]); } return out.toLowerCase().replace(/[^a-z0-9 ]/g,'').trim(); }
+function suggestEnglish(zomi){ const lower=zomi.toLowerCase().trim(); if(ZOMI_EN_DICT[lower]) return ZOMI_EN_DICT[lower]; for(const z in ZOMI_EN_DICT){ if(lower.includes(z.toLowerCase())) return ZOMI_EN_DICT[z]+` (from "${z}")`; } return ""; }
+let idx=1; let done={}; let langs=[{code:'zom',name:'Zomi Tedim',owner:'Gin P Khup'}]; let currentLang=langs[0];
+let mediaRecorder=null; let chunks=[]; let audioBlob=null;
+const DATA_KEY='nqai_seed_progress_data'; const LAST_KEY='nqai_seed_last_index';
+function load(){ try{ const d=localStorage.getItem(DATA_KEY); if(d){ const o=JSON.parse(d); done=o.done||{}; const last=localStorage.getItem(LAST_KEY); if(last) idx=parseInt(last)||1; } }catch(e){} }
+function saveLocal(){ localStorage.setItem(DATA_KEY,JSON.stringify({done})); localStorage.setItem(LAST_KEY,String(idx)); }
+function renderGrid(){ const g=document.getElementById('grid'); g.innerHTML=''; for(let i=1;i<=1000;i++){ const b=document.createElement('div'); b.className='box'+(done[i]?' done':(i===idx?' current':'')); b.textContent=i; b.onclick=()=>{ idx=i; render(); }; g.appendChild(b); } document.getElementById('pbar').style.width=(Object.keys(done).length/10)+'%'; document.getElementById('ptext').textContent=Object.keys(done).length+' / 1000 done'; }
+function renderKB(){ const kb=document.getElementById('kb'); kb.innerHTML=''; for(const cat in ZOMI_KEYS){ const div=document.createElement('div'); div.style.width='100%'; div.style.marginTop='6px'; const label=document.createElement('div'); label.textContent=cat.toUpperCase()+':'; label.style.fontSize='9px'; label.style.fontWeight='800'; label.style.color='#94a3b8'; div.appendChild(label); const row=document.createElement('div'); row.className='kb'; ZOMI_KEYS[cat].forEach(k=>{ const btn=document.createElement('button'); btn.textContent=k; btn.onclick=()=>{ const inp=document.getElementById('zomi'); const start=inp.selectionStart||inp.value.length; const end=inp.selectionEnd||inp.value.length; const v=inp.value; const nv=v.substring(0,start)+k+v.substring(end); inp.value=nv; onZomiInput(nv); inp.focus(); inp.setSelectionRange(start+k.length,start+k.length); }; row.appendChild(btn); }); div.appendChild(row); kb.appendChild(div); } }
+function render(){ const eng=BASE_1000[idx-1]||''; document.getElementById('eng').textContent=eng; document.getElementById('boxnum').textContent=idx; document.getElementById('cur').textContent=idx; document.getElementById('clang').textContent=currentLang.name+' ('+currentLang.code+')'; const isDone=!!done[idx]; document.getElementById('zomi').value=isDone?done[idx].zomi||'':''; document.getElementById('hint').value=isDone?done[idx].hint||'':''; document.getElementById('status').textContent=isDone?'🔒 BOX '+idx+' Done - Locked! - SOLE OWNER Gin P Khup':'FINAL BOX '+idx+' - '+currentLang.name+' - Available! - SOLE OWNER Gin P Khup - 1000/1000 REAL BASIC'; if(isDone){ document.getElementById('zomi').disabled=true; document.getElementById('hint').disabled=true; } else { document.getElementById('zomi').disabled=false; document.getElementById('hint').disabled=false; } renderGrid(); }
+function onZomiInput(v){ const plain=transliterateZomi(v); const eng=suggestEnglish(v); document.getElementById('zomi').value=v; if(v){ document.getElementById('autobox').style.display='block'; document.getElementById('at_typed').textContent=v; document.getElementById('at_plain').textContent=plain; document.getElementById('at_voice').textContent=document.getElementById('hint').value||plain; if(eng){ document.getElementById('at_eng').textContent='→ '+eng; document.getElementById('at_eng_wrap').style.display='block'; } else { document.getElementById('at_eng_wrap').style.display='none'; } if(!document.getElementById('hint').value) document.getElementById('hint').value=plain; } else { document.getElementById('autobox').style.display='none'; } }
+function startRec(){ navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{ mediaRecorder=new MediaRecorder(s); chunks=[]; mediaRecorder.ondataavailable=e=>chunks.push(e.data); mediaRecorder.onstop=()=>{ audioBlob=new Blob(chunks,{type:'audio/webm'}); const url=URL.createObjectURL(audioBlob); const a=document.getElementById('audio'); a.src=url; a.style.display='block'; }; mediaRecorder.start(); document.getElementById('status').textContent='● RECORDING...'; document.getElementById('stopBtn').disabled=false; }).catch(()=>{ document.getElementById('status').textContent='Mic permission denied'; }); }
+function stopRec(){ if(mediaRecorder){ mediaRecorder.stop(); document.getElementById('status').textContent='Recording stopped - Ready to save'; document.getElementById('stopBtn').disabled=true; } }
+function saveBox(){ const zomi=document.getElementById('zomi').value.trim(); const hint=document.getElementById('hint').value.trim(); if(!zomi){ alert('Type Zomi first!'); return; } done[idx]={zomi,hint,time:Date.now()}; saveLocal(); if(idx<1000) idx++; render(); document.getElementById('status').textContent='✅ Saved BOX '+(idx-1)+' - SOLE OWNER Gin P Khup'; }
+function exportCSV(){ let csv='BOX,English,Zomi,VoiceHint,Owner\n'; for(let i=1;i<=1000;i++){ const d=done[i]; const eng=BASE_1000[i-1]||''; if(d) csv+=`${i},"${eng.replace(/"/g,'""')}","${(d.zomi||'').replace(/"/g,'""')}","${(d.hint||'').replace(/"/g,'""')}","Gin P Khup"\n`; } const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='SEED1000_1000_REAL_BASIC_SOLE_OWNER_Gin_P_Khup.csv'; a.click(); }
+function exportZIP(){ exportCSV(); alert('CSV exported - ZIP needs server. SOLE OWNER Gin P Khup'); }
+function addLang(){ const name=prompt('Enter language name (e.g. Swahili):'); if(!name) return; const code=name.toLowerCase().replace(/[^a-z]/g,'').substring(0,4)+'_'+Math.floor(Math.random()*10000); langs.push({code,name,owner:'Gin P Khup'}); const div=document.getElementById('langs'); div.innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join(''); }
+load(); renderKB(); render();
+document.getElementById('langs').innerHTML=langs.map(l=>`<div>${l.name} (${l.code}) - Owner: ${l.owner}</div>`).join('');
 </script>
 </body>
 </html>
