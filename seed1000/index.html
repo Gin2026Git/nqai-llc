@@ -1,52 +1,49 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>NqAI Seed1000 — ZOMI + KRIO ONLY — SOLE OWNER Gin P Khup</title>
+<title>NqAI Seed1000 — ZOMI + KRIO ONLY — 1000 English — SOLE OWNER Gin P Khup</title>
 <style>
 *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#0f172a;color:#e2e8f0}
 .header{background:#22c55e;color:#000;padding:14px;text-align:center;position:sticky;top:0;z-index:20}
 .header h1{margin:0;font-size:20px} .header p{margin:4px 0 0;font-size:11px;font-weight:700}
-.wrap{max-width:700px;margin:0 auto;padding:14px}
+.wrap{max-width:750px;margin:0 auto;padding:14px}
 .card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px;margin:12px 0}
 .btn{background:#22c55e;color:#000;border:none;padding:10px 16px;border-radius:999px;font-weight:900;cursor:pointer;margin:4px;font-size:13px}
 .btn2{background:#fff;color:#000;border:none;padding:10px 16px;border-radius:999px;font-weight:900;cursor:pointer;margin:4px;font-size:13px}
 .btn3{background:#334155;color:#fff;border:1px solid #475569;padding:8px 12px;border-radius:999px;font-weight:700;cursor:pointer;margin:3px;font-size:12px}
 .tab{flex:1;padding:12px;border-radius:999px;border:2px solid #fff;font-weight:900;cursor:pointer;font-size:14px}
 .tab.active{outline:3px solid #000}
-input{width:100%;background:#0f172a;color:#e2e8f0;border:1px solid #475569;border-radius:8px;padding:10px;margin:6px 0;font-size:14px}
-.phrase{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:8px}
+input,select{width:100%;background:#0f172a;color:#e2e8f0;border:1px solid #475569;border-radius:8px;padding:10px;margin:6px 0;font-size:14px}
+.phrase{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px;margin:8px 0}
 .small{font-size:11px;color:#94a3b8}
+.sugg{background:#0f172a;border:1px dashed #22c55e;border-radius:8px;padding:8px;margin:6px 0;cursor:pointer}
+.sugg:hover{background:#1e293b}
+.progress{background:#0f172a;border-radius:999px;height:12px;overflow:hidden} .bar{background:#22c55e;height:12px}
 </style>
 </head>
 <body>
 <div class="header" id="header">
-  <h1 id="headerTitle">🇲🇲 ZOMI ONLY — Seed1000</h1>
+  <h1 id="headerTitle">🇲🇲 ZOMI ONLY — Seed1000 — 1000 English</h1>
   <p>SOLE OWNER Gin P Khup • NqAI LLC • Smyrna TN • https://nqai.llc/seed1000</p>
-  <p style="background:#000;color:#fff;display:inline-block;padding:4px 10px;border-radius:999px;margin-top:6px">✅ NO KEYBOARD — Use Your Phone Keyboard • ✅ ZOMI + KRIO ONLY — Simple</p>
+  <p style="background:#000;color:#fff;display:inline-block;padding:4px 10px;border-radius:999px;margin-top:6px">✅ NO KEYBOARD — Use Your Phone Keyboard • ✅ ZOMI + KRIO ONLY • ✅ 1000 ENGLISH SUGGESTIONS</p>
 </div>
 <div class="wrap">
-  <!-- CLEAR SWITCHER — Users know which page they are on -->
   <div style="display:flex;gap:8px">
     <button id="tabZom" class="tab active" onclick="switchLang('zom')" style="background:#22c55e;color:#000">🇲🇲 ZOMI<br><span style="font-size:11px">Zomi Tedim • My Main</span></button>
     <button id="tabKri" class="tab" onclick="switchLang('kri')" style="background:#f59e0b;color:#000">🇸🇱 KRIO<br><span style="font-size:11px">Krio • Sierra Leone</span></button>
   </div>
   <div class="card" style="border-color:#22c55e">
     <div style="font-weight:900;color:#22c55e" id="pageInfoTitle">📄 THIS IS YOUR ZOMI PAGE</div>
-    <div class="small" style="margin-top:6px;line-height:1.6" id="pageInfo">
-      • Language: <b style="color:#fff">ZOMI — Zomi Tedim — ZOM</b><br>
-      • Only Zomi + Krio here — No 31 languages, simple!<br>
-      • No keyboard here — Use your own phone / computer keyboard.<br>
-      • Zomi data saved separately from Krio — Never mixes.
-    </div>
-    <div style="margin-top:8px;font-size:12px">🔗 Share this page: <b id="shareLink" style="background:#0f172a;padding:4px 8px;border-radius:999px">https://nqai.llc/seed1000?lang=zom</b> <button class="btn3" onclick="copyLink()">⎘ COPY LINK</button></div>
+    <div class="small" style="margin-top:6px;line-height:1.6" id="pageInfo">• Language: <b style="color:#fff">ZOMI — Zomi Tedim — ZOM</b><br>• Only Zomi + Krio — No 31 languages, simple!<br>• No keyboard — Use your own phone / computer keyboard.<br>• 1000 English suggestions below — Tap one to fill English, then type Zomi / Krio.</div>
+    <div style="margin-top:8px;font-size:12px">🔗 Share: <b id="shareLink" style="background:#0f172a;padding:4px 8px;border-radius:999px">https://nqai.llc/seed1000?lang=zom</b> <button class="btn3" onclick="copyLink()">⎘ COPY LINK</button></div>
+    <div style="margin-top:10px"><div class="small">Progress: <span id="progText">0 / 1000</span></div><div class="progress"><div class="bar" id="progBar" style="width:0%"></div></div></div>
   </div>
   <div class="card">
-    <div style="font-weight:900" id="recTitle">🎤 Record Zomi Phrase</div>
-    <input id="enInput" placeholder="English: e.g. Hello">
+    <div style="font-weight:900" id="recTitle">🎤 Record / Add Phrase</div>
+    <input id="enInput" placeholder="English — Tap a suggestion below or type">
     <input id="langInput" placeholder="Zomi: e.g. Dam">
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn" onclick="startRec()">🎤 RECORD</button>
@@ -58,13 +55,29 @@ input{width:100%;background:#0f172a;color:#e2e8f0;border:1px solid #475569;borde
     <button class="btn" onclick="addPhrase()" style="width:100%;margin-top:8px">➕ ADD PHRASE</button>
   </div>
   <div class="card">
-    <div style="font-weight:900" id="listTitle">📋 Zomi Phrases — <span id="count">0</span> / 1000</div>
-    <input id="search" placeholder="Search..." oninput="renderList()">
+    <div style="font-weight:900">💡 1000 English Suggestions — Tap to Use</div>
+    <div class="small">From your previous version — 1000 REAL BASIC English phrases. Tap one → English fills → Type Zomi / Krio → Add.</div>
+    <input id="suggSearch" placeholder="Search 1000 English... e.g. father, water, God" oninput="renderSugg()">
+    <select id="suggFilter" onchange="renderSugg()">
+      <option value="all">All 1000 — Show 50 at a time</option>
+      <option value="todo">Not yet done — Need translation</option>
+      <option value="done">Done — Already translated</option>
+    </select>
+    <div id="suggList"></div>
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <button class="btn3" onclick="suggPage--;renderSugg()">← Prev 50</button>
+      <button class="btn3" onclick="suggPage++;renderSugg()">Next 50 →</button>
+      <span class="small" id="suggPageInfo" style="align-self:center"></span>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-weight:900" id="listTitle">📋 My Phrases — <span id="count">0</span> / 1000</div>
+    <input id="search" placeholder="Search my saved phrases..." oninput="renderList()">
     <div id="list"></div>
   </div>
   <div class="card">
     <div style="font-weight:900">💾 Save — Simple!</div>
-    <div class="small">CSV works. ZIP works without server.</div>
+    <div class="small">CSV works. ZIP works without server (JSZip in browser).</div>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
       <button class="btn" onclick="saveCSV()">📄 SAVE CSV</button>
       <button class="btn2" onclick="saveZIP()">📦 SAVE ZIP</button>
@@ -73,145 +86,67 @@ input{width:100%;background:#0f172a;color:#e2e8f0;border:1px solid #475569;borde
     </div>
     <div id="saveMsg" class="small" style="margin-top:8px"></div>
   </div>
-  <div class="card" id="commonCard">
-    <div style="font-weight:900" id="commonTitle">📚 Common Zomi Words</div>
-    <div class="small" style="line-height:1.8;margin-top:6px" id="commonBody">
-      <b>Family:</b> pa = father, nu = mother, tapa = son, tanu = daughter, innkuan = family<br>
-      <b>Numbers:</b> khat = 1, nih = 2, thum = 3, li = 4, nga = 5<br>
-      <b>Days:</b> Nipi = Sunday, Seppatni = Monday<br>
-      <b>Pronouns:</b> kei = I, nang = you, ama = he/she<br>
-      <b>Polite:</b> Kisiansuahna mun = bathroom
-    </div>
-  </div>
-  <div class="small" style="text-align:center;padding:12px">© 2026 NqAI LLC — SOLE OWNER Gin P Khup — ZOMI + KRIO ONLY — v2.6.1 SIMPLE — No Keyboard — https://nqai.llc/seed1000</div>
+  <div class="small" style="text-align:center;padding:12px">© 2026 NqAI LLC — SOLE OWNER Gin P Khup — ZOMI + KRIO ONLY — 1000 English — v2.6.2 SIMPLE — No Keyboard — https://nqai.llc/seed1000</div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
-// ZOMI + KRIO ONLY — v2.6.1 SIMPLE — No keyboard, no 31 languages
-let currentLang = 'zom';
+// ZOMI + KRIO ONLY + 1000 English Suggestions — v2.6.2 SIMPLE — No Keyboard
+const ENGLISH_1000 = ["Hello", "How are you?", "I am fine", "What is your name?", "My name is Gin", "Good morning", "Good afternoon", "Good evening", "Good night", "Thank you", "Please", "Sorry", "Yes", "No", "Welcome", "Excuse me", "I love you", "I need help", "Where is the market?", "How much is this?", "Too expensive", "Water please", "Food please", "I am hungry", "I am thirsty", "My family", "My father", "My mother", "My brother", "My sister", "My wife", "My husband", "My son", "My daughter", "House", "Village", "School", "Church", "Today", "Tomorrow", "Yesterday", "Help me", "Hospital", "Doctor", "Phone number", "What time is it?", "I am going home", "I am coming", "Where are you?", "I am here", "Come here", "Go there", "Sit down", "Stand up", "Open the door", "Close the door", "Turn on the light", "Turn off the light", "I understand", "I don't understand", "What do you want?", "I want water", "I want food", "Very good", "Very bad", "Big house", "Small house", "Long road", "Short road", "New clothes", "Old clothes", "Hot water", "Cold water", "Good weather", "Bad weather", "It is raining", "It is sunny", "It is windy", "It is cold", "It is hot", "My friend", "My friends", "God loves you", "Pray for me", "Thank God", "Bless you", "Peace be with you", "See you later", "See you tomorrow", "Take care", "I am tired", "I am sick", "I am happy", "I am sad", "Don't worry", "Be careful", "Hurry up", "Slow down", "Wait a minute", "Let's go", "Where is the bathroom?", "I need a doctor", "Call the police", "I am lost", "Show me the way", "How far is it?", "It is near", "It is far", "Left side", "Right side", "Go straight", "Turn left", "Turn right", "Stop here", "I live here", "This is my home", "That is his house", "This is good", "That is bad", "I like it", "I don't like it", "I want to learn", "I want to teach", "Speak slowly", "Say again please", "Write it down", "I can read", "I can write", "Do you understand?", "I understand a little", "What language do you speak?", "I speak Zomi", "I speak English", "Learn together", "Let's eat", "Let's drink", "Breakfast time", "Lunch time", "Dinner time", "I cooked rice", "Delicious food", "Fresh water", "Clean clothes", "Dirty clothes", "Wash your hands", "Brush your teeth", "Take a bath", "Go to sleep", "Wake up early", "Good dreams", "My name is written here", "This is my book", "That is your book", "Open your book", "Read this", "Write your name", "Count numbers", "One, two, three", "I have money", "I have no money", "I will pay", "Keep the change", "Cheaper please", "I will buy this", "I will sell that", "Market day", "Rice field", "Corn field", "Chicken", "Cow", "Goat", "Dog", "Cat", "Bird", "Fish", "Tree", "Flower", "Mountain", "River", "Lake", "Forest", "Sun", "Moon", "Stars", "Sky", "Cloud", "Rain", "Wind", "Fire", "Earth", "Stone", "Road", "Bridge", "Car", "Bicycle", "Motorcycle", "Bus", "Walk fast", "Walk slowly", "Run", "Jump", "Swim", "Fly", "Sing a song", "Dance", "Play", "Work", "Rest", "Sleep", "Cook", "Eat rice", "Drink tea", "Drink coffee", "Make tea", "Cut wood", "Carry water", "Build house", "Clean house", "Sweep floor", "Wash dishes", "My father works", "My mother cooks", "Children play", "Teacher teaches", "Student learns", "Farmer farms", "Pastor preaches", "Doctor helps", "We help each other", "We love each other", "I go to church", "I go to school", "I go to market", "I go to hospital", "I go to work", "I stay home", "I am at home", "He is at work", "She is at school", "They are in church", "Who is this?", "Who is that?", "What is this?", "What is that?", "Where is this?", "Where is that?", "Why are you crying?", "Why are you laughing?", "How old are you?", "I am fifty six years old", "Where were you born?", "I was born in Myanmar", "I live in Tennessee", "Smyrna Tennessee", "United States", "I love my family", "Family is important", "Respect your parents", "Love your neighbor", "Help the poor", "God is good", "God is great", "Jesus loves you", "Trust in God", "Faith", "Hope", "Love", "Joy", "Peace", "Kindness", "Good morning everyone", "Good night everyone", "Happy birthday", "Merry Christmas", "Happy New Year", "Congratulations", "Well done", "Great job", "Keep going", "Don't give up", "I will try", "I will come tomorrow", "I will go now", "I will wait here", "I will call you", "I will help you", "You can do it", "We can do it", "Let's work together", "Together we are strong", "One family", "One community", "One village", "One church", "One God", "Be honest", "Be kind", "Be humble", "Be patient", "Be strong", "Morning prayer", "Evening prayer", "Read the Bible", "Sing hymn", "Sunday service", "Wednesday prayer", "Youth meeting", "Women's meeting", "Men's meeting", "Children's meeting", "Where is your father?", "Where is your mother?", "How is your father?", "How is your mother?", "How is your family?", "My family is fine", "Thank you for asking", "You are welcome", "No problem", "It's okay", "I am busy", "I am free", "I am at work", "I am on the way", "I am in the market", "I am cooking", "I am eating", "I am drinking", "I am reading", "I am writing", "I am walking", "I am running", "I am working", "I am resting", "I am praying", "I am singing", "I am learning Zomi", "I am teaching English", "I am learning fast", "I am improving", "Speak Zomi please", "Translate to English", "Translate to Zomi", "What does this mean?", "It means hello", "How do you say this?", "Say it in Zomi", "Say it in English", "Correct pronunciation", "Listen carefully", "Repeat after me", "Again please", "One more time", "Very clear", "Not clear", "Loud and clear", "Soft voice", "Fast speech", "Slow speech", "Good accent", "Good job speaking", "You speak well", "Practice every day", "Every day I learn", "Language is important", "Save our language", "Teach our children", "Keep our culture", "Remember our village", "Remember our history", "I miss home", "I miss my village", "I miss my family", "I will return home", "Home sweet home", "This is my village", "That is my farm", "Rice is ready", "Harvest time", "Planting time", "Rainy season", "Dry season", "Hot season", "Cold season", "Morning time", "Noon time", "Afternoon", "Evening time", "Night time", "Midnight", "Today is Monday", "Today is Tuesday", "Today is Wednesday", "Today is Thursday", "Today is Friday", "Today is Saturday", "Today is Sunday", "This week", "Next week", "Last week", "This month", "Next month", "Last month", "This year", "Next year", "Last year", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "What date today?", "What month now?", "Number one", "Number two", "Number three", "Number four", "Number five", "Number six", "Number seven", "Number eight", "Number nine", "Number ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety", "One hundred", "One thousand", "Many people", "Few people", "Some people", "All people", "Everybody", "Nobody", "Somebody", "Anybody", "Who knows?", "I know", "I don't know", "I think so", "I don't think so", "Maybe", "Probably", "Certainly", "Of course", "Sure", "Absolutely", "Never", "Always", "Sometimes", "Often", "Usually", "Rarely", "Every day", "Every night", "Every morning", "Every evening", "Once a day", "Twice a day", "Three times a day", "Morning to night", "Day and night", "Work hard", "Study hard", "Try hard", "Do your best", "Best wishes", "Good luck", "Take your time", "Be safe", "Be healthy", "Get well soon", "Feel better", "Long life", "Long live", "Thank you very much", "Thank you so much", "Thanks a lot", "Many thanks", "You're welcome very much", "I appreciate you", "I respect you", "I trust you", "I believe you", "I support you", "I need you", "I miss you", "I remember you", "I will never forget you", "Where do you work?", "Where do you live?", "Where do you study?", "What do you do?", "What is your job?", "What is your favorite food?", "What is your favorite color?", "What is your favorite song?", "How is life?", "How is work?", "How is school?", "How is church?", "Everything is good", "Everything is okay", "Nothing special", "Something important", "Something good", "Something bad", "Everything will be okay", "God will help us", "Don't be afraid", "Don't be sad", "Don't be angry", "Be happy", "Stay happy", "Stay strong", "Stay healthy", "Stay safe", "Stay together", "Stay in touch", "I will pray for you", "Pray for us", "God bless you", "God bless your family", "God be with you", "Peace of God", "Love of God", "Grace of God", "Mercy of God", "Glory to God", "Thank you God for today", "God gave us life", "God gave us food", "God gave us water", "We thank God", "We praise God", "We worship God", "We love God", "We trust God", "We need God", "My heart is happy", "My heart is sad", "My heart is clean", "Open your heart", "Close your eyes", "Open your eyes", "Look here", "Look there", "Listen to me", "Hear me", "Hold my hand", "Give me your hand", "Come with me", "Stay with me", "Wait for me", "Follow me", "Lead the way", "Show me", "Teach me", "Tell me", "Tell me the truth", "Tell me story", "Story time", "Long story", "Short story", "True story", "Old story", "New story", "Funny story", "Sad story", "Good story", "Bad story", "My story", "Your story", "Our story", "Village story", "Family story", "God's story", "Bible story", "History story", "Speak truth", "Speak slowly please", "Speak clearly", "Don't shout", "Don't whisper", "Talk to me", "Talk to him", "Talk to her", "Talk to them", "Talk to us", "Call me", "Call him", "Call her", "Call them", "Answer me", "Answer the phone", "Hang up", "Call back", "Text me", "Message me", "Send me", "Give me", "Take this", "Take that", "Bring this", "Bring that", "Carry this", "Carry that", "Hold this", "Hold that", "Put here", "Put there", "Keep here", "Keep there", "Leave it", "Leave here", "Leave now", "Come back", "Go back", "Return soon", "See you soon", "See you again", "See you next time", "See you at church", "See you at market", "See you at home", "See you at school", "See you at work", "See you tonight", "See you in the morning", "Goodbye", "Bye bye", "Take care bye", "Have a nice day", "Have a nice night", "Have a good trip", "Have a safe trip", "Have fun", "Enjoy your day", "Enjoy your meal", "Bon appetit", "Eat well", "Drink well", "Sleep well", "Work well", "Study well", "Live well", "Love well", "Pray well", "Sing well", "Walk well", "Go well", "Come well", "Stay well", "All is well", "Everything is well", "I am well", "We are well", "Family is well", "Children are well", "Parents are well", "Friends are well", "Village is well", "Church is well", "Thank God we are well", "God keeps us well", "God makes us well", "God loves us well", "God leads us well", "Amen", "Let us pray", "Let us sing", "Let us eat", "Let us go", "Let us work", "Let us learn", "Let us help", "Let us love", "Let us thank God", "Let us praise God", "I want to go to America", "I want to go home", "I want to help people", "I want to save language", "I want to teach children", "I want to build church", "I want to build school", "I want to build house", "I want to plant rice", "I want to learn more", "Knowledge is power", "Education is important", "Language is life", "Culture is important", "Tradition is important", "Family is life", "Love is life", "God is life", "Water is life", "Food is life", "Rice is life", "Work is life", "We work for family", "We work for God", "We live for God", "We live for family", "We live for love", "We live for peace", "Peace in village", "Peace in family", "Peace in church", "Peace in heart", "Love in family", "Love in church", "Love in village", "Love in heart", "Joy in heart", "Joy in family", "Joy in church", "Joy in village", "Faith in God", "Hope in God", "Love for God", "Life with God", "Walk with God", "Talk with God", "Live with God", "Stay with God", "Thank God always", "I am Zomi", "You are Zomi", "We are Zomi", "Zomi language", "Zomi people", "Zomi culture", "Zomi village", "Zomi house", "Zomi food", "Zomi song", "Zomi dance", "Zomi tradition", "Zomi history", "Zomi story", "Zomi family", "Zomi church", "Zomi community", "Zomi land", "Zomi heart", "Zomi pride", "7000 languages", "Save languages", "All languages are important", "Every language has value", "Language is identity", "Language is heritage", "Teach mother tongue", "Learn mother tongue", "Speak mother tongue", "Write mother tongue", "Read mother tongue", "Sing in mother tongue", "Pray in mother tongue", "Dream in mother tongue", "Live in mother tongue", "Love mother tongue", "Keep mother tongue", "Save mother tongue", "Share mother tongue", "Spread mother tongue", "NqAI LLC", "SOLE OWNER Gin P Khup", "Smyrna Tennessee USA", "2026 NqAI Seed1000", "1000 phrases real basic", "FINAL version", "Zero error", "All rights reserved", "God bless NqAI", "Thank you for using NqAI", "I am Gin P Khup", "This is my project", "This is my language work", "This is my dream", "This is my heart work", "For Zomi people", "For 7000 languages", "For future generation", "For our children", "For our heritage", "Start now", "Begin now", "Do it now", "Finish well", "Complete 1000", "1000 done", "We made it", "We finished", "Praise God", "Hallelujah", "One more step", "Last box", "First box", "Middle box", "Every box matters", "Save all boxes", "Export all", "Clean workspace", "Final build", "God bless America", "My heart thanks you", "My family thanks you", "Our community thanks you", "Zomi thanks you", "7000 languages thanks you", "God bless your work", "Keep up the good work", "Continue learning", "Continue teaching", "Continue saving language", "God bless you and your family", "May God protect you", "May God guide you", "Walk in peace", "Live in harmony", "Speak with love", "Work with joy", "Help one another", "Share your food", "Share your water", "Clean your heart", "Open your mind", "Learn new words", "Teach old words", "Keep your promise", "Respect elders", "Love children", "Honor parents", "Serve community", "Build together", "Plant seeds", "Water plants", "Harvest crops", "Store rice", "Cook together", "Sing together", "Pray together", "Dance together", "Laugh together", "Cry together", "Morning has come", "Night has come", "Sun is rising", "Sun is setting", "Moon is shining", "Stars are bright", "Rain is coming", "Wind is blowing", "Fire is burning", "Water is flowing", "Road is long", "House is big", "Village is beautiful", "Church is open", "School is closed", "Market is busy", "Food is ready", "Water is clean", "Clothes are new", "Book is open", "I am learning", "You are teaching", "We are listening", "They are speaking", "He is working", "She is cooking", "It is good", "This is true", "That is false", "These are mine", "Those are yours", "All are welcome", "None are left", "Some are here", "Many are coming", "One more time please", "Two more days", "Three more nights", "Four more weeks", "Five more years", "First day", "Second day", "Third day", "Fourth day", "Fifth day", "Last day", "Early morning", "Late night", "Midday", "Sunrise", "Sunset", "Good health", "Good life", "Good heart", "Good mind", "Good spirit", "Be kind to all", "Be true to yourself", "Be faithful", "Be grateful", "Be joyful", "Thank you for coming", "Thank you for helping", "Thank you for teaching", "Thank you for sharing", "Thank you for caring", "Please come in", "Please sit down", "Please stand up", "Please listen", "Please speak", "Come quickly", "Go slowly", "Wait patiently", "Speak kindly", "Love never fails", "Faith moves mountains", "Hope never dies", "Peace be still", "Joy comes in morning", "God is with us", "God is for us", "God loves us all", "God hears our prayer", "God answers prayer", "Language is treasure", "Words are power", "Stories are life", "Songs are history", "Culture is pride", "My heart thanks you again", "Our village is happy", "Our church is happy", "Our children are happy", "Our future is bright", "Keep our language alive", "Pass it to children", "Record your voice", "Share with world", "This is the end", "We have finished", "We did it together", "Praise the Lord", "Hallelujah amen", "Begin again", "Start new chapter", "Open new door", "Walk new path", "My father is here", "My father is coming", "My father is going", "My father is working", "My father is cooking", "My father is eating", "My father is sleeping", "My father is praying", "My father is happy", "My father is well", "My mother is here", "My mother is coming", "My mother is going", "My mother is working", "My mother is cooking", "My mother is eating", "My mother is sleeping", "My mother is praying", "My mother is happy", "My mother is well", "My brother is here", "My brother is coming", "My brother is going"];
+let currentLang='zom';
 try{ const p=new URLSearchParams(location.search); const l=(p.get('lang')||'zom').toLowerCase(); if(l==='kri'||l==='zom') currentLang=l; }catch(e){}
-let phrases = { zom:[], kri:[] };
-let mediaRecorder=null, audioChunks=[], audioBlob=null;
-const LANGS = {
-  zom:{ name:'ZOMI', native:'Zomi Tedim', code:'ZOM', flag:'🇲🇲', color:'#22c55e', region:'Myanmar / Tedim', placeholder:'Zomi: e.g. Dam', storage:'nqai_seed_zom_only' },
-  kri:{ name:'KRIO', native:'Krio', code:'KRI', flag:'🇸🇱', color:'#f59e0b', region:'Sierra Leone', placeholder:'Krio: e.g. How yu do', storage:'nqai_seed_kri_only' }
+let saved={zom:[],kri:[]};
+let mediaRecorder=null, audioChunks=[];
+let suggPage=0;
+const LANGS={
+  zom:{name:'ZOMI',native:'Zomi Tedim',code:'ZOM',flag:'🇲🇲',color:'#22c55e',placeholder:'Zomi: e.g. Dam',storage:'nqai_seed_zom_1000'},
+  kri:{name:'KRIO',native:'Krio',code:'KRI',flag:'🇸🇱',color:'#f59e0b',placeholder:'Krio: e.g. How yu do',storage:'nqai_seed_kri_1000'}
 };
 function load(){
-  // Load both separately — Never mixes!
-  try{ const v=localStorage.getItem('nqai_seed_zom_only'); if(v) phrases.zom=JSON.parse(v); }catch(e){}
-  try{ const v=localStorage.getItem('nqai_seed_kri_only'); if(v) phrases.kri=JSON.parse(v); }catch(e){}
-  if(phrases.zom.length===0){
-    phrases.zom=[
-      {en:'Hello', lang:'Dam'},
-      {en:'How are you?', lang:'Na dam maw?'},
-      {en:'My father', lang:'Ka pa'},
-      {en:'My mother', lang:'Ka nu'},
-      {en:'My family', lang:'Ka innkuan'},
-      {en:'God bless you and your family', lang:'Pasian in na innkuan hong thupha'},
-      {en:'Thank you', lang:'Lungdam'},
-      {en:'Water', lang:'Tui'},
-      {en:'Sunday', lang:'Nipi'},
-      {en:'Bathroom (polite)', lang:'Kisiansuahna mun'}
-    ];
-    save();
-  }
-  if(phrases.kri.length===0){
-    phrases.kri=[
-      {en:'Hello', lang:'How yu do'},
-      {en:'How are you?', lang:'How yu de?'},
-      {en:'My father', lang:'Mi papa'},
-      {en:'My mother', lang:'Mi mama'},
-      {en:'My family', lang:'Mi fambul'},
-      {en:'Thank you', lang:'Tenki'},
-      {en:'Water', lang:'Wata'},
-      {en:'Sunday', lang:'Sonde'},
-      {en:'Good morning', lang:'Good mornin'},
-      {en:'I love you', lang:'I love yu'}
-    ];
-    save();
-  }
-  updatePage();
-  renderList();
+  try{ const v=localStorage.getItem('nqai_seed_zom_1000'); if(v) saved.zom=JSON.parse(v); }catch(e){}
+  try{ const v=localStorage.getItem('nqai_seed_kri_1000'); if(v) saved.kri=JSON.parse(v); }catch(e){}
+  // If first time, seed 10 examples so page not empty, but 1000 suggestions remain
+  if(saved.zom.length===0){ saved.zom=[{en:'Hello',lang:'Dam'},{en:'How are you?',lang:'Na dam maw?'},{en:'My father',lang:'Ka pa'},{en:'My mother',lang:'Ka nu'},{en:'My family',lang:'Ka innkuan'},{en:'God bless you and your family',lang:'Pasian in na innkuan hong thupha'},{en:'Thank you',lang:'Lungdam'},{en:'Water',lang:'Tui'},{en:'Sunday',lang:'Nipi'},{en:'Bathroom (polite)',lang:'Kisiansuahna mun'}]; }
+  if(saved.kri.length===0){ saved.kri=[{en:'Hello',lang:'How yu do'},{en:'How are you?',lang:'How yu de?'},{en:'My father',lang:'Mi papa'},{en:'My mother',lang:'Mi mama'},{en:'My family',lang:'Mi fambul'},{en:'Thank you',lang:'Tenki'},{en:'Water',lang:'Wata'},{en:'Sunday',lang:'Sonde'},{en:'Good morning',lang:'Good mornin'},{en:'I love you',lang:'I love yu'}]; }
+  save(); updatePage(); renderList(); renderSugg();
 }
-function save(){ try{ localStorage.setItem('nqai_seed_zom_only', JSON.stringify(phrases.zom)); localStorage.setItem('nqai_seed_kri_only', JSON.stringify(phrases.kri)); }catch(e){} }
-function switchLang(code){
-  currentLang=code;
-  const url=new URL(location.href); url.searchParams.set('lang',code); history.replaceState({},'',url);
-  updatePage(); renderList();
+function save(){ try{ localStorage.setItem('nqai_seed_zom_1000', JSON.stringify(saved.zom)); localStorage.setItem('nqai_seed_kri_1000', JSON.stringify(saved.kri)); }catch(e){} }
+function switchLang(code){ currentLang=code; const url=new URL(location.href); url.searchParams.set('lang',code); history.replaceState({},'',url); updatePage(); renderList(); renderSugg(); }
+function updatePage(){ const info=LANGS[currentLang]; document.getElementById('header').style.background=info.color; document.getElementById('headerTitle').textContent=info.flag+' '+info.name+' ONLY — Seed1000 — 1000 English'; document.getElementById('tabZom').classList.toggle('active',currentLang==='zom'); document.getElementById('tabKri').classList.toggle('active',currentLang==='kri'); document.getElementById('pageInfoTitle').textContent='📄 THIS IS YOUR '+info.name+' PAGE'; document.getElementById('pageInfo').innerHTML='• Language: <b style="color:#fff">'+info.name+' — '+info.native+' — '+info.code+'</b><br>• Only Zomi + Krio — No 31 languages, simple!<br>• No keyboard — Use your own phone / computer keyboard.<br>• 1000 English suggestions below — Tap one to fill English, then type '+info.name+'.'; document.getElementById('shareLink').textContent='https://nqai.llc/seed1000?lang='+currentLang; document.getElementById('recTitle').textContent='🎤 Record / Add '+info.name+' Phrase'; document.getElementById('langInput').placeholder=info.placeholder; document.getElementById('listTitle').innerHTML='📋 My '+info.name+' Phrases — <span id="count">0</span> / 1000'; document.title='NqAI Seed1000 — '+info.flag+' '+info.name+' ONLY — 1000 English — SOLE OWNER Gin P Khup'; const done=saved[currentLang].length; document.getElementById('progText').textContent=done+' / 1000 done'; document.getElementById('progBar').style.width=(done/10)+'%'; }
+function isDone(en){ return saved[currentLang].some(p=>p.en.toLowerCase()===en.toLowerCase()); }
+function renderSugg(){
+  const q=(document.getElementById('suggSearch').value||'').toLowerCase();
+  const filt=document.getElementById('suggFilter').value;
+  let list=ENGLISH_1000.filter(en=>en.toLowerCase().includes(q));
+  if(filt==='todo') list=list.filter(en=>!isDone(en));
+  if(filt==='done') list=list.filter(en=>isDone(en));
+  const totalPages=Math.ceil(list.length/50); if(suggPage<0) suggPage=0; if(suggPage>=totalPages) suggPage=totalPages-1; if(suggPage<0) suggPage=0;
+  const pageList=list.slice(suggPage*50, suggPage*50+50);
+  document.getElementById('suggPageInfo').textContent='Page '+(suggPage+1)+' / '+totalPages+' • '+list.length+' found • '+saved[currentLang].length+' done';
+  document.getElementById('suggList').innerHTML=pageList.map((en,i)=>{
+    const done=isDone(en); const idx=ENGLISH_1000.indexOf(en);
+    return '<div class="sugg" onclick="useSugg('+idx+')"><b>'+(idx+1)+'. '+en+'</b> '+(done?'<span style="color:#22c55e">✅ DONE</span>':'<span style="color:#f59e0b">○ Tap to translate</span>')+'</div>';
+  }).join('') || '<div class="small">No suggestions found.</div>';
 }
-function updatePage(){
-  const info=LANGS[currentLang];
-  document.getElementById('header').style.background=info.color;
-  document.getElementById('headerTitle').textContent=info.flag+' '+info.name+' ONLY — Seed1000';
-  document.getElementById('tabZom').classList.toggle('active', currentLang==='zom');
-  document.getElementById('tabKri').classList.toggle('active', currentLang==='kri');
-  document.getElementById('pageInfoTitle').textContent='📄 THIS IS YOUR '+info.name+' PAGE';
-  document.getElementById('pageInfo').innerHTML='• Language: <b style="color:#fff">'+info.name+' — '+info.native+' — '+info.code+'</b><br>• Only Zomi + Krio here — No 31 languages, simple!<br>• No keyboard here — Use your own phone / computer keyboard.<br>• '+info.name+' data saved separately — Never mixes with '+(currentLang==='zom'?'Krio':'Zomi')+'.';
-  document.getElementById('shareLink').textContent='https://nqai.llc/seed1000?lang='+currentLang;
-  document.getElementById('recTitle').textContent='🎤 Record '+info.name+' Phrase';
-  document.getElementById('langInput').placeholder=info.placeholder;
-  document.getElementById('listTitle').innerHTML='📋 '+info.name+' Phrases — <span id="count">0</span> / 1000';
-  document.getElementById('commonTitle').textContent='📚 Common '+info.name+' Words';
-  if(currentLang==='zom'){
-    document.getElementById('commonBody').innerHTML='<b>Family:</b> pa = father, nu = mother, tapa = son, tanu = daughter, innkuan = family<br><b>Numbers:</b> khat = 1, nih = 2, thum = 3, li = 4, nga = 5<br><b>Days:</b> Nipi = Sunday, Seppatni = Monday<br><b>Pronouns:</b> kei = I, nang = you, ama = he/she<br><b>Polite:</b> Kisiansuahna mun = bathroom';
-  } else {
-    document.getElementById('commonBody').innerHTML='<b>Family:</b> papa = father, mama = mother, pikin = child, fambul = family<br><b>Numbers:</b> wan = 1, tu = 2, tri = 3, fo = 4, fayv = 5<br><b>Days:</b> Sonde = Sunday, Monde = Monday<br><b>Pronouns:</b> mi = I, yu = you, i = he/she<br><b>Polite:</b> Abeg = please';
-  }
-  document.title='NqAI Seed1000 — '+info.flag+' '+info.name+' ONLY — SOLE OWNER Gin P Khup';
-}
+function useSugg(idx){ const en=ENGLISH_1000[idx]; document.getElementById('enInput').value=en; document.getElementById('langInput').focus(); document.getElementById('saveMsg').textContent='💡 Using: '+en+' — Now type '+LANGS[currentLang].name+' and tap ADD.'; window.scrollTo({top:200,behavior:'smooth'}); }
 function renderList(){
-  const q=(document.getElementById('search').value||'').toLowerCase();
-  const arr=phrases[currentLang];
+  const q=(document.getElementById('search').value||'').toLowerCase(); const arr=saved[currentLang];
   const filtered=arr.filter(p=>(p.en+' '+p.lang).toLowerCase().includes(q));
-  document.getElementById('count').textContent=arr.length;
+  const c=document.getElementById('count'); if(c) c.textContent=arr.length;
   const list=document.getElementById('list');
-  if(filtered.length===0){ list.innerHTML='<div class="small">No phrases yet. Add one above!</div>'; return; }
-  list.innerHTML=filtered.map(p=>{
-    const idx=arr.indexOf(p);
-    return '<div class="phrase"><div><b>'+(idx+1)+'. '+p.en+'</b><br><span style="color:#22c55e">'+p.lang+'</span></div><div><button class="btn3" onclick="speakOne('+idx+')">🔊</button><button class="btn3" onclick="copyOne('+idx+')">⎘</button><button class="btn3" onclick="delOne('+idx+')">🗑</button></div></div>';
-  }).join('');
+  if(filtered.length===0){ list.innerHTML='<div class="small">No saved yet. Tap a suggestion above, type '+LANGS[currentLang].name+', tap ADD.</div>'; return; }
+  list.innerHTML=filtered.map(p=>{ const idx=arr.indexOf(p); return '<div class="phrase"><div><b>'+(idx+1)+'. '+p.en+'</b><br><span style="color:#22c55e">'+p.lang+'</span></div><div><button class="btn3" onclick="speakOne('+idx+')">🔊</button><button class="btn3" onclick="copyOne('+idx+')">⎘</button><button class="btn3" onclick="delOne('+idx+')">🗑</button></div></div>'; }).join('');
+  updatePage();
 }
-function addPhrase(){
-  const en=document.getElementById('enInput').value.trim();
-  const lang=document.getElementById('langInput').value.trim();
-  if(!en||!lang){ alert('Type both English and '+LANGS[currentLang].name+'!'); return; }
-  phrases[currentLang].push({en, lang}); save(); renderList();
-  document.getElementById('enInput').value=''; document.getElementById('langInput').value='';
-  document.getElementById('saveMsg').textContent='✅ Added: '+en+' = '+lang+' ('+LANGS[currentLang].name+')';
-}
-function delOne(i){ if(confirm('Delete?')){ phrases[currentLang].splice(i,1); save(); renderList(); } }
-function copyOne(i){ const p=phrases[currentLang][i]; navigator.clipboard.writeText(p.en+' = '+p.lang).then(()=>{ document.getElementById('saveMsg').textContent='✅ Copied: '+p.en+' = '+p.lang; }); }
-function copyAll(){ const txt=phrases[currentLang].map((p,i)=>(i+1)+'. '+p.en+' = '+p.lang).join('\n'); navigator.clipboard.writeText(txt).then(()=>{ document.getElementById('saveMsg').textContent='✅ Copied all '+phrases[currentLang].length+' '+LANGS[currentLang].name+' phrases!'; }); }
+function addPhrase(){ const en=document.getElementById('enInput').value.trim(); const lang=document.getElementById('langInput').value.trim(); if(!en||!lang){ alert('Type both English and '+LANGS[currentLang].name+'! Tap a suggestion for English.'); return; } if(saved[currentLang].some(p=>p.en.toLowerCase()===en.toLowerCase())){ if(!confirm('Already done: '+en+'. Add again?')) return; } saved[currentLang].push({en,lang}); save(); renderList(); renderSugg(); document.getElementById('enInput').value=''; document.getElementById('langInput').value=''; document.getElementById('saveMsg').textContent='✅ Added: '+en+' = '+lang+' ('+LANGS[currentLang].name+')'; }
+function delOne(i){ if(confirm('Delete?')){ saved[currentLang].splice(i,1); save(); renderList(); renderSugg(); } }
+function copyOne(i){ const p=saved[currentLang][i]; navigator.clipboard.writeText(p.en+' = '+p.lang).then(()=>{ document.getElementById('saveMsg').textContent='✅ Copied: '+p.en+' = '+p.lang; }); }
+function copyAll(){ const txt=saved[currentLang].map((p,i)=>(i+1)+'. '+p.en+' = '+p.lang).join('\n'); navigator.clipboard.writeText(txt).then(()=>{ document.getElementById('saveMsg').textContent='✅ Copied all '+saved[currentLang].length+' phrases!'; }); }
 function copyLink(){ navigator.clipboard.writeText(document.getElementById('shareLink').textContent).then(()=>{ document.getElementById('saveMsg').textContent='✅ Copied link!'; }); }
-function clearAll(){ if(confirm('Clear all '+LANGS[currentLang].name+' phrases?')){ phrases[currentLang]=[]; save(); renderList(); } }
-function speakOne(i){ const p=phrases[currentLang][i]; try{ const u=new SpeechSynthesisUtterance(p.lang); u.lang= currentLang==='zom'?'my-MM':'en-GB'; speechSynthesis.speak(u); }catch(e){ alert(p.lang); } }
-function saveCSV(){
-  const info=LANGS[currentLang]; let csv='id,english,'+currentLang+'\n';
-  phrases[currentLang].forEach((p,i)=>{ csv+=(i+1)+',"'+p.en.replace(/"/g,'""')+'","'+p.lang.replace(/"/g,'""')+'"\n'; });
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='seed1000_'+currentLang+'_'+Date.now()+'.csv'; a.click();
-  document.getElementById('saveMsg').textContent='✅ CSV Saved: '+phrases[currentLang].length+' '+info.name+' phrases — No server needed!';
-}
-async function saveZIP(){
-  try{
-    if(typeof JSZip==='undefined'){ saveCSV(); return; }
-    const info=LANGS[currentLang]; let csv='id,english,'+currentLang+'\n';
-    phrases[currentLang].forEach((p,i)=>{ csv+=(i+1)+',"'+p.en+'","'+p.lang+'"\n'; });
-    const zip=new JSZip(); zip.file('seed1000_'+currentLang+'.csv', csv); zip.file('README.txt','NqAI Seed1000 '+info.name+' ONLY — SOLE OWNER Gin P Khup — '+phrases[currentLang].length+' phrases');
-    const blob=await zip.generateAsync({type:'blob'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='seed1000_'+currentLang+'_'+Date.now()+'.zip'; a.click();
-    document.getElementById('saveMsg').textContent='✅ ZIP Saved: '+phrases[currentLang].length+' '+info.name+' phrases — No server needed!';
-  }catch(e){ saveCSV(); }
-}
-async function startRec(){
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    let mime=''; const types=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];
-    for(const t of types){ if(window.MediaRecorder && MediaRecorder.isTypeSupported(t)){ mime=t; break; } }
-    mediaRecorder=new MediaRecorder(stream, mime?{mimeType:mime}:undefined); audioChunks=[];
-    mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); };
-    mediaRecorder.onstop=()=>{ audioBlob=new Blob(audioChunks,{type:mime||'audio/webm'}); const url=URL.createObjectURL(audioBlob); const el=document.getElementById('audioEl'); el.src=url; el.style.display='block'; document.getElementById('recStatus').textContent='✅ Recorded! Tap PLAY.'; };
-    mediaRecorder.start(); document.getElementById('recStatus').textContent='🔴 Recording... Speak '+LANGS[currentLang].name+' now! Tap STOP.';
-  }catch(e){ document.getElementById('recStatus').textContent='❌ Mic blocked: '+e.message+' — Chrome: System Settings → Privacy → Microphone → Chrome ON'; }
-}
+function clearAll(){ if(confirm('Clear all '+LANGS[currentLang].name+'?')){ saved[currentLang]=[]; save(); renderList(); renderSugg(); } }
+function speakOne(i){ const p=saved[currentLang][i]; try{ const u=new SpeechSynthesisUtterance(p.lang); u.lang=currentLang==='zom'?'my-MM':'en-GB'; speechSynthesis.speak(u); }catch(e){ alert(p.lang); } }
+function saveCSV(){ const info=LANGS[currentLang]; let csv='id,english,'+currentLang+'\n'; saved[currentLang].forEach((p,i)=>{ csv+=(i+1)+',"'+p.en.replace(/"/g,'""')+'","'+p.lang.replace(/"/g,'""')+'"\n'; }); const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='seed1000_'+currentLang+'_'+Date.now()+'.csv'; a.click(); document.getElementById('saveMsg').textContent='✅ CSV Saved: '+saved[currentLang].length+' '+info.name+' — No server needed!'; }
+async function saveZIP(){ try{ if(typeof JSZip==='undefined'){ saveCSV(); return; } const info=LANGS[currentLang]; let csv='id,english,'+currentLang+'\n'; saved[currentLang].forEach((p,i)=>{ csv+=(i+1)+',"'+p.en+'","'+p.lang+'"\n'; }); const zip=new JSZip(); zip.file('seed1000_'+currentLang+'.csv', csv); zip.file('README.txt','NqAI Seed1000 '+info.name+' ONLY — SOLE OWNER Gin P Khup — '+saved[currentLang].length+' phrases — 1000 English suggestions'); const blob=await zip.generateAsync({type:'blob'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='seed1000_'+currentLang+'_'+Date.now()+'.zip'; a.click(); document.getElementById('saveMsg').textContent='✅ ZIP Saved: '+saved[currentLang].length+' '+info.name+' — No server needed!'; }catch(e){ saveCSV(); } }
+async function startRec(){ try{ const stream=await navigator.mediaDevices.getUserMedia({audio:true}); let mime=''; const types=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus']; for(const t of types){ if(window.MediaRecorder && MediaRecorder.isTypeSupported(t)){ mime=t; break; } } mediaRecorder=new MediaRecorder(stream, mime?{mimeType:mime}:undefined); audioChunks=[]; mediaRecorder.ondataavailable=e=>{ if(e.data.size>0) audioChunks.push(e.data); }; mediaRecorder.onstop=()=>{ const blob=new Blob(audioChunks,{type:mime||'audio/webm'}); const url=URL.createObjectURL(blob); const el=document.getElementById('audioEl'); el.src=url; el.style.display='block'; document.getElementById('recStatus').textContent='✅ Recorded! Tap PLAY.'; }; mediaRecorder.start(); document.getElementById('recStatus').textContent='🔴 Recording... Speak '+LANGS[currentLang].name+' now! Tap STOP.'; }catch(e){ document.getElementById('recStatus').textContent='❌ Mic blocked: '+e.message+' — Chrome: System Settings → Privacy → Microphone → Chrome ON'; } }
 function stopRec(){ if(mediaRecorder && mediaRecorder.state!=='inactive'){ mediaRecorder.stop(); mediaRecorder.stream.getTracks().forEach(t=>t.stop()); } }
 function playRec(){ const el=document.getElementById('audioEl'); if(el.src) el.play(); }
 load();
